@@ -92,6 +92,7 @@
   nav a:hover{color:var(--orange);}
   .nav-cta{display:flex;align-items:center;gap:16px;}
   .burger{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--navy);}
+  .mobile-only-cta{display:none;}
 
   /* ===== HERO ===== */
   .hero{
@@ -278,8 +279,19 @@
   .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;text-align:center;font-size:13px;color:#8592A8;}
 
   @media(max-width:900px){
-    nav ul, .nav-cta .btn.outline{display:none;}
+    .nav-cta .btn.outline{display:none;}
     .burger{display:block;}
+    nav#main-nav{
+      display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);
+      border-bottom:1px solid var(--border);box-shadow:0 12px 20px rgba(13,27,53,.08);
+    }
+    nav#main-nav.open{display:block;}
+    nav#main-nav ul{flex-direction:column;gap:0;padding:12px 24px 20px;}
+    nav#main-nav li{padding:12px 0;border-bottom:1px solid var(--border);}
+    nav#main-nav li:last-child{border-bottom:none;}
+    nav#main-nav .mobile-only-cta{display:block;padding-top:16px;}
+    nav#main-nav .mobile-only-cta .btn{display:inline-flex;width:100%;justify-content:center;}
+    header{position:relative;}
     .hero-grid, .problem-grid, .duo, .showcase-grid, .about-grid{grid-template-columns:1fr;}
     .feature-grid, .price-grid{grid-template-columns:1fr 1fr;}
     .testi-grid, .blog-grid{grid-template-columns:1fr 1fr;}
@@ -300,17 +312,18 @@
 <header>
   <div class="nav-wrap">
     <div class="logo">Avatar<span>Sales</span>Academy</div>
-    <nav>
+    <nav id="main-nav">
       <ul>
         <li><a href="#hero">Accueil</a></li>
         <li><a href="#blog">Blog</a></li>
         <li><a href="#footer">Contact</a></li>
+        <li class="mobile-only-cta"><a class="btn outline" href="#pricing">Voir les offres</a></li>
       </ul>
     </nav>
     <div class="nav-cta">
       <a class="btn outline" href="#pricing">Voir les offres</a>
     </div>
-    <button class="burger">☰</button>
+    <button class="burger" id="burger-btn" aria-label="Ouvrir le menu">☰</button>
   </div>
 </header>
 
@@ -892,6 +905,20 @@
 </footer>
 
 <script>
+  // Menu mobile (burger)
+  const burgerBtn = document.getElementById('burger-btn');
+  const mainNav = document.getElementById('main-nav');
+  burgerBtn.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    burgerBtn.textContent = mainNav.classList.contains('open') ? '✕' : '☰';
+  });
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      burgerBtn.textContent = '☰';
+    });
+  });
+
   // FAQ accordéon
   document.querySelectorAll('.faq-item').forEach(item=>{
     item.querySelector('.faq-q').addEventListener('click', ()=>{
