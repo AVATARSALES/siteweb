@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avatar Sales Academy — Clone éditable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ====== VARIABLES DE MARQUE — modifie ici pour tester des variantes ====== */
+    --navy:#0D1B35;
+    --navy-light:#152847;
+    --orange:#FF6B00;
+    --orange-light:#FF8A33;
+    --blue:#00AAFF;
+    --white:#FFFFFF;
+    --off-white:#F5F7FA;
+    --grey:#5B6472;
+    --border:#E4E8EE;
+
+    --font-display:'Baloo 2', sans-serif;
+    --font-body:'DM Sans', sans-serif;
+
+    --radius:14px;
+    --shadow: 0 10px 30px rgba(13,27,53,0.08);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--navy);
+    background:var(--white);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:var(--font-display);
+    font-weight:700;
+    line-height:1.1;
+    margin:0 0 .5em;
+    letter-spacing:.2px;
+  }
+  p{margin:0 0 1em;color:var(--grey);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    display:inline-block;
+    font-family:var(--font-display);
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--orange);
+    margin-bottom:10px;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-display);
+    font-weight:700;font-size:17px;letter-spacing:.3px;
+    padding:14px 28px;border-radius:999px;
+    background:var(--orange);color:var(--white);
+    box-shadow:0 8px 20px rgba(255,107,0,.30);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    cursor:pointer;border:none;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,107,0,.38);}
+  .btn.outline{
+    background:transparent;color:var(--navy);
+    box-shadow:none;border:2px solid var(--navy);
+  }
+  .btn.outline:hover{background:var(--navy);color:var(--white);}
+  section{padding:80px 0;}
+  .section-head{max-width:720px;margin:0 auto 48px;text-align:center;}
+  .section-head h2{font-size:clamp(28px,4vw,42px);}
+  .section-head p{font-size:17px;}
+
+  /* ===== HEADER ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1160px;margin:0 auto;}
+  .logo{font-family:var(--font-display);font-weight:800;font-size:22px;color:var(--navy);}
+  .logo span{color:var(--orange);}
+  nav ul{display:flex;gap:32px;list-style:none;margin:0;padding:0;font-family:var(--font-display);font-weight:600;font-size:16px;}
+  nav a{transition:color .15s;}
+  nav a:hover{color:var(--orange);}
+  .nav-cta{display:flex;align-items:center;gap:16px;}
+  .burger{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--navy);}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 60%, #1c3a63 100%);
+    color:var(--white);
+    padding:100px 0 80px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle, rgba(0,170,255,.35), transparent 70%);
+    filter:blur(10px);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;position:relative;z-index:1;}
+  .hero h1{font-size:clamp(34px,5vw,56px);color:var(--white);}
+  .hero h1 em{font-style:normal;color:var(--orange);}
+  .hero p{color:#C9D2E0;font-size:18px;max-width:480px;}
+  .hero-media{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.15);}
+  .hero-media img{width:100%;}
+  .stats-strip{display:grid;grid-template-columns:repeat(2,auto);gap:16px 40px;margin-top:36px;}
+  .stats-strip div{font-family:var(--font-display);}
+  .stats-strip strong{display:block;font-size:30px;color:var(--orange);}
+  .stats-strip span{font-size:13px;color:#B8C2D4;text-transform:uppercase;letter-spacing:1px;}
+
+  /* ===== PROBLEM / CHALLENGE ===== */
+  .problem{background:var(--off-white);}
+  .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  .problem-grid img{border-radius:var(--radius);box-shadow:var(--shadow);}
+  .risk-list{list-style:none;margin:20px 0;padding:0;}
+  .risk-list li{padding-left:28px;position:relative;margin-bottom:14px;color:var(--navy);font-weight:500;}
+  .risk-list li::before{content:"—";position:absolute;left:0;color:var(--orange);font-weight:700;}
+
+  /* ===== 2-COL CHALLENGE/IMPACT ===== */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  .duo-card{padding:36px;border-radius:var(--radius);}
+  .duo-card.challenge{background:var(--navy);color:var(--white);}
+  .duo-card.impact{background:var(--orange);color:var(--white);}
+  .duo-card h3{font-size:15px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:24px;opacity:.85;}
+  .duo-card ul{list-style:none;margin:0;padding:0;}
+  .duo-card li{margin-bottom:18px;font-weight:500;font-size:16px;padding-left:24px;position:relative;}
+  .duo-card li::before{content:"▸";position:absolute;left:0;}
+  .duo-card li strong{color:#fff;}
+
+  /* ===== FEATURE GRID ===== */
+  .features{background:var(--white);}
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  /* ===== FORMATS (stepper) ===== */
+  .format-steps{display:flex;gap:0;margin-bottom:64px;position:relative;}
+  .format-step{flex:1;text-align:center;padding:0 18px;position:relative;}
+  .format-step-num{
+    width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;
+    font-family:var(--font-display);font-weight:800;font-size:16px;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:1;
+  }
+  .format-step::before{
+    content:"";position:absolute;top:18px;left:0;right:0;height:2px;background:var(--border);z-index:0;
+  }
+  .format-step:first-child::before{left:50%;}
+  .format-step:last-child::before{right:50%;}
+  .format-step-icon{font-size:30px;margin-bottom:10px;}
+  .format-step h3{font-size:18px;margin-bottom:6px;}
+  .format-step p{font-size:14px;margin:0;}
+
+  /* ===== THÉMATIQUES (chips colorées) ===== */
+  .theme-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .theme-chip{
+    border-radius:var(--radius);padding:26px 22px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;gap:10px;color:#fff;
+  }
+  .theme-chip.chip-navy{background:var(--navy);}
+  .theme-chip.chip-orange{background:linear-gradient(135deg,var(--orange),var(--orange-light));}
+  .theme-chip.chip-blue{background:linear-gradient(135deg,#0D1B35,var(--blue));}
+  .chip-emoji{font-size:26px;}
+  .theme-chip h3{font-size:17px;color:#fff;margin:0;}
+  .chip-count{
+    align-self:flex-start;background:rgba(255,255,255,.18);color:#fff;
+    font-family:var(--font-display);font-weight:700;font-size:12px;
+    padding:4px 12px;border-radius:999px;letter-spacing:.3px;
+  }
+  .feature-card{
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:30px 26px;transition:box-shadow .2s, transform .2s;background:var(--white);
+  }
+  .feature-card:hover{box-shadow:var(--shadow);transform:translateY(-4px);}
+  .feature-card .icon{
+    width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--orange),var(--blue));
+    margin-bottom:16px;display:flex;align-items:center;justify-content:center;font-size:22px;
+  }
+  .feature-card h3{font-size:20px;}
+  .feature-card p{font-size:15px;margin:0;}
+
+  /* ===== SHOWCASE ===== */
+  .showcase{background:var(--navy);color:var(--white);}
+  .showcase .section-head h2{color:var(--white);}
+  .showcase .section-head p{color:#C9D2E0;}
+  .showcase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .showcase-item{border-radius:var(--radius);overflow:hidden;background:var(--navy-light);border:1px solid rgba(255,255,255,.1);}
+  .showcase-item img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:left center;}
+  .showcase-item h3{padding:16px 18px;font-size:19px;margin:0;}
+
+  /* ===== PRICING ===== */
+  .pricing{background:var(--off-white);}
+  .toggle{display:flex;justify-content:center;gap:0;margin-bottom:48px;}
+  .toggle button{
+    font-family:var(--font-display);font-weight:700;font-size:15px;
+    padding:10px 24px;border:2px solid var(--navy);background:var(--white);color:var(--navy);cursor:pointer;
+  }
+  .toggle button:first-child{border-radius:999px 0 0 999px;}
+  .toggle button:last-child{border-radius:0 999px 999px 0;border-left:none;}
+  .toggle button.active{background:var(--navy);color:var(--white);}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .price-card{
+    background:var(--white);border-radius:var(--radius);border:1px solid var(--border);
+    padding:32px 28px;display:flex;flex-direction:column;
+  }
+  .price-card.featured{border:2px solid var(--orange);box-shadow:var(--shadow);position:relative;}
+  .price-card.featured::before{
+    content:"Recommandé";position:absolute;top:-13px;left:28px;
+    background:var(--orange);color:#fff;font-family:var(--font-display);font-weight:700;
+    font-size:12px;letter-spacing:1px;padding:4px 12px;border-radius:999px;
+  }
+  .price-card h3{font-size:22px;margin-bottom:4px;}
+  .price-card .tagline{font-size:14px;color:var(--grey);margin-bottom:18px;}
+  .price-card .amount{font-family:var(--font-display);font-size:40px;font-weight:800;color:var(--navy);}
+  .price-card .amount span{font-size:15px;font-weight:500;color:var(--grey);}
+  .price-card ul{list-style:none;padding:0;margin:22px 0;flex:1;}
+  .price-card li{padding:7px 0;font-size:14.5px;border-bottom:1px dashed var(--border);}
+  .price-card .btn{width:100%;justify-content:center;margin-top:12px;}
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials{background:var(--white);}
+  .testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .testi-card{
+    background:var(--off-white);border-radius:var(--radius);padding:26px 22px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .testi-card p{font-size:14.5px;color:var(--navy);font-style:italic;margin:0;}
+  .testi-name{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--orange);}
+
+  /* ===== BLOG ===== */
+  .blog{background:var(--off-white);}
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .blog-card{background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
+  .blog-card img{width:100%;aspect-ratio:16/10;object-fit:cover;}
+  .blog-card .body{padding:20px;}
+  .blog-card h3{font-size:18px;}
+  .blog-card a.read{color:var(--orange);font-weight:700;font-family:var(--font-display);font-size:14px;}
+
+  /* ===== ABOUT ===== */
+  .about{background:var(--navy);color:var(--white);}
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center;}
+  .about img{border-radius:var(--radius);}
+  .about h2{color:var(--white);font-size:32px;}
+  .about p{color:#C9D2E0;}
+
+  /* ===== FAQ ===== */
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:20px 0;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--navy);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;font-size:15px;color:var(--grey);}
+  .faq-item.open .faq-a{max-height:300px;padding-bottom:18px;}
+  .faq-item.open .faq-q{color:var(--orange);}
+
+  /* ===== FINAL CTA ===== */
+  .final-cta{
+    background:linear-gradient(120deg, var(--orange), var(--orange-light));
+    text-align:center;color:var(--white);
+  }
+  .final-cta h2{color:var(--white);}
+  .final-cta p{color:rgba(255,255,255,.9);max-width:560px;margin:0 auto 28px;}
+  .final-cta .btn{background:var(--navy);box-shadow:0 8px 20px rgba(13,27,53,.35);}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy);color:#B8C2D4;padding:56px 0 28px;font-size:14px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px;}
+  footer h4{color:var(--white);font-size:15px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{margin-bottom:8px;}
+  footer a:hover{color:var(--orange);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;text-align:center;font-size:13px;color:#8592A8;}
+
+  @media(max-width:900px){
+    nav ul, .nav-cta .btn.outline{display:none;}
+    .burger{display:block;}
+    .hero-grid, .problem-grid, .duo, .showcase-grid, .about-grid{grid-template-columns:1fr;}
+    .feature-grid, .price-grid{grid-template-columns:1fr 1fr;}
+    .testi-grid, .blog-grid{grid-template-columns:1fr 1fr;}
+    .format-steps{flex-wrap:wrap;}
+    .format-step{flex:0 0 50%;margin-bottom:28px;}
+    .format-step::before{display:none;}
+    .theme-chips{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:600px){
+    .feature-grid, .price-grid, .testi-grid, .blog-grid, .footer-grid, .theme-chips{grid-template-columns:1fr;}
+    .format-step{flex:0 0 100%;}
+    section{padding:56px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="logo">Avatar<span>Sales</span>Academy</div>
+    <nav>
+      <ul>
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn outline" href="#pricing">Voir les offres</a>
+    </div>
+    <button class="burger">☰</button>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow" style="color:var(--blue)">Avatar Sales Academy</span>
+      <h1>Vos étudiants décrochent en cours.<br>Pas dans vos simulations.</h1>
+      <p>Nous automatisons vos jeux de rôles en Serious Games 3D. Entraînement simultané, avatars et scoring intégré — pensés pour concentrer votre énergie sur le débriefing stratégique.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a class="btn" href="https://avatarsales-academy.learnybox.com/inscription/6966211bc810ejkvo5opi3t0g6g6awdc7o/" target="_blank">Tester gratuitement →</a>
+        <a class="btn outline" style="border-color:#fff;color:#fff;" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Audit offert !</a>
+      </div>
+      <div class="stats-strip">
+        <div><strong>30+</strong><span>Serious Games</span></div>
+        <div><strong>6</strong><span>Compétences</span></div>
+        <div><strong>5</strong><span>Secteurs d'activités</span></div>
+        <div><strong>100%</strong><span>Interactif et ludique</span></div>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/12/Template-fiches-videos-41.png" alt="Aperçu plateforme Avatar Sales Academy">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container duo">
+    <div class="duo-card challenge">
+      <h3>Pour les Directeurs de CFA</h3>
+      <ul>
+        <li><strong style="color:#fff;">L'arme anti-décrochage :</strong> le Serious Game agit comme un pont immersif entre la théorie et le terrain, il réduit drastiquement l'ennui et l'abandon.</li>
+        <li><strong style="color:#fff;">Un levier d'acquisition puissant :</strong> montrer une plateforme 3D en Journée Portes Ouvertes différencie immédiatement votre établissement de la concurrence.</li>
+        <li><strong style="color:#fff;">Du plug and play :</strong> LMS simplifié et contenu SCORM clé en main, sans besoin d'embaucher un ingénieur pédagogique.</li>
+      </ul>
+    </div>
+    <div class="duo-card impact">
+      <h3>Pour les Formateurs</h3>
+      <ul>
+        <li><strong style="color:#fff;">Du temps gagné sur la théorie :</strong> les étudiants s'exercent sur le simulateur, vous consacrez votre temps de classe au débriefing et au coaching.</li>
+        <li><strong style="color:#fff;">Ancrage par l'erreur :</strong> vos apprenants s'entraînent aux objections dans un environnement sécurisé, avant d'être lâchés en rendez-vous réel.</li>
+        <li><strong style="color:#fff;">Une donnée automatisée :</strong> un tableau de bord SCORM précis, sans avoir à corriger des dizaines de cas pratiques.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="container problem-grid">
+    <div>
+      <span class="eyebrow">Votre défi pédagogique</span>
+      <h2>Comment garantir l'engagement de vos apprenants et l'attractivité de votre école ?</h2>
+      <p><strong>Le constat : un décalage entre la théorie scolaire et la réalité professionnelle.</strong> Face à une génération numérique habituée à l'immédiateté, la capacité d'attention de vos étudiants en cours s'effondre.</p>
+      <ul class="risk-list">
+        <li><strong>Des formateurs surchargés :</strong> des experts qui s'épuisent sur la théorie au lieu de coacher.</li>
+        <li><strong>Un ancrage mémoriel faible :</strong> l'absence de pratique sécurisée empêche l'apprentissage par l'erreur.</li>
+        <li><strong>Une attractivité en danger :</strong> vos formations peinent à se démarquer de la concurrence lors des portes ouvertes.</li>
+      </ul>
+      <p><strong>La solution :</strong> recréez l'engagement et simplifiez l'apprentissage grâce aux Serious Games 3D et un LMS clé-en-main.</p>
+      <a class="btn" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je souhaite une démo</a>
+    </div>
+    <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/12/Template-fiches-videos-44.png" alt="Formation gamifiée">
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container" style="max-width:860px;">
+    <a href="https://www.youtube.com/watch?v=JOLGAdtSvls" target="_blank" style="display:block;position:relative;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000;">
+      <img src="https://img.youtube.com/vi/JOLGAdtSvls/maxresdefault.jpg" alt="Avatar Sales Academy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+      <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76px;height:76px;background:rgba(255,0,0,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+        <span style="width:0;height:0;border-style:solid;border-width:14px 0 14px 24px;border-color:transparent transparent transparent #fff;margin-left:4px;"></span>
+      </span>
+    </a>
+  </div>
+</section>
+
+
+<section class="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Pourquoi nous choisir</span>
+      <h2>Une solution digitale pensée pour votre réussite</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="icon">✅</div><h3>Conformité & Suivi Qualiopi</h3><p>Relevés de connexion générés automatiquement avec CSV pour vos audits.</p></div>
+      <div class="feature-card"><div class="icon">🤝</div><h3>Développement des Soft Skills</h3><p>Compétences commerciales & comportementales traductibles dans plus de 20 langues.</p></div>
+      <div class="feature-card"><div class="icon">🧠</div><h3>Ancrage mémoriel durable</h3><p>Micro-learning et répétition espacée pour assimiler durablement les notions complexes.</p></div>
+      <div class="feature-card"><div class="icon">🏆</div><h3>Engagement & rétention</h3><p>Quiz, points, badges, emails pour maintenir motivation et assiduité toute l'année.</p></div>
+      <div class="feature-card"><div class="icon">🔒</div><h3>Conforme RGPD</h3><p>Hébergement en France et données apprenants protégées, sans partage à des tiers.</p></div>
+      <div class="feature-card"><div class="icon">📦</div><h3>Lecteur SCORM</h3><p>Intégrez vos propres modules SCORM et suivez la progression dans le même tableau de bord.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--blue)">Avatar Sales Academy</span>
+      <h2>Des scénarios jouables en présentiel ou distanciel</h2>
+    </div>
+    <div class="showcase-grid">
+      <div class="showcase-item">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/11/vr-1.webp" alt="Serious Games en 3D">
+        <h3>Serious Games en 3D</h3>
+      </div>
+      <div class="showcase-item">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/11/vr-2.webp" alt="Simulations professionnelles">
+        <h3>Simulations professionnelles réalistes</h3>
+      </div>
+      <div class="showcase-item">
+        <img src="https://avatarsales.github.io/asa-quiz/img-ressources.jpg" alt="Bibliothèque de ressources">
+        <h3>Bibliothèque de ressources</h3>
+      </div>
+      <div class="showcase-item">
+        <img src="https://avatarsales.github.io/asa-quiz/img-dashboard.jpg" alt="Tableau de bord & Reporting">
+        <h3>Tableau de bord & Reporting</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catalogue">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Notre catalogue</span>
+      <h2>30+ Serious Games, 4 formats, 6 thématiques métier</h2>
+      <p>Chaque situation de vente appelle un format différent — voici comment votre catalogue s'adapte à chaque objectif pédagogique.</p>
+    </div>
+
+    <div class="format-steps">
+      <div class="format-step">
+        <div class="format-step-num">1</div>
+        <div class="format-step-icon">🎬</div>
+        <h3>Analyse vidéo</h3>
+        <p>L'apprenant observe et diagnostique une situation.</p>
+      </div>
+      <div class="format-step">
+        <div class="format-step-num">2</div>
+        <div class="format-step-icon">🎮</div>
+        <h3>Gestion de situation</h3>
+        <p>Scénario à choix multiples avec points gagnés/perdus.</p>
+      </div>
+      <div class="format-step">
+        <div class="format-step-num">3</div>
+        <div class="format-step-icon">🔍</div>
+        <h3>Enquête immersive</h3>
+        <p>Multi-interlocuteurs, croisement d'informations.</p>
+      </div>
+      <div class="format-step">
+        <div class="format-step-num">4</div>
+        <div class="format-step-icon">📝</div>
+        <h3>Scénarisation + Quiz</h3>
+        <p>Parcours guidé avec évaluation intégrée.</p>
+      </div>
+    </div>
+
+    <div class="theme-chips">
+      <div class="theme-chip chip-navy"><span class="chip-emoji">🤝</span><h3>Négociation & objections</h3><span class="chip-count">5 modules</span></div>
+      <div class="theme-chip chip-orange"><span class="chip-emoji">💬</span><h3>Relation client & fidélisation</h3><span class="chip-count">8 modules</span></div>
+      <div class="theme-chip chip-blue"><span class="chip-emoji">📊</span><h3>Gestion de situations complexes</h3><span class="chip-count">6 modules</span></div>
+      <div class="theme-chip chip-orange"><span class="chip-emoji">🧠</span><h3>Psychologie de vente & Soft Skills</h3><span class="chip-count">5 modules</span></div>
+      <div class="theme-chip chip-blue"><span class="chip-emoji">📋</span><h3>Recrutement & posture professionnelle</h3><span class="chip-count">2 modules</span></div>
+      <div class="theme-chip chip-orange"><span class="chip-emoji">🎯</span><h3>Argumentation & pitch commercial</h3><span class="chip-count">4 modules</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">30 jours offerts</span>
+      <h2>Nos formules</h2>
+      <p>Testez la plateforme et trouvez la formule adaptée à votre établissement.</p>
+    </div>
+
+    <div class="toggle">
+      <button class="active" data-period="month">Mensuel</button>
+      <button data-period="year">Annuel — -40%</button>
+    </div>
+
+    <!-- MENSUEL -->
+    <div class="price-grid" data-plan="month">
+      <div class="price-card">
+        <h3>Découverte</h3>
+        <div class="tagline">Pour tester la plateforme sur une classe</div>
+        <div class="amount">19,90€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit 0,40€/apprenant/mois</p>
+        <ul>
+          <li>1 formateur, 50 apprenants</li>
+          <li>10 Serious Games au choix</li>
+          <li>2 pôles sectoriels</li>
+          <li>Personnalisation en option</li>
+          <li>Fiches déroulement + grilles</li>
+          <li>Ajout de vos propres SCORM</li>
+          <li>1Go d'espace disponible</li>
+          <li>Ajout de vos propres documents & lien html</li>
+          <li>Mapping RNCP en lecture</li>
+          <li>Tableau de progression</li>
+          <li>Export CSV</li>
+          <li>Accompagnement 30mn</li>
+          <li>Support email</li>
+        </ul>
+        <a class="btn outline" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Liste d'attente</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Campus</h3>
+        <div class="tagline">Pour digitaliser tout votre établissement</div>
+        <div class="amount">Dès 399€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit dès 2,00€/apprenant/mois</p>
+        <ul>
+          <li>10 formateurs, 200 apprenants</li>
+          <li>Catalogue complet (28+ SG)</li>
+          <li>Tous les pôles sectoriels</li>
+          <li>Mapping RNCP complet par diplôme</li>
+          <li>3 scénarios personnalisés/an inclus</li>
+          <li>Ajout SCORM + docs pédagogiques</li>
+          <li>5Go d'espace disponible</li>
+          <li>Tableau de progression</li>
+          <li>Export CSV</li>
+          <li>Accompagnement 4h</li>
+          <li>Support email prioritaire + WhatsApp</li>
+        </ul>
+        <a class="btn" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
+      </div>
+      <div class="price-card">
+        <h3>Académie</h3>
+        <div class="tagline">Pour un partenariat pédagogique complet</div>
+        <div class="amount">Dès 599€<span>/mois</span></div>
+        <ul>
+          <li>Tout Campus inclus</li>
+          <li>Formateurs & apprenants illimités</li>
+          <li>6 scénarios personnalisés/an inclus</li>
+          <li>Digitalisation de 2 supports PPT/an</li>
+          <li>Co-branding logo CFA</li>
+          <li>Accès prioritaire aux nouveaux SG</li>
+          <li>Ajout SCORM + docs pédagogiques</li>
+          <li>10Go d'espace disponible</li>
+          <li>Bilan pédagogique mensuel</li>
+          <li>Export CSV</li>
+          <li>Accompagnement 1 journée inclus</li>
+          <li>Support email prioritaire + WhatsApp</li>
+        </ul>
+        <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
+      </div>
+    </div>
+
+    <!-- ANNUEL -40% -->
+    <div class="price-grid" data-plan="year" style="display:none;">
+      <div class="price-card">
+        <h3>Découverte</h3>
+        <div class="tagline">Pour tester la plateforme sur une classe</div>
+        <div class="amount">11,90€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit 0,24€/apprenant/mois — 143€/an</p>
+        <ul>
+          <li>1 formateur, 50 apprenants</li>
+          <li>10 Serious Games au choix</li>
+          <li>2 pôles sectoriels</li>
+          <li>Personnalisation en option</li>
+          <li>Fiches déroulement + grilles</li>
+          <li>Ajout de vos propres SCORM</li>
+          <li>1Go d'espace disponible</li>
+          <li>Ajout de vos propres documents & lien html</li>
+          <li>Mapping RNCP en lecture</li>
+          <li>Tableau de progression</li>
+          <li>Export CSV</li>
+          <li>Accompagnement 30mn</li>
+          <li>Support email</li>
+        </ul>
+        <a class="btn outline" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Liste d'attente</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Campus</h3>
+        <div class="tagline">Pour digitaliser tout votre établissement</div>
+        <div class="amount">Dès 239€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit dès 1,20€/apprenant/mois — 2 873€/an</p>
+        <ul>
+          <li>10 formateurs, 200 apprenants</li>
+          <li>Catalogue complet (28+ SG)</li>
+          <li>Tous les pôles sectoriels</li>
+          <li>Mapping RNCP complet par diplôme</li>
+          <li>3 scénarios personnalisés/an inclus</li>
+          <li>Ajout SCORM + docs pédagogiques</li>
+          <li>5Go d'espace disponible</li>
+          <li>Tableau de progression</li>
+          <li>Export CSV</li>
+          <li>Accompagnement 4h</li>
+          <li>Support email prioritaire + WhatsApp</li>
+        </ul>
+        <a class="btn" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
+      </div>
+      <div class="price-card">
+        <h3>Académie</h3>
+        <div class="tagline">Pour un partenariat pédagogique complet</div>
+        <div class="amount">Dès 359€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Facturé annuellement — dès 4 313€/an</p>
+        <ul>
+          <li>Tout Campus inclus</li>
+          <li>Formateurs & apprenants illimités</li>
+          <li>6 scénarios personnalisés/an inclus</li>
+          <li>Digitalisation de 2 supports PPT/an</li>
+          <li>Co-branding logo CFA</li>
+          <li>Accès prioritaire aux nouveaux SG</li>
+          <li>Ajout SCORM + docs pédagogiques</li>
+          <li>10Go d'espace disponible</li>
+          <li>Bilan pédagogique mensuel</li>
+          <li>Export CSV</li>
+          <li>Accompagnement 1 journée inclus</li>
+          <li>Support email prioritaire + WhatsApp</li>
+        </ul>
+        <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;padding-top:40px;border-top:1px solid var(--border);">
+      <div class="section-head">
+        <span class="eyebrow">Sans engagement</span>
+        <h2>Modules à la carte</h2>
+        <p>Vous avez déjà un LMS ? Ajoutez simplement nos contenus, sans abonnement.</p>
+      </div>
+      <div class="price-grid" style="grid-template-columns:repeat(3,1fr);max-width:920px;margin:0 auto;">
+        <div class="price-card">
+          <h3>Scénario sur-mesure</h3>
+          <div class="tagline">Créé à partir de votre catalogue existant</div>
+          <div class="amount">Dès 490€<span>/scénario</span></div>
+          <p style="font-size:13px;margin:-8px 0 0;">Paiement en 1 fois</p>
+          <ul>
+            <li>Livraison SCORM ou HTML5</li>
+          </ul>
+          <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande un devis</a>
+        </div>
+        <div class="price-card">
+          <h3>Digitalisation PPT + Quiz</h3>
+          <div class="tagline">À partir d'un support existant (10 slides)</div>
+          <div class="amount">Dès 490€<span>/support</span></div>
+          <p style="font-size:13px;margin:-8px 0 0;">Paiement en 1 fois</p>
+          <ul>
+            <li>Livraison SCORM ou HTML5</li>
+          </ul>
+          <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande un devis</a>
+        </div>
+        <div class="price-card">
+          <h3>Branding & personnalisation</h3>
+          <div class="tagline">Adaptez un module existant à votre image</div>
+          <div class="amount">Dès 99€<span>/modification</span></div>
+          <p style="font-size:13px;margin:-8px 0 0;">Paiement en 1 fois</p>
+          <ul>
+            <li>Intégration de votre logo et charte graphique</li>
+            <li>Modification de textes ou visuels existants</li>
+          </ul>
+          <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande un devis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Partenaires</span>
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;opacity:.85;">
+      <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2026/07/logo-lb-800px.png" alt="Learnybox" style="height:38px;width:auto;">
+      <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/serious-factory.png" alt="Serious Factory" style="height:38px;width:auto;">
+      <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/made-in-95.webp" alt="Made in 95" style="height:38px;width:auto;">
+      <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/rsconsultants-1-1024x234.webp" alt="RS Consultants" style="height:38px;width:auto;">
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Avis</span>
+      <h2>Ce que disent les utilisateurs</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card"><p>"Une solution rapide à déployer, ludique et ultra engageante. Les Serious Games ont boosté la motivation et ancré les apprentissages. Mention spéciale pour les modules sur mesure : objections & accueil client."</p><div class="testi-name">Emeline D.</div></div>
+      <div class="testi-card"><p>"Une expérience de formation exceptionnelle grâce à Régis et son serious game immersif avec LMS intégré. Les modules de vente sont variés, captivants, et surtout efficaces pour ancrer les apprentissages dans la durée."</p><div class="testi-name">Laurine C.</div></div>
+      <div class="testi-card"><p>"J'ai été bluffé par la rapidité de mise en place et surtout grâce à l'aspect ludique. Résultat : meilleure mémorisation, plus d'implication, et des compétences ancrées durablement."</p><div class="testi-name">Enzo</div></div>
+      <div class="testi-card"><p>"Une solution rapide à mettre en place, à la fois ludique et bien pensée. Les contenus sont variés, immersifs, et donnent envie de s'impliquer. L'approche par le jeu apporte une vraie dynamique à la formation."</p><div class="testi-name">Katia K.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Blog</span>
+      <h2>Nos derniers articles</h2>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/12/equipe-Avatar.png" alt="">
+        <div class="body">
+          <h3>Pourquoi les Serious Games sont votre meilleur allié pour réussir votre BTS NDRC & MCO</h3>
+          <a class="read" href="https://www.avatar-sales-academy.com/combien-coute-reellement-la-creation-dun-serious-game-le-guide-complet-2024/" target="_blank">Lire la suite →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/04/bg-commerciaux-1.webp" alt="">
+        <div class="body">
+          <h3>Serious Games : révolutionner la formation à distance pour les commerciaux</h3>
+          <a class="read" href="https://www.avatar-sales-academy.com/serious-games-revolutionner-la-formation-a-distance-pour-les-commerciaux/" target="_blank">Lire la suite →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Gemini_Generated_Image_61pewc61pewc61pe.png" alt="">
+        <div class="body">
+          <h3>Les 5 conseils pour enfin décrocher ton alternance !</h3>
+          <a class="read" href="https://www.avatar-sales-academy.com/les-serious-games-un-levier-puissant-pour-booster-votre-performance-commerciale/" target="_blank">Lire la suite →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Facture-alternant.png" alt="">
+        <div class="body">
+          <h3>Et si vous misiez sur la solution la plus pérenne ? L'Alternance !</h3>
+          <a class="read" href="https://www.avatar-sales-academy.com/lms-transformez-votre-formation-en-une-experience-inoubliable/" target="_blank">Lire la suite →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Gemini_Generated_Image_v3xdbcv3xdbcv3xd.png" alt="">
+        <div class="body">
+          <h3>Comment mémoriser plus vite et plus longtemps, grâce au pouvoir de la répétition ?</h3>
+          <a class="read" href="https://www.avatar-sales-academy.com/quest-ce-quun-lms-et-pourquoi-est-il-essentiel/" target="_blank">Lire la suite →</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Gemini_Generated_Image_prhfvtprhfvtprhf.jpg" alt="">
+        <div class="body">
+          <h3>Formateurs, responsables pédagogiques : réinventez l'apprentissage avec le pouvoir du jeu 🎮</h3>
+          <a class="read" href="https://www.avatar-sales-academy.com/formateurs-responsables-pedagogiques-reinventez-lapprentissage-avec-le-pouvoir-du-jeu%f0%9f%8e%ae/" target="_blank">Lire la suite →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="max-width:820px;">
+    <div class="section-head">
+      <span class="eyebrow">Questions & réponses</span>
+      <h2>FAQ</h2>
+    </div>
+    <div id="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">1. Qu'est-ce que la plateforme pédagogique Avatar Sales Academy ? <span>+</span></button>
+        <div class="faq-a">C'est une solution de pédagogie immersive dédiée aux métiers de la vente et du management. Nous transformons les concepts théoriques en Serious Games interactifs pour booster l'engagement des apprenants.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">2. À qui s'adresse cette plateforme ? <span>+</span></button>
+        <div class="faq-a">Elle est conçue pour les CFA, les écoles de commerce et les formateurs indépendants, pour digitaliser des parcours de formation et assurer un suivi pédagogique précis.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">3. Quels sont les domaines couverts par les simulations ? <span>+</span></button>
+        <div class="faq-a">Vente & Négociation (B2B, B2C, objections, closing), Recrutement (entretiens, sélection) et Management & Soft Skills (gestion de conflit, profil DISC, écoute active).</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">4. Pouvez-vous créer des scénarios sur mesure à partir de mes cours ? <span>+</span></button>
+        <div class="faq-a">Oui, c'est notre spécialité. Vous nous transmettez vos supports existants (Word, Excel, PPT) et nous les transformons en Serious Games personnalisés.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">5. En quoi consistent vos Serious Games immersifs ? <span>+</span></button>
+        <div class="faq-a">Ce sont des simulations à embranchements où l'apprenant est le protagoniste. Chaque choix entraîne une conséquence immédiate, pour un droit à l'erreur sécurisé.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">6. La plateforme est-elle compatible avec le suivi Qualiopi ? <span>+</span></button>
+        <div class="faq-a">Absolument. Un tableau de bord permet de suivre l'assiduité, les temps de connexion et les scores, exportables pour vos audits Qualiopi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="container" style="max-width:600px;">
+    <h2>Vous êtes un centre de formation ou formateur ?</h2>
+    <p>Besoin d'accompagnement pour booster l'engagement de vos apprenants ? Laissez-nous vos coordonnées, on vous recontacte sous 48h.</p>
+
+    <form id="lead-form" style="background:#fff;border-radius:var(--radius);padding:28px;text-align:left;box-shadow:0 12px 30px rgba(13,27,53,.25);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+        <div>
+          <label style="display:block;font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--navy);margin-bottom:6px;">Nom *</label>
+          <input type="text" name="nom" required style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:15px;">
+        </div>
+        <div>
+          <label style="display:block;font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--navy);margin-bottom:6px;">Email *</label>
+          <input type="email" name="email" required style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:15px;">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+        <div>
+          <label style="display:block;font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--navy);margin-bottom:6px;">Téléphone</label>
+          <input type="tel" name="telephone" style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:15px;">
+        </div>
+        <div>
+          <label style="display:block;font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--navy);margin-bottom:6px;">Établissement</label>
+          <input type="text" name="etablissement" style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:15px;">
+        </div>
+      </div>
+      <div style="margin-bottom:18px;">
+        <label style="display:block;font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--navy);margin-bottom:6px;">Message</label>
+        <textarea name="message" rows="3" style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:15px;resize:vertical;"></textarea>
+      </div>
+      <button type="submit" class="btn" style="width:100%;justify-content:center;border:none;cursor:pointer;">Envoyer ma demande</button>
+      <p id="lead-form-status" style="margin:12px 0 0;font-size:14px;text-align:center;color:var(--grey);"></p>
+    </form>
+
+    <p style="margin-top:20px;">Vous préférez échanger de vive voix ?</p>
+    <a class="btn outline" style="border-color:#fff;color:#fff;" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Prendre RDV</a>
+  </div>
+</section>
+
+<script>
+  // Formulaire de leads → Google Sheet via Apps Script
+  const LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwkgUGVHo1LXlA_eLZ2GWe5CL-VFNPxJW22bzTaVK_g98zHcQ_i5lw2YSkb1oG11cshJQ/exec';
+
+  document.getElementById('lead-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = e.target;
+    const status = document.getElementById('lead-form-status');
+    const btn = form.querySelector('button[type="submit"]');
+    const data = new URLSearchParams(new FormData(form));
+
+    if (LEAD_WEBHOOK_URL.includes('COLLE_ICI')) {
+      status.textContent = "Formulaire pas encore connecté — configure l'URL Apps Script.";
+      status.style.color = '#c0392b';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours...';
+
+    fetch(LEAD_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: data })
+      .then(() => {
+        form.reset();
+        status.textContent = 'Merci ! Votre demande a bien été envoyée, on vous recontacte sous 48h.';
+        status.style.color = '#2e7d32';
+        btn.textContent = 'Envoyé ✓';
+      })
+      .catch(() => {
+        status.textContent = "Une erreur est survenue, réessayez ou contactez-nous par email.";
+        status.style.color = '#c0392b';
+        btn.disabled = false;
+        btn.textContent = 'Envoyer ma demande';
+      });
+  });
+</script>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;color:#E4392E;">Avatar<span style="color:#E4392E;">Sales</span>Academy</div>
+        <p style="color:#8592A8;max-width:320px;">La plateforme Serious Games qui transforme la formation commerciale en expérience gamifiée.</p>
+        <div style="display:flex;gap:16px;align-items:center;margin-top:16px;">
+          <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/10/rgpd.webp" alt="RGPD" style="height:32px;width:auto;">
+          <img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/10/Hebergementt.webp" alt="Hébergement" style="height:32px;width:auto;">
+        </div>
+      </div>
+      <div>
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="https://www.avatar-sales-academy.com/mentions-legales/" target="_blank">Mentions légales</a></li>
+          <li><a href="https://www.avatar-sales-academy.com/politique-de-confidentialite/" target="_blank">Politique de confidentialité</a></li>
+          <li><a href="https://www.avatar-sales-academy.com/cgv/" target="_blank">CGV</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>contact@avatar-sales-academy.com</li>
+          <li><a href="http://www.linkedin.com/in/regis-malonga" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.youtube.com/@AVATARSALESACADEMY" target="_blank">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Avatar Sales Academy. Tous droits réservés.</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordéon
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Toggle mensuel / annuel
+  document.querySelectorAll('.toggle button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.toggle button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const period = btn.dataset.period;
+      document.querySelectorAll('.price-grid').forEach(g=>{
+        g.style.display = (g.dataset.plan === period) ? 'grid' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
