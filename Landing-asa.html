@@ -45,7 +45,7 @@
   p{margin:0 0 1em;color:var(--grey);}
   a{color:inherit;text-decoration:none;}
   img{max-width:100%;display:block;}
-  .container{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .asa-container{max-width:1160px;margin:0 auto;padding:0 24px;}
   .eyebrow{
     display:inline-block;
     font-family:var(--font-display);
@@ -223,6 +223,19 @@
   .price-card ul{list-style:none;padding:0;margin:22px 0;flex:1;}
   .price-card li{padding:7px 0;font-size:14.5px;border-bottom:1px dashed var(--border);}
   .price-card .btn{width:100%;justify-content:center;margin-top:12px;}
+  .options-label{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-top:4px;}
+  .options-list{list-style:none;padding:0;margin:10px 0 0;border-top:1px dashed var(--border);padding-top:10px;}
+  .options-list li{padding:5px 0 5px 20px;font-size:13.5px;color:var(--grey);border-bottom:none;position:relative;}
+  .options-list li::before{content:"+";position:absolute;left:0;color:var(--orange);font-weight:700;}
+  .pilot-banner{
+    background:var(--off-white);border:2px solid var(--orange);border-radius:var(--radius);
+    padding:28px 32px;margin:-28px auto 40px;max-width:720px;text-align:center;position:relative;z-index:2;
+  }
+  .pilot-banner .pilot-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--orange);margin-bottom:6px;}
+  .pilot-banner p{font-size:14px;color:var(--grey);margin-bottom:16px;}
+  .pilot-features{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:16px;font-size:13px;color:var(--navy);font-weight:500;}
+  .pilot-features span::before{content:"✓ ";color:var(--orange);font-weight:700;}
+  @media(max-width:600px){.pilot-features{flex-direction:column;gap:6px;}}
 
   /* ===== TESTIMONIALS ===== */
   .testimonials{background:var(--white);}
@@ -329,13 +342,13 @@
 </header>
 
 <section class="hero" id="hero">
-  <div class="container hero-grid">
+  <div class="asa-container hero-grid">
     <div>
       <span class="eyebrow" style="color:var(--blue)">Avatar Sales Academy</span>
       <h1>Vos étudiants décrochent en cours.<br>Pas dans vos simulations.</h1>
-      <p>Nous automatisons vos jeux de rôles en Serious Games 3D. Entraînement simultané, avatars et scoring intégré — pensés pour concentrer votre énergie sur le débriefing stratégique.</p>
+      <p>Nous automatisons vos jeux de rôles en Serious Games 3D. Entraînement simultané, avatars et scoring intégré, pensés pour concentrer votre énergie sur le débriefing stratégique.</p>
       <div style="display:flex;gap:14px;flex-wrap:wrap;">
-        <a class="btn" href="https://avatarsales-academy.learnybox.com/inscription/6966211bc810ejkvo5opi3t0g6g6awdc7o/" target="_blank">Tester gratuitement →</a>
+        <a class="btn" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Tester gratuitement →</a>
         <a class="btn outline" style="border-color:#fff;color:#fff;" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Audit offert !</a>
       </div>
       <div class="stats-strip">
@@ -352,7 +365,7 @@
 </section>
 
 <section>
-  <div class="container duo">
+  <div class="asa-container duo">
     <div class="duo-card challenge">
       <h3>Pour les Directeurs de CFA</h3>
       <ul>
@@ -373,7 +386,7 @@
 </section>
 
 <section class="problem">
-  <div class="container problem-grid">
+  <div class="asa-container problem-grid">
     <div>
       <span class="eyebrow">Votre défi pédagogique</span>
       <h2>Comment garantir l'engagement de vos apprenants et l'attractivité de votre école ?</h2>
@@ -391,7 +404,7 @@
 </section>
 
 <section style="padding-top:0;">
-  <div class="container" style="max-width:860px;">
+  <div class="asa-container" style="max-width:860px;">
     <a href="https://www.youtube.com/watch?v=JOLGAdtSvls" target="_blank" style="display:block;position:relative;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#000;">
       <img src="https://img.youtube.com/vi/JOLGAdtSvls/maxresdefault.jpg" alt="Avatar Sales Academy" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
       <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76px;height:76px;background:rgba(255,0,0,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;">
@@ -403,7 +416,7 @@
 
 
 <section class="features">
-  <div class="container">
+  <div class="asa-container">
     <div class="section-head">
       <span class="eyebrow">Pourquoi nous choisir</span>
       <h2>Une solution digitale pensée pour votre réussite</h2>
@@ -420,7 +433,7 @@
 </section>
 
 <section class="showcase">
-  <div class="container">
+  <div class="asa-container">
     <div class="section-head">
       <span class="eyebrow" style="color:var(--blue)">Avatar Sales Academy</span>
       <h2>Des scénarios jouables en présentiel ou distanciel</h2>
@@ -447,7 +460,7 @@
 </section>
 
 <section id="catalogue">
-  <div class="container">
+  <div class="asa-container">
     <div class="section-head">
       <span class="eyebrow">Notre catalogue</span>
       <h2>30+ Serious Games, 4 formats, 6 thématiques métier</h2>
@@ -493,11 +506,23 @@
 </section>
 
 <section class="pricing" id="pricing">
-  <div class="container">
+  <div class="asa-container">
     <div class="section-head">
       <span class="eyebrow">30 jours offerts</span>
       <h2>Nos formules</h2>
       <p>Testez la plateforme et trouvez la formule adaptée à votre établissement.</p>
+    </div>
+
+    <div class="pilot-banner">
+      <div class="pilot-title">Classe pilote offerte — 30 jours</div>
+      <p>Testez la plateforme avec votre classe, sans engagement et sans carte bancaire.</p>
+      <div class="pilot-features">
+        <span>5 Serious Games</span>
+        <span>1 formateur</span>
+        <span>30 apprenants</span>
+        <span>Fiches déroulement incluses</span>
+      </div>
+      <a class="btn" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Démarrer ma classe pilote gratuite</a>
     </div>
 
     <div class="toggle">
@@ -508,64 +533,71 @@
     <!-- MENSUEL -->
     <div class="price-grid" data-plan="month">
       <div class="price-card">
-        <h3>Découverte</h3>
-        <div class="tagline">Pour tester la plateforme sur une classe</div>
-        <div class="amount">19,90€<span>/mois</span></div>
-        <p style="font-size:13px;margin:-8px 0 0;">Soit 0,40€/apprenant/mois</p>
+        <h3>Starter</h3>
+        <div class="tagline">Pour un formateur ou une section</div>
+        <div class="amount">49€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit 0,98€/apprenant/mois</p>
         <ul>
-          <li>1 formateur, 50 apprenants</li>
           <li>10 Serious Games au choix</li>
-          <li>2 pôles sectoriels</li>
-          <li>Personnalisation en option</li>
-          <li>Fiches déroulement + grilles</li>
-          <li>Ajout de vos propres SCORM</li>
-          <li>1Go d'espace disponible</li>
-          <li>Ajout de vos propres documents & lien html</li>
+          <li>1-2 formateurs, 50 apprenants</li>
+          <li>Fiches déroulement + grilles d'évaluation</li>
           <li>Mapping RNCP en lecture</li>
-          <li>Tableau de progression</li>
+          <li>Tableau de progression apprenant</li>
           <li>Export CSV</li>
           <li>Accompagnement 30mn</li>
           <li>Support email</li>
         </ul>
-        <a class="btn outline" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Liste d'attente</a>
+        <div class="options-label">Options personnalisation</div>
+        <ul class="options-list">
+          <li>Import de vos propres SCORM</li>
+          <li>1Go d'espace</li>
+          <li>Branding avec votre logo</li>
+          <li>Nom de domaine personnalisé</li>
+        </ul>
+        <a class="btn outline" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Accès VIP</a>
       </div>
       <div class="price-card featured">
         <h3>Campus</h3>
-        <div class="tagline">Pour digitaliser tout votre établissement</div>
-        <div class="amount">Dès 399€<span>/mois</span></div>
-        <p style="font-size:13px;margin:-8px 0 0;">Soit dès 2,00€/apprenant/mois</p>
+        <div class="tagline">Pour un CFA qui déploie sur plusieurs classes</div>
+        <div class="amount">149€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit 0,99€/apprenant/mois</p>
         <ul>
-          <li>10 formateurs, 200 apprenants</li>
-          <li>Catalogue complet (28+ SG)</li>
-          <li>Tous les pôles sectoriels</li>
+          <li>20 Serious Games</li>
+          <li>5 formateurs, 150 apprenants</li>
           <li>Mapping RNCP complet par diplôme</li>
           <li>3 scénarios personnalisés/an inclus</li>
-          <li>Ajout SCORM + docs pédagogiques</li>
-          <li>5Go d'espace disponible</li>
-          <li>Tableau de progression</li>
+          <li>Tableau de progression apprenant</li>
           <li>Export CSV</li>
-          <li>Accompagnement 4h</li>
-          <li>Support email prioritaire + WhatsApp</li>
+          <li>Accompagnement 2h</li>
+          <li>Support email + WhatsApp</li>
+        </ul>
+        <div class="options-label">Options personnalisation</div>
+        <ul class="options-list">
+          <li>Import SCORM + docs pédagogiques</li>
+          <li>5Go d'espace</li>
+          <li>Branding avec votre logo</li>
+          <li>Nom de domaine personnalisé</li>
         </ul>
         <a class="btn" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
       </div>
       <div class="price-card">
         <h3>Académie</h3>
-        <div class="tagline">Pour un partenariat pédagogique complet</div>
-        <div class="amount">Dès 599€<span>/mois</span></div>
+        <div class="tagline">Partenariat pédagogique complet</div>
+        <div class="amount">349€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Formateurs & apprenants illimités</p>
         <ul>
-          <li>Tout Campus inclus</li>
+          <li>Catalogue complet : 30 Serious Games</li>
           <li>Formateurs & apprenants illimités</li>
+          <li>Mapping RNCP complet par diplôme</li>
           <li>6 scénarios personnalisés/an inclus</li>
-          <li>Digitalisation de 2 supports PPT/an</li>
-          <li>Co-branding logo CFA</li>
+          <li>Co-branding avec le logo de votre école</li>
+          <li>Nom de domaine personnalisé inclus</li>
           <li>Accès prioritaire aux nouveaux SG</li>
-          <li>Ajout SCORM + docs pédagogiques</li>
-          <li>10Go d'espace disponible</li>
+          <li>Import SCORM + docs pédagogiques</li>
+          <li>10Go d'espace</li>
           <li>Bilan pédagogique mensuel</li>
-          <li>Export CSV</li>
           <li>Accompagnement 1 journée inclus</li>
-          <li>Support email prioritaire + WhatsApp</li>
+          <li>Support prioritaire email + WhatsApp</li>
         </ul>
         <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
       </div>
@@ -574,115 +606,80 @@
     <!-- ANNUEL -40% -->
     <div class="price-grid" data-plan="year" style="display:none;">
       <div class="price-card">
-        <h3>Découverte</h3>
-        <div class="tagline">Pour tester la plateforme sur une classe</div>
-        <div class="amount">11,90€<span>/mois</span></div>
-        <p style="font-size:13px;margin:-8px 0 0;">Soit 0,24€/apprenant/mois — 143€/an</p>
+        <h3>Starter</h3>
+        <div class="tagline">Pour un formateur ou une section</div>
+        <div class="amount">29€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit 349€/an — 0,58€/apprenant/mois</p>
         <ul>
-          <li>1 formateur, 50 apprenants</li>
           <li>10 Serious Games au choix</li>
-          <li>2 pôles sectoriels</li>
-          <li>Personnalisation en option</li>
-          <li>Fiches déroulement + grilles</li>
-          <li>Ajout de vos propres SCORM</li>
-          <li>1Go d'espace disponible</li>
-          <li>Ajout de vos propres documents & lien html</li>
+          <li>1-2 formateurs, 50 apprenants</li>
+          <li>Fiches déroulement + grilles d'évaluation</li>
           <li>Mapping RNCP en lecture</li>
-          <li>Tableau de progression</li>
+          <li>Tableau de progression apprenant</li>
           <li>Export CSV</li>
           <li>Accompagnement 30mn</li>
           <li>Support email</li>
         </ul>
-        <a class="btn outline" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Liste d'attente</a>
+        <div class="options-label">Options personnalisation</div>
+        <ul class="options-list">
+          <li>Import de vos propres SCORM</li>
+          <li>1Go d'espace</li>
+          <li>Branding avec votre logo</li>
+          <li>Nom de domaine personnalisé</li>
+        </ul>
+        <a class="btn outline" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank">Accès VIP</a>
       </div>
       <div class="price-card featured">
         <h3>Campus</h3>
-        <div class="tagline">Pour digitaliser tout votre établissement</div>
-        <div class="amount">Dès 239€<span>/mois</span></div>
-        <p style="font-size:13px;margin:-8px 0 0;">Soit dès 1,20€/apprenant/mois — 2 873€/an</p>
+        <div class="tagline">Pour un CFA qui déploie sur plusieurs classes</div>
+        <div class="amount">99€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit 1 188€/an — 0,66€/apprenant/mois</p>
         <ul>
-          <li>10 formateurs, 200 apprenants</li>
-          <li>Catalogue complet (28+ SG)</li>
-          <li>Tous les pôles sectoriels</li>
+          <li>20 Serious Games</li>
+          <li>5 formateurs, 150 apprenants</li>
           <li>Mapping RNCP complet par diplôme</li>
           <li>3 scénarios personnalisés/an inclus</li>
-          <li>Ajout SCORM + docs pédagogiques</li>
-          <li>5Go d'espace disponible</li>
-          <li>Tableau de progression</li>
+          <li>Tableau de progression apprenant</li>
           <li>Export CSV</li>
-          <li>Accompagnement 4h</li>
-          <li>Support email prioritaire + WhatsApp</li>
+          <li>Accompagnement 2h</li>
+          <li>Support email + WhatsApp</li>
+        </ul>
+        <div class="options-label">Options personnalisation</div>
+        <ul class="options-list">
+          <li>Import SCORM + docs pédagogiques</li>
+          <li>5Go d'espace</li>
+          <li>Branding avec votre logo</li>
+          <li>Nom de domaine personnalisé</li>
         </ul>
         <a class="btn" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
       </div>
       <div class="price-card">
         <h3>Académie</h3>
-        <div class="tagline">Pour un partenariat pédagogique complet</div>
-        <div class="amount">Dès 359€<span>/mois</span></div>
-        <p style="font-size:13px;margin:-8px 0 0;">Facturé annuellement — dès 4 313€/an</p>
+        <div class="tagline">Partenariat pédagogique complet</div>
+        <div class="amount">249€<span>/mois</span></div>
+        <p style="font-size:13px;margin:-8px 0 0;">Soit 2 988€/an — illimité</p>
         <ul>
-          <li>Tout Campus inclus</li>
+          <li>Catalogue complet : 30 Serious Games</li>
           <li>Formateurs & apprenants illimités</li>
+          <li>Mapping RNCP complet par diplôme</li>
           <li>6 scénarios personnalisés/an inclus</li>
-          <li>Digitalisation de 2 supports PPT/an</li>
-          <li>Co-branding logo CFA</li>
+          <li>Co-branding avec le logo de votre école</li>
+          <li>Nom de domaine personnalisé inclus</li>
           <li>Accès prioritaire aux nouveaux SG</li>
-          <li>Ajout SCORM + docs pédagogiques</li>
-          <li>10Go d'espace disponible</li>
+          <li>Import SCORM + docs pédagogiques</li>
+          <li>10Go d'espace</li>
           <li>Bilan pédagogique mensuel</li>
-          <li>Export CSV</li>
           <li>Accompagnement 1 journée inclus</li>
-          <li>Support email prioritaire + WhatsApp</li>
+          <li>Support prioritaire email + WhatsApp</li>
         </ul>
         <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande une démo</a>
-      </div>
-    </div>
-
-    <div style="margin-top:56px;padding-top:40px;border-top:1px solid var(--border);">
-      <div class="section-head">
-        <span class="eyebrow">Sans engagement</span>
-        <h2>Modules à la carte</h2>
-        <p>Vous avez déjà un LMS ? Ajoutez simplement nos contenus, sans abonnement.</p>
-      </div>
-      <div class="price-grid modules-grid">
-        <div class="price-card">
-          <h3>Scénario sur-mesure</h3>
-          <div class="tagline">Créé à partir de votre catalogue existant</div>
-          <div class="amount">Dès 490€<span>/scénario</span></div>
-          <p style="font-size:13px;margin:-8px 0 0;">Paiement en 1 fois</p>
-          <ul>
-            <li>Livraison SCORM ou HTML5</li>
-          </ul>
-          <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande un devis</a>
-        </div>
-        <div class="price-card">
-          <h3>Digitalisation PPT + Quiz</h3>
-          <div class="tagline">À partir d'un support existant (10 slides)</div>
-          <div class="amount">Dès 490€<span>/support</span></div>
-          <p style="font-size:13px;margin:-8px 0 0;">Paiement en 1 fois</p>
-          <ul>
-            <li>Livraison SCORM ou HTML5</li>
-          </ul>
-          <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande un devis</a>
-        </div>
-        <div class="price-card">
-          <h3>Branding & personnalisation</h3>
-          <div class="tagline">Adaptez un module existant à votre image</div>
-          <div class="amount">Dès 99€<span>/modification</span></div>
-          <p style="font-size:13px;margin:-8px 0 0;">Paiement en 1 fois</p>
-          <ul>
-            <li>Intégration de votre logo et charte graphique</li>
-            <li>Modification de textes ou visuels existants</li>
-          </ul>
-          <a class="btn outline" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank">Je demande un devis</a>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="container">
+  <div class="asa-container">
     <div class="section-head">
       <span class="eyebrow">Partenaires</span>
     </div>
@@ -696,7 +693,7 @@
 </section>
 
 <section class="testimonials">
-  <div class="container">
+  <div class="asa-container">
     <div class="section-head">
       <span class="eyebrow">Avis</span>
       <h2>Ce que disent les utilisateurs</h2>
@@ -711,7 +708,7 @@
 </section>
 
 <section class="blog" id="blog">
-  <div class="container">
+  <div class="asa-container">
     <div class="section-head">
       <span class="eyebrow">Blog</span>
       <h2>Nos derniers articles</h2>
@@ -764,7 +761,7 @@
 </section>
 
 <section>
-  <div class="container" style="max-width:820px;">
+  <div class="asa-container" style="max-width:820px;">
     <div class="section-head">
       <span class="eyebrow">Questions & réponses</span>
       <h2>FAQ</h2>
@@ -799,7 +796,7 @@
 </section>
 
 <section class="final-cta">
-  <div class="container" style="max-width:600px;">
+  <div class="asa-container" style="max-width:600px;">
     <h2>Vous êtes un centre de formation ou formateur ?</h2>
     <p>Besoin d'accompagnement pour booster l'engagement de vos apprenants ? Laissez-nous vos coordonnées, on vous recontacte sous 48h.</p>
 
@@ -874,7 +871,7 @@
 </script>
 
 <footer id="footer">
-  <div class="container">
+  <div class="asa-container">
     <div class="footer-grid">
       <div>
         <div class="logo" style="margin-bottom:14px;color:#E4392E;">Avatar<span style="color:#E4392E;">Sales</span>Academy</div>
