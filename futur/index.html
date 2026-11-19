@@ -134,6 +134,13 @@
   .sheet{width:min(820px,100%);max-height:92vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);position:relative;}
   .sheet img{width:100%;aspect-ratio:16/9;object-fit:cover;}
   .sheet .in{padding:24px 28px 30px;}
+  .clip{position:relative;aspect-ratio:16/9;background:#000;}
+  .clip video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;background:#000;}
+  .clip.on video{display:block;}
+  .clip .replay{position:absolute;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;background:var(--orange);color:#fff;font-size:20px;padding-left:4px;display:grid;place-items:center;box-shadow:0 0 0 6px rgba(255,107,0,.25);z-index:1;}
+  .clip.playing .replay{opacity:0;pointer-events:none;}
+  .clip.none .replay,.clip.none .clip-tag{display:none;}
+  .clip-tag{position:absolute;left:12px;bottom:12px;font-family:var(--display);font-style:italic;font-weight:700;font-size:13px;letter-spacing:1.5px;background:rgba(6,11,22,.8);padding:3px 9px;border-radius:4px;}
   .sheet h3{font-size:36px;margin:6px 0 12px;}
   .sheet p{color:#C6D0E2;margin-bottom:18px;}
   .sheet ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
@@ -456,7 +463,7 @@
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <div class="sheet">
     <button class="close" id="mClose" aria-label="Fermer">✕</button>
-    <img id="mImg" alt="" width="640" height="360">
+    <div class="clip" id="mClip"><img id="mImg" alt="" width="640" height="360"><video id="mVid" muted playsinline preload="none" width="640" height="360"></video><button class="replay" id="mReplay" aria-label="Lecture / Play">▶</button><span class="clip-tag">15 s</span></div>
     <div class="in">
       <span class="tag" id="mCat"></span>
       <h3 id="mTitle"></h3>
@@ -677,17 +684,35 @@ function renderRail(){
 function scrollRail(d){var r=$('#rail');r.scrollBy({left:d*Math.max(300,r.clientWidth*.8),behavior:'smooth'});}
 $('#prev').addEventListener('click',function(){scrollRail(-1);});$('#next').addEventListener('click',function(){scrollRail(1);});
 
+/* ---------- EXTRAITS 15 s ---------- */
+var vid=$('#mVid'),clip=$('#mClip');
+function stopClip(){try{vid.pause();vid.removeAttribute('src');vid.load();}catch(e){}clip.classList.remove('on','playing');}
+function playClip(){
+  var p=vid.play();if(p&&p.catch)p.catch(function(){clip.classList.remove('playing');});
+}
+function setClip(id){
+  stopClip();clip.classList.remove('none');
+  vid.poster='img/g-'+id+'.webp';vid.src='video/'+id+'.mp4';clip.classList.add('on');
+  playClip();
+}
+vid.addEventListener('playing',function(){clip.classList.add('playing');});
+vid.addEventListener('ended',function(){clip.classList.remove('playing');});
+vid.addEventListener('error',function(){clip.classList.remove('on','playing');clip.classList.add('none');});
+$('#mReplay').addEventListener('click',function(){vid.currentTime=0;playClip();});
+vid.addEventListener('click',function(){if(vid.paused){playClip();}else{vid.pause();clip.classList.remove('playing');}});
+
 var lastFocus;
 function openGame(id){
   var g=byId(id);lastFocus=document.activeElement;
   $('#mImg').src='img/g-'+g.id+'.webp';$('#mImg').alt=tx(g.t);$('#mCat').textContent=tx(CATS[g.c]);$('#mTitle').textContent=tx(g.t);$('#mDesc').textContent=tx(g.d);
   $('#mSkills').innerHTML=tx(g.s).map(function(s){return '<li>'+s+'</li>';}).join('');
   $('#mPlay').href=g.url||DEMO_URL;
+  setClip(id);
   $('#modal').classList.add('open');$('#mClose').focus();
   if(state.seen.indexOf(id)<0){state.seen.push(id);save();renderRail();}
   if(state.seen.length>=3)complete('cat');
 }
-function closeModal(){if(!$('#modal').classList.contains('open'))return;$('#modal').classList.remove('open');if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
+function closeModal(){if(!$('#modal').classList.contains('open'))return;stopClip();$('#modal').classList.remove('open');if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
 $('#mClose').addEventListener('click',closeModal);
 $('#modal').addEventListener('click',function(e){if(e.target.id==='modal')closeModal();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
