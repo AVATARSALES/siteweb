@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Avatar Sales Academy — Serious Games 3D</title>
+<title>Avatar Sales Academy, Serious Games 3D</title>
 <meta name="description" content="20 Serious Games 3D pour la formation commerciale : jouez un extrait, explorez le catalogue et trouvez le jeu adapté à vos apprenants.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +55,7 @@
   @keyframes kb{0%{opacity:0;transform:scale(1.02);}4%{opacity:1;}25%{opacity:1;}30%{opacity:0;transform:scale(1.14) translateX(-1.5%);}100%{opacity:0;}}
   .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(6,11,22,.95) 0%,rgba(6,11,22,.72) 45%,rgba(6,11,22,.45) 100%),linear-gradient(to top,var(--bg) 0%,transparent 30%);}
   .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;width:100%;}
-  .hero h1{font-size:clamp(46px,7vw,96px);margin:16px 0 20px;}
+  .hero h1{font-size:clamp(36px,5vw,66px);margin:16px 0 20px;}
   .hero h1 em{color:var(--orange);font-style:italic;}
   .hero p.lead{font-size:18px;color:#C6D0E2;max-width:520px;margin-bottom:28px;}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
@@ -134,12 +134,6 @@
   .sheet{width:min(820px,100%);max-height:92vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);position:relative;}
   .sheet img{width:100%;aspect-ratio:16/9;object-fit:cover;}
   .sheet .in{padding:24px 28px 30px;}
-  .clip{position:relative;aspect-ratio:16/9;background:#000;}
-  .clip video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;background:#000;}
-  .clip.on video{display:block;}
-  .clip .replay{position:absolute;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;background:var(--orange);color:#fff;font-size:20px;padding-left:4px;display:grid;place-items:center;box-shadow:0 0 0 6px rgba(255,107,0,.25);z-index:1;}
-  .clip.playing .replay{opacity:0;pointer-events:none;}
-  .clip.none .replay,.clip.none .clip-tag{display:none;}
   .clip-tag{position:absolute;left:12px;bottom:12px;font-family:var(--display);font-style:italic;font-weight:700;font-size:13px;letter-spacing:1.5px;background:rgba(6,11,22,.8);padding:3px 9px;border-radius:4px;}
   .sheet h3{font-size:36px;margin:6px 0 12px;}
   .sheet p{color:#C6D0E2;margin-bottom:18px;}
@@ -166,6 +160,28 @@
   .level::before{counter-increment:l;content:"0" counter(l);position:absolute;right:16px;top:0;font-family:var(--display);font-style:italic;font-weight:800;font-size:96px;line-height:1;color:rgba(255,255,255,.05);}
   .level h3{font-size:32px;margin-bottom:8px;color:var(--orange);}
   .level p{color:var(--muted);font-size:15.5px;}
+  .vframe{position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#000;}
+  .vframe img,.vframe video,.vframe iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;}
+  .vframe img{filter:brightness(.6);}
+  .vplay{position:absolute;inset:0;display:grid;place-items:center;}
+  .vplay span{width:84px;height:84px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-size:30px;padding-left:6px;box-shadow:0 0 0 12px rgba(255,107,0,.25);transition:transform .2s;}
+  .vplay:hover span{transform:scale(1.08);}
+  .pilot{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;}
+  .pilot .head{margin:0;}
+  .kpis{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .kpis li{font-size:13px;padding:6px 14px;border-radius:99px;background:rgba(0,170,255,.12);border:1px solid rgba(0,170,255,.35);}
+  .chart{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel);}
+  .chart img{width:100%;height:auto;display:block;}
+  .cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .cycle article{position:relative;border:1px solid rgba(255,107,0,.55);border-radius:var(--r);background:var(--panel);overflow:hidden;}
+  .cycle article:not(:last-child)::after{content:"→";position:absolute;right:-14px;top:42px;z-index:2;font-size:20px;color:var(--orange);}
+  .cycle img{width:100%;height:auto;display:block;}
+  .cycle article>div{padding:18px 18px 22px;}
+  .cycle h3{display:flex;align-items:center;gap:10px;font-size:26px;margin-bottom:8px;}
+  .cycle h3 b{width:32px;height:32px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-size:16px;flex:none;}
+  .cycle p{color:var(--muted);font-size:15px;}
+  .loop{margin-top:22px;border-top:2px solid var(--orange);border-radius:0 0 40px 40px;height:26px;position:relative;border-left:2px solid var(--orange);border-right:2px solid var(--orange);border-top:0;border-bottom:2px solid var(--orange);width:92%;margin-left:auto;margin-right:auto;}
+  .loop span{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);background:var(--bg,#0D1B35);border:1px solid var(--orange);border-radius:99px;padding:4px 18px;font-size:14px;color:var(--orange);white-space:nowrap;}
   .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
   .big{padding:30px 26px;border-radius:var(--r);border:1px solid var(--line);background:radial-gradient(400px 200px at 0 0,rgba(0,170,255,.12),transparent 70%),var(--panel);}
   .big strong{display:block;font-family:var(--display);font-style:italic;font-weight:800;font-size:clamp(56px,7vw,88px);line-height:.95;color:#fff;}
@@ -222,7 +238,9 @@
 
   @media(max-width:980px){
     .hero-grid,.diag{grid-template-columns:1fr;}
-    .levels,.proof{grid-template-columns:1fr;}
+    .levels,.proof,.pilot{grid-template-columns:1fr;}
+    .cycle{grid-template-columns:1fr 1fr;}
+    .cycle article::after{display:none;}
     .testis{grid-template-columns:1fr 1fr;}
     .contact,.fgrid{grid-template-columns:1fr;}
     .path{grid-template-columns:1fr;gap:18px;}
@@ -246,7 +264,7 @@
     section.block{padding:60px 0;}
     .btn{width:100%;}
     .reco button{grid-template-columns:96px 1fr;}
-    .testis,.lead-form{grid-template-columns:1fr;}
+    .testis,.lead-form,.cycle{grid-template-columns:1fr;}
   }
   @media(prefers-reduced-motion:reduce){
     .bgv div{animation:none;} .bgv div:first-child{opacity:1;}
@@ -280,9 +298,8 @@
   </div>
   <div class="wrap hero-grid">
     <div>
-      <span class="tag" data-i="heroTag">Serious Games 3D · Formation commerciale</span>
-      <h1 data-i="heroH1">La vente s'apprend <em>en jouant.</em></h1>
-      <p class="lead" data-i="heroLead">Vos apprenants affrontent des clients virtuels dans des décors 3D : ils décident, se trompent, recommencent, et vous suivez leurs scores.</p>
+      <span class="tag" data-i="heroTag">Serious Games 3D pour la formation commerciale</span>
+      <h1 data-i="heroH1">Entraînez intensivement vos futurs commerciaux <em>en conditions réelles</em>, dans votre CFA ou dans votre entreprise</h1>
       <div class="cta-row">
         <a class="btn btn-primary" href="#catalogue" data-i="heroCta1">Voir les 20 jeux</a>
         <a class="btn btn-ghost" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank" rel="noopener" data-i="heroCta2">Audit offert</a>
@@ -297,6 +314,34 @@
   </div>
 </section>
 
+<section class="block" id="preuves">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag" data-i="prTag">Résultats</span>
+      <h2 data-i="prH2">Apprendre en jouant, ça marche</h2>
+    </div>
+    <div class="proof">
+      <div class="big"><strong>75 %</strong><span data-i="p1"></span></div>
+      <div class="big"><strong>+40 %</strong><span data-i="p2"></span></div>
+      <div class="big"><strong>+50 %</strong><span data-i="p3"></span></div>
+    </div>
+    <p class="src">Sources : <a href="https://formation.viaaduc.com/actualites/13/le-pouvoir-des-serious-games-dans-la-formation-professionnelle" target="_blank" rel="noopener">Viaaduc</a> / <a href="https://teamfirst.be/blog/serious-game-strategique-entreprise/" target="_blank" rel="noopener">TeamFirst</a> / <a href="https://www.albusfactory.com/blog-post/serious-game-definition-guide-complet" target="_blank" rel="noopener">Albus Factory</a></p>
+  </div>
+</section>
+
+<section class="block" id="video">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag" data-i="vdTag">En vidéo</span>
+      <h2 data-i="vdH2">La méthode ASA en motion design</h2>
+    </div>
+    <div class="vframe" id="vframe">
+      <img src="img/bg-2.webp" alt="" width="1280" height="720" loading="lazy">
+      <button class="vplay" id="vplay" aria-label="Lecture"><span>▶</span></button>
+    </div>
+  </div>
+</section>
+
 <div class="partners">
   <div class="wrap">
     <span class="lab" data-i="ptLab">Nos partenaires</span>
@@ -308,6 +353,7 @@
     </div>
   </div>
 </div>
+
 
 <section class="block map" id="quetes">
   <div class="wrap">
@@ -358,18 +404,41 @@
   </div>
 </section>
 
-<section class="block" id="preuves">
+
+<section class="block" id="pilotage">
+  <div class="wrap pilot">
+    <div class="head">
+      <span class="tag" data-i="pgTag">Pilotage</span>
+      <h2 data-i="pgH2">Pilotez la progression de vos apprenants</h2>
+      <p data-i="pgP">Un tableau de bord clair pour suivre les sessions, les scores et la progression de chaque groupe, directement dans votre LMS</p>
+      <ul class="kpis"><li data-i="k1">Apprenants</li><li data-i="k2">Parcours terminés</li><li data-i="k3">Durée moyenne</li><li data-i="k4">Progression</li></ul>
+    </div>
+    <figure class="chart"><img src="img/pilotage.webp" alt="Graphique des sessions par jour" width="628" height="229" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="block" id="pedagogie">
   <div class="wrap">
     <div class="head">
-      <span class="tag" data-i="prTag">Résultats</span>
-      <h2 data-i="prH2">Apprendre en jouant, ça marche</h2>
+      <span class="tag" data-i="pdTag">Focus pédagogique</span>
+      <h2 data-i="pdH2">Apprendre par la simulation : le cycle en 4 temps</h2>
     </div>
-    <div class="proof">
-      <div class="big"><strong>75 %</strong><span data-i="p1"></span></div>
-      <div class="big"><strong>+40 %</strong><span data-i="p2"></span></div>
-      <div class="big"><strong>+50 %</strong><span data-i="p3"></span></div>
+    <div class="cycle">
+      <article><img src="img/cy-vivre.webp" alt="" width="339" height="121" loading="lazy"><div><h3><b>1</b><span data-i="c1h">Vivre</span></h3><p data-i="c1p">Le client 3D réagit : objection, hésitation, silence</p></div></article>
+      <article><img src="img/cy-decider.webp" alt="" width="339" height="121" loading="lazy"><div><h3><b>2</b><span data-i="c2h">Décider</span></h3><p data-i="c2p">L'apprenant choisit sa réponse, comme en rendez-vous</p></div></article>
+      <article><img src="img/cy-comprendre.webp" alt="" width="339" height="121" loading="lazy"><div><h3><b>3</b><span data-i="c3h">Comprendre</span></h3><p data-i="c3p">Feedback immédiat : jauge, score, bonnes pratiques</p></div></article>
+      <article><img src="img/cy-rejouer.webp" alt="" width="339" height="121" loading="lazy"><div><h3><b>4</b><span data-i="c4h">Rejouer</span></h3><p data-i="c4p">On recommence jusqu'à ancrer le bon réflexe</p></div></article>
     </div>
-    <p class="src">Sources : <a href="https://formation.viaaduc.com/actualites/13/le-pouvoir-des-serious-games-dans-la-formation-professionnelle" target="_blank" rel="noopener">Viaaduc</a> · <a href="https://teamfirst.be/blog/serious-game-strategique-entreprise/" target="_blank" rel="noopener">TeamFirst</a> · <a href="https://www.albusfactory.com/blog-post/serious-game-definition-guide-complet" target="_blank" rel="noopener">Albus Factory</a></p>
+    <div class="loop"><span data-i="loop">Boucle d'entraînement</span></div>
+  </div>
+</section>
+
+<section class="block" id="avis">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag" data-i="avTag">Témoignages</span>
+      <h2 data-i="avH2">Ils ont testé nos Serious Games</h2>
+    </div>
     <div class="testis">
       <figure class="testi"><span class="stars" aria-hidden="true">★★★★★</span><p lang="fr">« Une solution rapide à déployer, ludique et ultra engageante. Les Serious Games ont boosté la motivation et ancré les apprentissages. Mention spéciale pour les modules sur mesure : objections &amp; accueil client. »</p><b>Emeline D.</b></figure>
       <figure class="testi"><span class="stars" aria-hidden="true">★★★★★</span><p lang="fr">« Une expérience de formation exceptionnelle grâce à Régis et son serious game immersif avec LMS intégré. Les modules de vente sont variés, captivants, et surtout efficaces pour ancrer les apprentissages dans la durée. »</p><b>Laurine C.</b></figure>
@@ -456,14 +525,14 @@
         </ul>
       </div>
     </div>
-    <div class="fbot">© 2026 Avatar Sales Academy · <span data-i="ftQ">Organisme certifié Qualiopi</span></div>
+    <div class="fbot">© 2026 Avatar Sales Academy, <span data-i="ftQ">Organisme certifié Qualiopi</span></div>
   </div>
 </footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <div class="sheet">
     <button class="close" id="mClose" aria-label="Fermer">✕</button>
-    <div class="clip" id="mClip"><img id="mImg" alt="" width="640" height="360"><video id="mVid" muted playsinline preload="none" width="640" height="360"></video><button class="replay" id="mReplay" aria-label="Lecture / Play">▶</button><span class="clip-tag">15 s</span></div>
+    <img id="mImg" alt="" width="640" height="360">
     <div class="in">
       <span class="tag" id="mCat"></span>
       <h3 id="mTitle"></h3>
@@ -482,84 +551,85 @@
 (function(){
 /* ---------- RÉGLAGES ---------- */
 var HERO_VIDEO = '';   // ex. 'video/hero.mp4' pour remplacer le diaporama par une vraie vidéo
+var MOTION_VIDEO = '';   // lien de la video motion design : 'video/motion.mp4' ou lien YouTube
 var DEMO_URL  = 'https://avatarsales.github.io/asa-quiz/avantpremiere.html';
 
 /* ---------- TEXTES ---------- */
 var T = {
-fr:{ptLab:'Nos partenaires',blH2:'Nos derniers articles',blRead:"Lire l'article →",ctTag:'Contact',ctH2:'Centre de formation ou formateur ?',ctP:'Laissez-nous vos coordonnées, nous vous recontactons sous 48 h.',ctRdv:'Prendre rendez-vous',fNom:'Nom *',fMail:'Email *',fTel:'Téléphone',fEtab:'Établissement',fMsg:'Message',fSend:'Envoyer ma demande',fWait:'Envoi en cours…',fOk:'Merci ! Votre demande est partie, nous vous recontactons sous 48 h.',fKo:"Une erreur est survenue. Réessayez ou écrivez-nous par email.",ftP:'La plateforme Serious Games qui transforme la formation commerciale en expérience gamifiée.',ftL:'Liens utiles',ftMl:'Mentions légales',ftPc:'Politique de confidentialité',quests:'Quêtes',navCta:'Essai gratuit',heroTag:'Serious Games 3D · Formation commerciale',heroH1:"La vente s'apprend <em>en jouant.</em>",heroLead:"Vos apprenants affrontent des clients virtuels dans des décors 3D : ils décident, se trompent, recommencent, et vous suivez leurs scores.",heroCta1:'Voir les 20 jeux',heroCta2:'Audit offert',st1:'jeux 3D',st2:'univers métier',st3:'seuil de validation',
- mapTag:'Votre mission',mapH2:'5 quêtes pour débloquer le bonus',mapP:"Explorez le site comme un jeu : chaque quête accomplie remplit votre barre de progression.",
- catTag:'Le catalogue',catH2:'20 jeux, 6 univers',catP:'Cliquez sur une vignette pour découvrir le jeu.',
- dgTag:'Générateur de scénario',dgH2:'Quel jeu pour vos apprenants ?',dgP:'Trois questions, et nous vous proposons les Serious Games les plus adaptés à votre besoin.',
- mtTag:'La méthode',mtH2:'Jouer. Scorer. Débriefer.',l1h:'Jouer',l1p:"L'apprenant dialogue avec un client virtuel dans un décor 3D à 360°, en présentiel ou à distance.",l2h:'Scorer',l2p:"Points, chrono, indices et graphique de compétences : le module est validé à partir de 70 % des points.",l3h:'Débriefer',l3p:"Bilan PDF téléchargeable et remontée des scores dans votre LMS (SCORM 2004) pour préparer le coaching.",
+fr:{heroH1:"Entraînez intensivement vos futurs commerciaux <em>en conditions réelles</em>, dans votre CFA ou dans votre entreprise",heroTag:'Serious Games 3D pour la formation commerciale',vdTag:'En vidéo',vdH2:'La méthode ASA en motion design',vdSoon:'Vidéo bientôt disponible',pgTag:'Pilotage',pgH2:'Pilotez la progression de vos apprenants',pgP:'Un tableau de bord clair pour suivre les sessions, les scores et la progression de chaque groupe, directement dans votre LMS',k1:'Apprenants',k2:'Parcours terminés',k3:'Durée moyenne',k4:'Progression',pdTag:'Focus pédagogique',pdH2:'Apprendre par la simulation : le cycle en 4 temps',c1h:'Vivre',c1p:'Le client 3D réagit : objection, hésitation, silence',c2h:'Décider',c2p:"L'apprenant choisit sa réponse, comme en rendez-vous",c3h:'Comprendre',c3p:'Feedback immédiat : jauge, score, bonnes pratiques',c4h:'Rejouer',c4p:"On recommence jusqu'à ancrer le bon réflexe",loop:"Boucle d'entraînement",avTag:'Témoignages',avH2:'Ils ont testé nos Serious Games',ptLab:'Nos partenaires',blH2:'Nos derniers articles',blRead:"Lire l'article →",ctTag:'Contact',ctH2:'Centre de formation ou formateur ?',ctP:'Laissez-nous vos coordonnées, nous vous recontactons sous 48 h',ctRdv:'Prendre rendez-vous',fNom:'Nom *',fMail:'Email *',fTel:'Téléphone',fEtab:'Établissement',fMsg:'Message',fSend:'Envoyer ma demande',fWait:'Envoi en cours',fOk:'Merci ! Votre demande est partie, nous vous recontactons sous 48 h',fKo:"Une erreur est survenue, réessayez ou écrivez-nous par email",ftP:'La plateforme Serious Games qui transforme la formation commerciale en expérience gamifiée',ftL:'Liens utiles',ftMl:'Mentions légales',ftPc:'Politique de confidentialité',quests:'Quêtes',navCta:'Essai gratuit',heroCta1:'Voir les 20 jeux',heroCta2:'Audit offert',st1:'jeux 3D',st2:'univers métier',st3:'seuil de validation',
+ mapTag:'Votre mission',mapH2:'5 quêtes pour débloquer le bonus',mapP:"Explorez le site comme un jeu : chaque quête accomplie remplit votre barre de progression",
+ catTag:'Le catalogue',catH2:'20 jeux, 6 univers',catP:'Cliquez sur une vignette pour découvrir le jeu',
+ dgTag:'Générateur de scénario',dgH2:'Quel jeu pour vos apprenants ?',dgP:'Trois questions, et nous vous proposons les Serious Games les plus adaptés à votre besoin',
+ mtTag:'La méthode',mtH2:'Jouer, scorer, débriefer',l1h:'Jouer',l1p:"L'apprenant dialogue avec un client virtuel dans un décor 3D à 360°, en présentiel ou à distance",l2h:'Scorer',l2p:"Points, chrono, indices et graphique de compétences : le module est validé à partir de 70 % des points",l3h:'Débriefer',l3p:"Bilan PDF téléchargeable et remontée des scores dans votre LMS (SCORM 2004) pour préparer le coaching",
  prTag:'Résultats',prH2:'Apprendre en jouant, ça marche',p1:'de rétention des connaissances avec des formations gamifiées',p2:'de rétention des compétences à 6 mois',p3:"d'engagement par rapport aux formations traditionnelles",
- bnLockH:'Bonus verrouillé',bnLockP:'Terminez les 5 quêtes pour débloquer votre accès VIP.',bnOpenH:'Bonus débloqué !',bnOpenP:'Bravo, vous avez terminé les 5 quêtes. Votre classe pilote de 30 jours et votre accès VIP vous attendent.',bn1:'Classe pilote 30 jours',bn2:'Accès VIP',ftQ:'Organisme certifié Qualiopi',
+ bnLockH:'Bonus verrouillé',bnLockP:'Terminez les 5 quêtes pour débloquer votre accès VIP',bnOpenH:'Bonus débloqué !',bnOpenP:'Bravo, vous avez terminé les 5 quêtes : votre classe pilote de 30 jours et votre accès VIP vous attendent',bn1:'Classe pilote 30 jours',bn2:'Accès VIP',ftQ:'Organisme certifié Qualiopi',
  mPlay:'Demander la démo',mTalk:'En parler',seen:'Vu',all:'Tous',
- gTag:'Mini-jeu',gStartH:'Défi 15 secondes',gStartP:'Un client, trois objections, quinze secondes. Saurez-vous trouver la bonne réplique ?',gStartB:'Jouer',gLive:'En direct',gClient:'Le client',gEndP:'Dans nos jeux, chaque réplique compte.',gAgain:'Rejouer',gMore:'Voir les jeux',
+ gTag:'Mini-jeu',gStartH:'Défi 15 secondes',gStartP:'Un client, trois objections, quinze secondes : saurez-vous trouver la bonne réplique ?',gStartB:'Jouer',gLive:'En direct',gClient:'Le client',gEndP:'Dans nos jeux, chaque réplique compte',gAgain:'Rejouer',gMore:'Voir les jeux',
  ranks:['À entraîner','Bon réflexe','Vendeur affûté','Closer'],
  qDone:'Quête accomplie',qTodo:'À faire',qOk:'Terminé',
  dStep:'Question',dAgain:'Recommencer',dResH:'Votre sélection',dResCta:'Recevoir la démo'},
-en:{ptLab:'Our partners',blH2:'Latest articles',blRead:'Read the article (FR) →',ctTag:'Contact',ctH2:'Training centre or trainer?',ctP:'Leave us your details and we will get back to you within 48 hours.',ctRdv:'Book a call',fNom:'Name *',fMail:'Email *',fTel:'Phone',fEtab:'Organisation',fMsg:'Message',fSend:'Send my request',fWait:'Sending…',fOk:'Thank you! Your request has been sent, we will get back to you within 48 hours.',fKo:'Something went wrong. Please try again or email us.',ftP:'The Serious Games platform that turns sales training into a gamified experience.',ftL:'Useful links',ftMl:'Legal notice',ftPc:'Privacy policy',quests:'Quests',navCta:'Free trial',heroTag:'3D Serious Games · Sales training',heroH1:'Learn to sell <em>by playing.</em>',heroLead:'Your learners face virtual customers in 3D settings: they decide, fail, try again, and you track their scores.',heroCta1:'See the 20 games',heroCta2:'Free audit',st1:'3D games',st2:'business worlds',st3:'pass mark',
- mapTag:'Your mission',mapH2:'5 quests to unlock the bonus',mapP:'Explore the site like a game: each completed quest fills your progress bar.',
- catTag:'The catalogue',catH2:'20 games, 6 worlds',catP:'Click a thumbnail to discover the game.',
- dgTag:'Scenario generator',dgH2:'Which game for your learners?',dgP:'Three questions, and we suggest the Serious Games that best fit your need.',
- mtTag:'The method',mtH2:'Play. Score. Debrief.',l1h:'Play',l1p:'The learner talks with a virtual customer in a 360° 3D setting, in class or remotely.',l2h:'Score',l2p:'Points, timer, hints and a skills chart: the module is passed from 70% of the points.',l3h:'Debrief',l3p:'Downloadable PDF report and scores sent to your LMS (SCORM 2004) to prepare coaching.',
+en:{heroH1:'Train your future sales people intensively <em>in real conditions</em>, in your training centre or in your company',heroTag:'3D Serious Games for sales training',vdTag:'On video',vdH2:'The ASA method in motion design',vdSoon:'Video coming soon',pgTag:'Monitoring',pgH2:'Track your learners\' progress',pgP:'A clear dashboard to follow sessions, scores and the progress of each group, directly in your LMS',k1:'Learners',k2:'Completed paths',k3:'Average duration',k4:'Progress',pdTag:'Pedagogical focus',pdH2:'Learning through simulation: the 4-step cycle',c1h:'Experience',c1p:'The 3D customer reacts: objection, hesitation, silence',c2h:'Decide',c2p:'The learner chooses a reply, just like in a real meeting',c3h:'Understand',c3p:'Instant feedback: gauge, score, best practices',c4h:'Replay',c4p:'Start again until the right reflex sticks',loop:'Training loop',avTag:'Testimonials',avH2:'They tried our Serious Games',ptLab:'Our partners',blH2:'Latest articles',blRead:'Read the article (FR) →',ctTag:'Contact',ctH2:'Training centre or trainer?',ctP:'Leave us your details and we will get back to you within 48 hours',ctRdv:'Book a call',fNom:'Name *',fMail:'Email *',fTel:'Phone',fEtab:'Organisation',fMsg:'Message',fSend:'Send my request',fWait:'Sending',fOk:'Thank you! Your request has been sent, we will get back to you within 48 hours',fKo:'Something went wrong, please try again or email us',ftP:'The Serious Games platform that turns sales training into a gamified experience',ftL:'Useful links',ftMl:'Legal notice',ftPc:'Privacy policy',quests:'Quests',navCta:'Free trial',heroCta1:'See the 20 games',heroCta2:'Free audit',st1:'3D games',st2:'business worlds',st3:'pass mark',
+ mapTag:'Your mission',mapH2:'5 quests to unlock the bonus',mapP:'Explore the site like a game: each completed quest fills your progress bar',
+ catTag:'The catalogue',catH2:'20 games, 6 worlds',catP:'Click a thumbnail to discover the game',
+ dgTag:'Scenario generator',dgH2:'Which game for your learners?',dgP:'Three questions, and we suggest the Serious Games that best fit your need',
+ mtTag:'The method',mtH2:'Play, score, debrief',l1h:'Play',l1p:'The learner talks with a virtual customer in a 360° 3D setting, in class or remotely',l2h:'Score',l2p:'Points, timer, hints and a skills chart: the module is passed from 70% of the points',l3h:'Debrief',l3p:'Downloadable PDF report and scores sent to your LMS (SCORM 2004) to prepare coaching',
  prTag:'Results',prH2:'Learning by playing works',p1:'knowledge retention with gamified training',p2:'skills retention at 6 months',p3:'engagement compared with traditional training',
- bnLockH:'Bonus locked',bnLockP:'Complete the 5 quests to unlock your VIP access.',bnOpenH:'Bonus unlocked!',bnOpenP:'Well done, you completed the 5 quests. Your 30-day pilot class and VIP access are waiting.',bn1:'30-day pilot class',bn2:'VIP access',ftQ:'Qualiopi-certified organisation',
+ bnLockH:'Bonus locked',bnLockP:'Complete the 5 quests to unlock your VIP access',bnOpenH:'Bonus unlocked!',bnOpenP:'Well done, you completed the 5 quests: your 30-day pilot class and VIP access are waiting',bn1:'30-day pilot class',bn2:'VIP access',ftQ:'Qualiopi-certified organisation',
  mPlay:'Request the demo',mTalk:'Talk to us',seen:'Seen',all:'All',
- gTag:'Mini-game',gStartH:'15-second challenge',gStartP:'One customer, three objections, fifteen seconds. Can you find the right reply?',gStartB:'Play',gLive:'Live',gClient:'The customer',gEndP:'In our games, every reply counts.',gAgain:'Play again',gMore:'See the games',
+ gTag:'Mini-game',gStartH:'15-second challenge',gStartP:'One customer, three objections, fifteen seconds: can you find the right reply?',gStartB:'Play',gLive:'Live',gClient:'The customer',gEndP:'In our games, every reply counts',gAgain:'Play again',gMore:'See the games',
  ranks:['Needs practice','Good instinct','Sharp seller','Closer'],
  qDone:'Quest complete',qTodo:'To do',qOk:'Done',
  dStep:'Question',dAgain:'Start over',dResH:'Your selection',dResCta:'Get the demo'},
-es:{ptLab:'Nuestros socios',blH2:'Últimos artículos',blRead:'Leer el artículo (FR) →',ctTag:'Contacto',ctH2:'¿Centro de formación o formador?',ctP:'Déjenos sus datos y le contactaremos en 48 horas.',ctRdv:'Reservar una cita',fNom:'Nombre *',fMail:'Email *',fTel:'Teléfono',fEtab:'Centro',fMsg:'Mensaje',fSend:'Enviar mi solicitud',fWait:'Enviando…',fOk:'¡Gracias! Su solicitud ha sido enviada, le contactaremos en 48 horas.',fKo:'Se ha producido un error. Inténtelo de nuevo o escríbanos por email.',ftP:'La plataforma de Serious Games que convierte la formación comercial en una experiencia gamificada.',ftL:'Enlaces útiles',ftMl:'Aviso legal',ftPc:'Política de privacidad',quests:'Misiones',navCta:'Prueba gratis',heroTag:'Serious Games 3D · Formación comercial',heroH1:'La venta se aprende <em>jugando.</em>',heroLead:'Sus alumnos se enfrentan a clientes virtuales en escenarios 3D: deciden, se equivocan, vuelven a empezar, y usted sigue sus puntuaciones.',heroCta1:'Ver los 20 juegos',heroCta2:'Auditoría gratis',st1:'juegos 3D',st2:'universos',st3:'umbral de validación',
- mapTag:'Su misión',mapH2:'5 misiones para desbloquear el bonus',mapP:'Explore el sitio como un juego: cada misión cumplida llena su barra de progreso.',
- catTag:'El catálogo',catH2:'20 juegos, 6 universos',catP:'Haga clic en una miniatura para descubrir el juego.',
- dgTag:'Generador de escenario',dgH2:'¿Qué juego para sus alumnos?',dgP:'Tres preguntas, y le proponemos los Serious Games más adecuados a su necesidad.',
- mtTag:'El método',mtH2:'Jugar. Puntuar. Analizar.',l1h:'Jugar',l1p:'El alumno dialoga con un cliente virtual en un escenario 3D de 360°, en clase o a distancia.',l2h:'Puntuar',l2p:'Puntos, cronómetro, pistas y gráfico de competencias: el módulo se valida a partir del 70 % de los puntos.',l3h:'Analizar',l3p:'Informe PDF descargable y envío de las puntuaciones a su LMS (SCORM 2004) para preparar el coaching.',
+es:{heroH1:'Entrene intensivamente a sus futuros comerciales <em>en condiciones reales</em>, en su centro de formación o en su empresa',heroTag:'Serious Games 3D para la formación comercial',vdTag:'En vídeo',vdH2:'El método ASA en motion design',vdSoon:'Vídeo próximamente',pgTag:'Seguimiento',pgH2:'Siga el progreso de sus alumnos',pgP:'Un panel claro para seguir las sesiones, las puntuaciones y el progreso de cada grupo, directamente en su LMS',k1:'Alumnos',k2:'Recorridos terminados',k3:'Duración media',k4:'Progreso',pdTag:'Enfoque pedagógico',pdH2:'Aprender por simulación: el ciclo en 4 tiempos',c1h:'Vivir',c1p:'El cliente 3D reacciona: objeción, duda, silencio',c2h:'Decidir',c2p:'El alumno elige su respuesta, como en una reunión',c3h:'Comprender',c3p:'Feedback inmediato: indicador, puntuación, buenas prácticas',c4h:'Repetir',c4p:'Se vuelve a empezar hasta fijar el buen reflejo',loop:'Bucle de entrenamiento',avTag:'Testimonios',avH2:'Han probado nuestros Serious Games',ptLab:'Nuestros socios',blH2:'Últimos artículos',blRead:'Leer el artículo (FR) →',ctTag:'Contacto',ctH2:'¿Centro de formación o formador?',ctP:'Déjenos sus datos y le contactaremos en 48 horas',ctRdv:'Reservar una cita',fNom:'Nombre *',fMail:'Email *',fTel:'Teléfono',fEtab:'Centro',fMsg:'Mensaje',fSend:'Enviar mi solicitud',fWait:'Enviando',fOk:'¡Gracias! Su solicitud ha sido enviada, le contactaremos en 48 horas',fKo:'Se ha producido un error, inténtelo de nuevo o escríbanos por email',ftP:'La plataforma de Serious Games que convierte la formación comercial en una experiencia gamificada',ftL:'Enlaces útiles',ftMl:'Aviso legal',ftPc:'Política de privacidad',quests:'Misiones',navCta:'Prueba gratis',heroCta1:'Ver los 20 juegos',heroCta2:'Auditoría gratis',st1:'juegos 3D',st2:'universos',st3:'umbral de validación',
+ mapTag:'Su misión',mapH2:'5 misiones para desbloquear el bonus',mapP:'Explore el sitio como un juego: cada misión cumplida llena su barra de progreso',
+ catTag:'El catálogo',catH2:'20 juegos, 6 universos',catP:'Haga clic en una miniatura para descubrir el juego',
+ dgTag:'Generador de escenario',dgH2:'¿Qué juego para sus alumnos?',dgP:'Tres preguntas, y le proponemos los Serious Games más adecuados a su necesidad',
+ mtTag:'El método',mtH2:'Jugar, puntuar, analizar',l1h:'Jugar',l1p:'El alumno dialoga con un cliente virtual en un escenario 3D de 360°, en clase o a distancia',l2h:'Puntuar',l2p:'Puntos, cronómetro, pistas y gráfico de competencias: el módulo se valida a partir del 70 % de los puntos',l3h:'Analizar',l3p:'Informe PDF descargable y envío de las puntuaciones a su LMS (SCORM 2004) para preparar el coaching',
  prTag:'Resultados',prH2:'Aprender jugando funciona',p1:'de retención de conocimientos con formaciones gamificadas',p2:'de retención de competencias a los 6 meses',p3:'de implicación frente a las formaciones tradicionales',
- bnLockH:'Bonus bloqueado',bnLockP:'Complete las 5 misiones para desbloquear su acceso VIP.',bnOpenH:'¡Bonus desbloqueado!',bnOpenP:'Enhorabuena, ha completado las 5 misiones. Su clase piloto de 30 días y su acceso VIP le esperan.',bn1:'Clase piloto 30 días',bn2:'Acceso VIP',ftQ:'Organismo certificado Qualiopi',
+ bnLockH:'Bonus bloqueado',bnLockP:'Complete las 5 misiones para desbloquear su acceso VIP',bnOpenH:'¡Bonus desbloqueado!',bnOpenP:'Enhorabuena, ha completado las 5 misiones: su clase piloto de 30 días y su acceso VIP le esperan',bn1:'Clase piloto 30 días',bn2:'Acceso VIP',ftQ:'Organismo certificado Qualiopi',
  mPlay:'Pedir la demo',mTalk:'Hablemos',seen:'Visto',all:'Todos',
- gTag:'Minijuego',gStartH:'Reto de 15 segundos',gStartP:'Un cliente, tres objeciones, quince segundos. ¿Encontrará la réplica correcta?',gStartB:'Jugar',gLive:'En directo',gClient:'El cliente',gEndP:'En nuestros juegos, cada réplica cuenta.',gAgain:'Volver a jugar',gMore:'Ver los juegos',
+ gTag:'Minijuego',gStartH:'Reto de 15 segundos',gStartP:'Un cliente, tres objeciones, quince segundos: ¿encontrará la réplica correcta?',gStartB:'Jugar',gLive:'En directo',gClient:'El cliente',gEndP:'En nuestros juegos, cada réplica cuenta',gAgain:'Volver a jugar',gMore:'Ver los juegos',
  ranks:['A entrenar','Buen reflejo','Vendedor afilado','Closer'],
  qDone:'Misión cumplida',qTodo:'Pendiente',qOk:'Hecho',
  dStep:'Pregunta',dAgain:'Reiniciar',dResH:'Su selección',dResCta:'Recibir la demo'}
 };
 
-var CATS = {retail:{fr:'Retail & Sport',en:'Retail & Sport',es:'Retail y Deporte'},bank:{fr:'Banque & Assurance',en:'Banking & Insurance',es:'Banca y Seguros'},auto:{fr:'Automobile',en:'Automotive',es:'Automóvil'},immo:{fr:'Immobilier',en:'Real estate',es:'Inmobiliario'},it:{fr:'IT & Digital',en:'IT & Digital',es:'IT y Digital'},base:{fr:'Fondamentaux & Quiz',en:'Fundamentals & Quiz',es:'Fundamentos y Quiz'}};
+var CATS = {retail:{fr:'Retail & Sport',en:'Retail & Sport',es:'Retail y Deporte'},bank:{fr:'Banque & Assurance',en:'Banking & Insurance',es:'Banca y Seguros'},auto:{fr:'Automobile',en:'Automotive',es:'Automóvil'},immo:{fr:'Immobilier',en:'Real estate',es:'Inmobiliario'},it:{fr:'IT & Digital',en:'IT & Digital',es:'IT y Digital'},base:{fr:'Révisions BTS/BUT',en:'BTS/BUT revision',es:'Repaso BTS/BUT'}};
 
-/* g = objectifs couverts (sell, conflict, aware, exam). Ajoutez url:'…' à un jeu pour lier sa démo. */
+/* g = objectifs couverts (sell, conflict, aware, exam). Ajoutez url:'' à un jeu pour lier sa démo. */
 var GAMES = [
- {id:'running',c:'retail',g:['sell'],t:{fr:'Le vendeur conseil — Rayon Running',en:'The sales adviser — Running aisle',es:'El vendedor asesor — Sección Running'},d:{fr:"Découvrez le besoin d'un client au rayon Running et conseillez-lui la bonne paire, sous l'œil du coach et du manager.",en:"Uncover a customer's need in the Running aisle and recommend the right pair, with the coach and manager watching.",es:'Descubra la necesidad de un cliente en la sección Running y aconséjele el par adecuado, bajo la mirada del coach y del mánager.'},s:{fr:['Découverte du besoin','Conseil produit','Vente additionnelle'],en:['Needs discovery','Product advice','Add-on selling'],es:['Descubrimiento de necesidades','Consejo de producto','Venta adicional']}},
- {id:'trail',c:'retail',g:['sell'],t:{fr:'Le conseiller Trail & Outdoor',en:'The Trail & Outdoor adviser',es:'El asesor Trail y Outdoor'},d:{fr:"Accompagnez une cliente au rayon Trail & Outdoor : questionnement, argumentation et choix du bon équipement.",en:'Guide a customer in the Trail & Outdoor aisle: questioning, pitching and choosing the right gear.',es:'Acompañe a una clienta en la sección Trail y Outdoor: preguntas, argumentación y elección del equipo adecuado.'},s:{fr:['Questionnement','Argumentation','Conseil produit'],en:['Questioning','Pitching','Product advice'],es:['Preguntas','Argumentación','Consejo de producto']}},
- {id:'caisse',c:'retail',g:['conflict'],t:{fr:'Litige commercial — La crise en caisse',en:'Customer dispute — Crisis at the checkout',es:'Litigio comercial — Crisis en caja'},d:{fr:"Un client s'emporte en caisse. Appliquez les techniques de désamorçage pour calmer la situation.",en:'A customer loses their temper at the checkout. Use de-escalation techniques to calm things down.',es:'Un cliente pierde los nervios en caja. Aplique las técnicas de desescalada para calmar la situación.'},s:{fr:['Désamorçage','Écoute active','Gestion du stress'],en:['De-escalation','Active listening','Stress management'],es:['Desescalada','Escucha activa','Gestión del estrés']}},
- {id:'beaute',c:'retail',g:['conflict'],t:{fr:'Litige commercial — Le rayon beauté',en:'Customer dispute — The beauty aisle',es:'Litigio comercial — Sección de belleza'},d:{fr:"Une réclamation au rayon beauté : traitez le litige sans perdre la cliente.",en:'A complaint in the beauty aisle: handle the dispute without losing the customer.',es:'Una reclamación en la sección de belleza: gestione el litigio sin perder a la clienta.'},s:{fr:['Traitement des réclamations','Empathie','Fidélisation'],en:['Complaint handling','Empathy','Loyalty'],es:['Gestión de reclamaciones','Empatía','Fidelización']}},
- {id:'rayon',c:'retail',g:['sell'],t:{fr:'Rayon Gagnant — Merchandising',en:'Winning Aisle — Merchandising',es:'Sección Ganadora — Merchandising'},d:{fr:"Contrôlez un linéaire, repérez les zones froides, arbitrez l'assortiment et mesurez le ROI de vos décisions.",en:'Audit a shelf, spot cold zones, decide on the range and measure the ROI of your choices.',es:'Controle un lineal, detecte las zonas frías, decida el surtido y mida el ROI de sus decisiones.'},s:{fr:['Planogramme','Zones chaudes / froides','Indices de sensibilité','ROI'],en:['Planogram','Hot / cold zones','Sensitivity indices','ROI'],es:['Planograma','Zonas calientes / frías','Índices de sensibilidad','ROI']}},
- {id:'assurance',c:'bank',g:['sell'],t:{fr:'Vente additionnelle — Assurance auto',en:'Add-on selling — Car insurance',es:'Venta adicional — Seguro de coche'},d:{fr:"Proposez la bonne garantie au bon moment, avec des points à gagner et un chrono.",en:'Offer the right cover at the right moment, with points to win and a timer.',es:'Proponga la garantía adecuada en el momento justo, con puntos y cronómetro.'},s:{fr:['Vente additionnelle','Argumentation','Cadre légal'],en:['Add-on selling','Pitching','Legal framework'],es:['Venta adicional','Argumentación','Marco legal']}},
- {id:'pret',c:'bank',g:['sell','aware'],t:{fr:'Banque — Prêt et conformité',en:'Banking — Loans and compliance',es:'Banca — Préstamo y cumplimiento'},d:{fr:"Recevez un couple de clients pour un projet de prêt, en respectant les règles de conformité.",en:'Meet a couple about a loan project while following compliance rules.',es:'Reciba a una pareja para un proyecto de préstamo, respetando las normas de cumplimiento.'},s:{fr:['Découverte client','Devoir de conseil','Conformité'],en:['Customer discovery','Duty to advise','Compliance'],es:['Descubrimiento del cliente','Deber de asesoramiento','Cumplimiento']}},
- {id:'impayes',c:'bank',g:['conflict'],t:{fr:'Banque — Impayés et recouvrement amiable',en:'Banking — Arrears and amicable recovery',es:'Banca — Impagos y recobro amistoso'},d:{fr:"Menez un entretien délicat pour trouver une solution amiable à un impayé.",en:'Lead a sensitive conversation to find an amicable solution to a missed payment.',es:'Dirija una entrevista delicada para hallar una solución amistosa a un impago.'},s:{fr:['Entretien difficile','Négociation','Recouvrement amiable'],en:['Difficult conversation','Negotiation','Amicable recovery'],es:['Entrevista difícil','Negociación','Recobro amistoso']}},
- {id:'suv',c:'auto',g:['sell'],t:{fr:'Concession — Vendre un SUV électrique',en:'Dealership — Selling an electric SUV',es:'Concesionario — Vender un SUV eléctrico'},d:{fr:"Du questionnement à la négociation : vendez un SUV électrique à une acheteuse exigeante.",en:'From questioning to negotiation: sell an electric SUV to a demanding buyer.',es:'De las preguntas a la negociación: venda un SUV eléctrico a una compradora exigente.'},s:{fr:['Questionnement','Argumentaire','Négociation','Savoir-être'],en:['Questioning','Sales pitch','Negotiation','Soft skills'],es:['Preguntas','Argumentario','Negociación','Saber estar']}},
- {id:'financement',c:'auto',g:['sell'],t:{fr:'Financement, services et après-vente',en:'Financing, services and after-sales',es:'Financiación, servicios y posventa'},d:{fr:"Crédit, LOA ou LLD, garanties et entretien : construisez l'offre complète et fidélisez.",en:'Loan, lease or long-term rental, warranties and servicing: build the full offer and retain the customer.',es:'Crédito, leasing o renting, garantías y mantenimiento: construya la oferta completa y fidelice.'},s:{fr:['Financement','Services associés','Fidélisation'],en:['Financing','Related services','Loyalty'],es:['Financiación','Servicios asociados','Fidelización']}},
- {id:'immo1',c:'immo',g:['sell'],t:{fr:"Immobilier — Obtenir le rendez-vous d'estimation",en:'Real estate — Getting the valuation appointment',es:'Inmobiliario — Conseguir la cita de valoración'},d:{fr:"Décrochez un rendez-vous d'estimation auprès d'un propriétaire vendeur.",en:'Win a valuation appointment with a homeowner who wants to sell.',es:'Consiga una cita de valoración con un propietario vendedor.'},s:{fr:['Prospection','Prise de rendez-vous','Traitement des objections'],en:['Prospecting','Appointment setting','Objection handling'],es:['Prospección','Concertación de citas','Tratamiento de objeciones']}},
- {id:'immo2',c:'immo',g:['sell'],t:{fr:'Immobilier — Obtenir le mandat exclusif',en:'Real estate — Winning the exclusive mandate',es:'Inmobiliario — Conseguir el mandato exclusivo'},d:{fr:"Face aux propriétaires, défendez votre estimation et obtenez le mandat exclusif.",en:'Facing the owners, defend your valuation and win the exclusive mandate.',es:'Frente a los propietarios, defienda su valoración y consiga el mandato exclusivo.'},s:{fr:['Argumentation','Négociation','Cadre légal'],en:['Pitching','Negotiation','Legal framework'],es:['Argumentación','Negociación','Marco legal']}},
- {id:'spin',c:'it',g:['sell'],t:{fr:'Vente complexe IT — Méthode SPIN',en:'Complex IT sale — SPIN method',es:'Venta compleja IT — Método SPIN'},d:{fr:"Appliquez la méthode SPIN face à un DSI exigeant pour faire émerger ses vrais enjeux.",en:'Apply the SPIN method with a demanding CIO to bring out the real stakes.',es:'Aplique el método SPIN ante un CIO exigente para hacer emerger sus verdaderos retos.'},s:{fr:['SPIN Selling','Vente complexe','Questionnement'],en:['SPIN Selling','Complex sales','Questioning'],es:['SPIN Selling','Venta compleja','Preguntas']}},
- {id:'b2b',c:'it',g:['sell'],t:{fr:'Marketing digital B2B — Générer des leads',en:'B2B digital marketing — Generating leads',es:'Marketing digital B2B — Generar leads'},d:{fr:"Convainquez une directrice marketing en parlant bénéfices et ROI plutôt que fonctionnalités.",en:'Convince a marketing director by talking benefits and ROI rather than features.',es:'Convenza a una directora de marketing hablando de beneficios y ROI, no de funcionalidades.'},s:{fr:['Vente B2B','Bénéfices client','ROI'],en:['B2B sales','Customer benefits','ROI'],es:['Venta B2B','Beneficios para el cliente','ROI']}},
- {id:'telephonie',c:'it',g:['sell'],t:{fr:'Argumentation BtoC — Boutique téléphonie',en:'B2C pitching — Phone shop',es:'Argumentación B2C — Tienda de telefonía'},d:{fr:"Accueillez un client en boutique et adaptez votre argumentaire aux fiches produits.",en:'Welcome a customer in store and tailor your pitch to the product sheets.',es:'Reciba a un cliente en tienda y adapte su argumentario a las fichas de producto.'},s:{fr:['Accueil client','Argumentation','Connaissance produit'],en:['Customer welcome','Pitching','Product knowledge'],es:['Acogida del cliente','Argumentación','Conocimiento del producto']}},
- {id:'cyber',c:'it',g:['aware'],t:{fr:'Cyber — Les bons réflexes',en:'Cyber — The right reflexes',es:'Ciber — Los buenos reflejos'},d:{fr:"Quatre chapitres pour adopter les bons réflexes : phishing, supports amovibles, mobilité, télétravail et rançongiciel.",en:'Four chapters to build the right reflexes: phishing, removable media, mobility, remote work and ransomware.',es:'Cuatro capítulos para adoptar los buenos reflejos: phishing, soportes extraíbles, movilidad, teletrabajo y ransomware.'},s:{fr:['Phishing','Mobilité','Télétravail','Rançongiciel'],en:['Phishing','Mobility','Remote work','Ransomware'],es:['Phishing','Movilidad','Teletrabajo','Ransomware']}},
- {id:'pitch',c:'base',g:['sell','exam'],t:{fr:"Pitch commercial — De l'étude de cas au jeu de rôle",en:'Sales pitch — From case study to role play',es:'Pitch comercial — Del caso práctico al juego de rol'},d:{fr:"Analysez une étude de cas, préparez votre pitch puis défendez-le en situation.",en:'Analyse a case study, prepare your pitch, then defend it in a live situation.',es:'Analice un caso práctico, prepare su pitch y defiéndalo en situación.'},s:{fr:['Analyse de cas','Pitch','Jeu de rôle'],en:['Case analysis','Pitch','Role play'],es:['Análisis de caso','Pitch','Juego de rol']}},
- {id:'om_bts',c:'base',g:['exam'],t:{fr:'Objectif Million — BTS NDRC · MCO · CCST',en:'Objectif Million — BTS NDRC · MCO · CCST',es:'Objectif Million — BTS NDRC · MCO · CCST'},d:{fr:"Le quiz 3D façon jeu télévisé pour réviser les épreuves E1 à E6, avec jokers et deux niveaux de difficulté.",en:'The TV-show-style 3D quiz to revise exams E1 to E6, with lifelines and two difficulty levels.',es:'El quiz 3D estilo concurso de TV para repasar las pruebas E1 a E6, con comodines y dos niveles de dificultad.'},s:{fr:['Révision examen','E1 à E6','2 niveaux'],en:['Exam revision','E1 to E6','2 levels'],es:['Repaso de examen','E1 a E6','2 niveles']}},
- {id:'om_but',c:'base',g:['exam'],t:{fr:'Objectif Million — BUT TC',en:'Objectif Million — BUT TC',es:'Objectif Million — BUT TC'},d:{fr:"Le quiz 3D pour réviser le programme du BUT Techniques de commercialisation.",en:'The 3D quiz to revise the BUT Techniques de commercialisation syllabus.',es:'El quiz 3D para repasar el programa del BUT Techniques de commercialisation.'},s:{fr:['Révision examen','BUT TC'],en:['Exam revision','BUT TC'],es:['Repaso de examen','BUT TC']}},
- {id:'om_ntc',c:'base',g:['exam'],t:{fr:'Objectif Million — TP NTC',en:'Objectif Million — TP NTC',es:'Objectif Million — TP NTC'},d:{fr:"Le quiz 3D du titre professionnel Négociateur Technico-Commercial.",en:'The 3D quiz for the Négociateur Technico-Commercial professional qualification.',es:'El quiz 3D del título profesional Négociateur Technico-Commercial.'},s:{fr:['Révision examen','Titre pro NTC'],en:['Exam revision','NTC qualification'],es:['Repaso de examen','Título NTC']}}
+ {id:'running',c:'retail',g:['sell'],t:{fr:'Le vendeur conseil : Rayon Running',en:'The sales adviser : Running aisle',es:'El vendedor asesor : Sección Running'},d:{fr:"Découvrez le besoin d'un client au rayon Running et conseillez-lui la bonne paire, sous l'œil du coach et du manager",en:"Uncover a customer's need in the Running aisle and recommend the right pair, with the coach and manager watching",es:'Descubra la necesidad de un cliente en la sección Running y aconséjele el par adecuado, bajo la mirada del coach y del mánager'},s:{fr:['Découverte du besoin','Conseil produit','Vente additionnelle'],en:['Needs discovery','Product advice','Add-on selling'],es:['Descubrimiento de necesidades','Consejo de producto','Venta adicional']}},
+ {id:'trail',c:'retail',g:['sell'],t:{fr:'Le conseiller Trail & Outdoor',en:'The Trail & Outdoor adviser',es:'El asesor Trail y Outdoor'},d:{fr:"Accompagnez une cliente au rayon Trail & Outdoor : questionnement, argumentation et choix du bon équipement",en:'Guide a customer in the Trail & Outdoor aisle: questioning, pitching and choosing the right gear',es:'Acompañe a una clienta en la sección Trail y Outdoor: preguntas, argumentación y elección del equipo adecuado'},s:{fr:['Questionnement','Argumentation','Conseil produit'],en:['Questioning','Pitching','Product advice'],es:['Preguntas','Argumentación','Consejo de producto']}},
+ {id:'caisse',c:'retail',g:['conflict'],t:{fr:'Litige commercial : La crise en caisse',en:'Customer dispute : Crisis at the checkout',es:'Litigio comercial : Crisis en caja'},d:{fr:"Un client s'emporte en caisse : appliquez les techniques de désamorçage pour calmer la situation",en:'A customer loses their temper at the checkout: use de-escalation techniques to calm things down',es:'Un cliente pierde los nervios en caja: aplique las técnicas de desescalada para calmar la situación'},s:{fr:['Désamorçage','Écoute active','Gestion du stress'],en:['De-escalation','Active listening','Stress management'],es:['Desescalada','Escucha activa','Gestión del estrés']}},
+ {id:'beaute',c:'retail',g:['conflict'],t:{fr:'Litige commercial : Le rayon beauté',en:'Customer dispute : The beauty aisle',es:'Litigio comercial : Sección de belleza'},d:{fr:"Une réclamation au rayon beauté : traitez le litige sans perdre la cliente",en:'A complaint in the beauty aisle: handle the dispute without losing the customer',es:'Una reclamación en la sección de belleza: gestione el litigio sin perder a la clienta'},s:{fr:['Traitement des réclamations','Empathie','Fidélisation'],en:['Complaint handling','Empathy','Loyalty'],es:['Gestión de reclamaciones','Empatía','Fidelización']}},
+ {id:'rayon',c:'retail',g:['sell'],t:{fr:'Rayon Gagnant : Merchandising',en:'Winning Aisle : Merchandising',es:'Sección Ganadora : Merchandising'},d:{fr:"Contrôlez un linéaire, repérez les zones froides, arbitrez l'assortiment et mesurez le ROI de vos décisions",en:'Audit a shelf, spot cold zones, decide on the range and measure the ROI of your choices',es:'Controle un lineal, detecte las zonas frías, decida el surtido y mida el ROI de sus decisiones'},s:{fr:['Planogramme','Zones chaudes / froides','Indices de sensibilité','ROI'],en:['Planogram','Hot / cold zones','Sensitivity indices','ROI'],es:['Planograma','Zonas calientes / frías','Índices de sensibilidad','ROI']}},
+ {id:'assurance',c:'bank',g:['sell'],t:{fr:'Vente additionnelle : Assurance auto',en:'Add-on selling : Car insurance',es:'Venta adicional : Seguro de coche'},d:{fr:"Proposez la bonne garantie au bon moment, avec des points à gagner et un chrono",en:'Offer the right cover at the right moment, with points to win and a timer',es:'Proponga la garantía adecuada en el momento justo, con puntos y cronómetro'},s:{fr:['Vente additionnelle','Argumentation','Cadre légal'],en:['Add-on selling','Pitching','Legal framework'],es:['Venta adicional','Argumentación','Marco legal']}},
+ {id:'pret',c:'bank',g:['sell','aware'],t:{fr:'Banque : Prêt et conformité',en:'Banking : Loans and compliance',es:'Banca : Préstamo y cumplimiento'},d:{fr:"Recevez un couple de clients pour un projet de prêt, en respectant les règles de conformité",en:'Meet a couple about a loan project while following compliance rules',es:'Reciba a una pareja para un proyecto de préstamo, respetando las normas de cumplimiento'},s:{fr:['Découverte client','Devoir de conseil','Conformité'],en:['Customer discovery','Duty to advise','Compliance'],es:['Descubrimiento del cliente','Deber de asesoramiento','Cumplimiento']}},
+ {id:'impayes',c:'bank',g:['conflict'],t:{fr:'Banque : Impayés et recouvrement amiable',en:'Banking : Arrears and amicable recovery',es:'Banca : Impagos y recobro amistoso'},d:{fr:"Menez un entretien délicat pour trouver une solution amiable à un impayé",en:'Lead a sensitive conversation to find an amicable solution to a missed payment',es:'Dirija una entrevista delicada para hallar una solución amistosa a un impago'},s:{fr:['Entretien difficile','Négociation','Recouvrement amiable'],en:['Difficult conversation','Negotiation','Amicable recovery'],es:['Entrevista difícil','Negociación','Recobro amistoso']}},
+ {id:'suv',c:'auto',g:['sell'],t:{fr:'Concession : Vendre un SUV électrique',en:'Dealership : Selling an electric SUV',es:'Concesionario : Vender un SUV eléctrico'},d:{fr:"Du questionnement à la négociation : vendez un SUV électrique à une acheteuse exigeante",en:'From questioning to negotiation: sell an electric SUV to a demanding buyer',es:'De las preguntas a la negociación: venda un SUV eléctrico a una compradora exigente'},s:{fr:['Questionnement','Argumentaire','Négociation','Savoir-être'],en:['Questioning','Sales pitch','Negotiation','Soft skills'],es:['Preguntas','Argumentario','Negociación','Saber estar']}},
+ {id:'financement',c:'auto',g:['sell'],t:{fr:'Financement, services et après-vente',en:'Financing, services and after-sales',es:'Financiación, servicios y posventa'},d:{fr:"Crédit, LOA ou LLD, garanties et entretien : construisez l'offre complète et fidélisez",en:'Loan, lease or long-term rental, warranties and servicing: build the full offer and retain the customer',es:'Crédito, leasing o renting, garantías y mantenimiento: construya la oferta completa y fidelice'},s:{fr:['Financement','Services associés','Fidélisation'],en:['Financing','Related services','Loyalty'],es:['Financiación','Servicios asociados','Fidelización']}},
+ {id:'immo1',c:'immo',g:['sell'],t:{fr:"Immobilier : Obtenir le rendez-vous d'estimation",en:'Real estate : Getting the valuation appointment',es:'Inmobiliario : Conseguir la cita de valoración'},d:{fr:"Décrochez un rendez-vous d'estimation auprès d'un propriétaire vendeur",en:'Win a valuation appointment with a homeowner who wants to sell',es:'Consiga una cita de valoración con un propietario vendedor'},s:{fr:['Prospection','Prise de rendez-vous','Traitement des objections'],en:['Prospecting','Appointment setting','Objection handling'],es:['Prospección','Concertación de citas','Tratamiento de objeciones']}},
+ {id:'immo2',c:'immo',g:['sell'],t:{fr:'Immobilier : Obtenir le mandat exclusif',en:'Real estate : Winning the exclusive mandate',es:'Inmobiliario : Conseguir el mandato exclusivo'},d:{fr:"Face aux propriétaires, défendez votre estimation et obtenez le mandat exclusif",en:'Facing the owners, defend your valuation and win the exclusive mandate',es:'Frente a los propietarios, defienda su valoración y consiga el mandato exclusivo'},s:{fr:['Argumentation','Négociation','Cadre légal'],en:['Pitching','Negotiation','Legal framework'],es:['Argumentación','Negociación','Marco legal']}},
+ {id:'spin',c:'it',g:['sell'],t:{fr:'Vente complexe IT : Méthode SPIN',en:'Complex IT sale : SPIN method',es:'Venta compleja IT : Método SPIN'},d:{fr:"Appliquez la méthode SPIN face à un DSI exigeant pour faire émerger ses vrais enjeux",en:'Apply the SPIN method with a demanding CIO to bring out the real stakes',es:'Aplique el método SPIN ante un CIO exigente para hacer emerger sus verdaderos retos'},s:{fr:['SPIN Selling','Vente complexe','Questionnement'],en:['SPIN Selling','Complex sales','Questioning'],es:['SPIN Selling','Venta compleja','Preguntas']}},
+ {id:'b2b',c:'it',g:['sell'],t:{fr:'Marketing digital B2B : Générer des leads',en:'B2B digital marketing : Generating leads',es:'Marketing digital B2B : Generar leads'},d:{fr:"Convainquez une directrice marketing en parlant bénéfices et ROI plutôt que fonctionnalités",en:'Convince a marketing director by talking benefits and ROI rather than features',es:'Convenza a una directora de marketing hablando de beneficios y ROI, no de funcionalidades'},s:{fr:['Vente B2B','Bénéfices client','ROI'],en:['B2B sales','Customer benefits','ROI'],es:['Venta B2B','Beneficios para el cliente','ROI']}},
+ {id:'telephonie',c:'it',g:['sell'],t:{fr:'Argumentation BtoC : Boutique téléphonie',en:'B2C pitching : Phone shop',es:'Argumentación B2C : Tienda de telefonía'},d:{fr:"Accueillez un client en boutique et adaptez votre argumentaire aux fiches produits",en:'Welcome a customer in store and tailor your pitch to the product sheets',es:'Reciba a un cliente en tienda y adapte su argumentario a las fichas de producto'},s:{fr:['Accueil client','Argumentation','Connaissance produit'],en:['Customer welcome','Pitching','Product knowledge'],es:['Acogida del cliente','Argumentación','Conocimiento del producto']}},
+ {id:'cyber',c:'it',g:['aware'],t:{fr:'Cyber : Les bons réflexes',en:'Cyber : The right reflexes',es:'Ciber : Los buenos reflejos'},d:{fr:"Quatre chapitres pour adopter les bons réflexes : phishing, supports amovibles, mobilité, télétravail et rançongiciel",en:'Four chapters to build the right reflexes: phishing, removable media, mobility, remote work and ransomware',es:'Cuatro capítulos para adoptar los buenos reflejos: phishing, soportes extraíbles, movilidad, teletrabajo y ransomware'},s:{fr:['Phishing','Mobilité','Télétravail','Rançongiciel'],en:['Phishing','Mobility','Remote work','Ransomware'],es:['Phishing','Movilidad','Teletrabajo','Ransomware']}},
+ {id:'pitch',c:'it',g:['sell','exam'],t:{fr:"Pitch commercial : De l'étude de cas au jeu de rôle",en:'Sales pitch : From case study to role play',es:'Pitch comercial : Del caso práctico al juego de rol'},d:{fr:"Analysez une étude de cas, préparez votre pitch puis défendez-le en situation",en:'Analyse a case study, prepare your pitch, then defend it in a live situation',es:'Analice un caso práctico, prepare su pitch y defiéndalo en situación'},s:{fr:['Analyse de cas','Pitch','Jeu de rôle'],en:['Case analysis','Pitch','Role play'],es:['Análisis de caso','Pitch','Juego de rol']}},
+ {id:'om_bts',c:'base',g:['exam'],t:{fr:'Objectif Million : BTS NDRC, MCO, CCST',en:'Objectif Million : BTS NDRC, MCO, CCST',es:'Objectif Million : BTS NDRC, MCO, CCST'},d:{fr:"Le quiz 3D façon jeu télévisé pour réviser les épreuves E1 à E6, avec jokers et deux niveaux de difficulté",en:'The TV-show-style 3D quiz to revise exams E1 to E6, with lifelines and two difficulty levels',es:'El quiz 3D estilo concurso de TV para repasar las pruebas E1 a E6, con comodines y dos niveles de dificultad'},s:{fr:['Révision examen','E1 à E6','2 niveaux'],en:['Exam revision','E1 to E6','2 levels'],es:['Repaso de examen','E1 a E6','2 niveles']}},
+ {id:'om_but',c:'base',g:['exam'],t:{fr:'Objectif Million : BUT TC',en:'Objectif Million : BUT TC',es:'Objectif Million : BUT TC'},d:{fr:"Le quiz 3D pour réviser le programme du BUT Techniques de commercialisation",en:'The 3D quiz to revise the BUT Techniques de commercialisation syllabus',es:'El quiz 3D para repasar el programa del BUT Techniques de commercialisation'},s:{fr:['Révision examen','BUT TC'],en:['Exam revision','BUT TC'],es:['Repaso de examen','BUT TC']}},
+ {id:'om_ntc',c:'base',g:['exam'],t:{fr:'Objectif Million : TP NTC',en:'Objectif Million : TP NTC',es:'Objectif Million : TP NTC'},d:{fr:"Le quiz 3D du titre professionnel Négociateur Technico-Commercial",en:'The 3D quiz for the Négociateur Technico-Commercial professional qualification',es:'El quiz 3D del título profesional Négociateur Technico-Commercial'},s:{fr:['Révision examen','Titre pro NTC'],en:['Exam revision','NTC qualification'],es:['Repaso de examen','Título NTC']}}
 ];
 
 var ROUNDS = [
- {img:'img/marc.webp',q:{fr:"J'ai deux minutes. Pourquoi vous ?",en:"I've got two minutes. Why you?",es:'Tengo dos minutos. ¿Por qué usted?'},
+ {img:'img/marc.webp',q:{fr:"J'ai deux minutes, pourquoi vous ?",en:"I've got two minutes, why you?",es:'Tengo dos minutos, ¿por qué usted?'},
   ok:{fr:"Quel est votre enjeu n° 1 aujourd'hui ?",en:"What's your number one challenge today?",es:'¿Cuál es su reto n.º 1 hoy?'},
-  ko:{fr:'Je vous présente toute notre gamme.',en:'Let me show you our whole range.',es:'Le presento toda nuestra gama.'}},
- {img:'img/amina.webp',q:{fr:"C'est trop cher.",en:"It's too expensive.",es:'Es demasiado caro.'},
+  ko:{fr:'Je vous présente toute notre gamme',en:'Let me show you our whole range',es:'Le presento toda nuestra gama'}},
+ {img:'img/amina.webp',q:{fr:"C'est trop cher",en:"It's too expensive",es:'Es demasiado caro'},
   ok:{fr:'Trop cher par rapport à quoi ?',en:'Too expensive compared with what?',es:'¿Demasiado caro comparado con qué?'},
-  ko:{fr:'Je vous fais 10 % tout de suite.',en:"I'll give you 10% off right now.",es:'Le hago un 10 % ahora mismo.'}},
- {img:'img/karim.webp',q:{fr:'Je vais réfléchir.',en:"I'll think about it.",es:'Me lo voy a pensar.'},
+  ko:{fr:'Je vous fais 10 % tout de suite',en:"I'll give you 10% off right now",es:'Le hago un 10 % ahora mismo'}},
+ {img:'img/karim.webp',q:{fr:'Je vais réfléchir',en:"I'll think about it",es:'Me lo voy a pensar'},
   ok:{fr:"Qu'est-ce qui vous fait encore hésiter ?",en:"What's still holding you back?",es:'¿Qué le hace dudar todavía?'},
-  ko:{fr:'Très bien, je vous rappelle un de ces jours.',en:"Fine, I'll call you back some day.",es:'Muy bien, le llamo un día de estos.'}}
+  ko:{fr:'Très bien, je vous rappelle un de ces jours',en:"Fine, I'll call you back some day",es:'Muy bien, le llamo un día de estos'}}
 ];
 
 var QUESTS = [
@@ -609,7 +679,7 @@ function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('on');cl
 function doneCount(){return QUESTS.filter(function(q){return state.q[q.k];}).length;}
 function complete(k){
   if(state.q[k])return; state.q[k]=1; save(); renderPath(); renderBonus();
-  toast('✓ '+L('qDone')+' · '+doneCount()+'/5');
+  toast('✓ '+L('qDone')+' '+doneCount()+'/5');
 }
 function renderPath(){
   var p=$('#path');p.innerHTML='';
@@ -650,7 +720,7 @@ function tick(){
 }
 function drawRound(){
   var r=ROUNDS[G.i],a=$('#arcade'),flip=Math.random()<.5;
-  a.innerHTML='<div class="arcade-top"><span class="live">'+L('gLive')+'</span><span>'+(G.i+1)+'/3 · '+G.score+' pts</span></div><div class="timer"><i></i></div>'+
+  a.innerHTML='<div class="arcade-top"><span class="live">'+L('gLive')+'</span><span>'+(G.i+1)+'/3, '+G.score+' pts</span></div><div class="timer"><i></i></div>'+
    '<div class="scene"><div class="who"><img src="'+r.img+'" alt="" width="108" height="138"></div><div class="bubble"><small>'+L('gClient')+'</small>'+tx(r.q)+'</div></div><div class="choices"></div>';
   var box=a.querySelector('.choices'),opts=[[tx(r.ok),1],[tx(r.ko),0]];if(flip)opts.reverse();
   opts.forEach(function(o){var b=el('button','choice',o[0]);b.addEventListener('click',function(){
@@ -684,35 +754,17 @@ function renderRail(){
 function scrollRail(d){var r=$('#rail');r.scrollBy({left:d*Math.max(300,r.clientWidth*.8),behavior:'smooth'});}
 $('#prev').addEventListener('click',function(){scrollRail(-1);});$('#next').addEventListener('click',function(){scrollRail(1);});
 
-/* ---------- EXTRAITS 15 s ---------- */
-var vid=$('#mVid'),clip=$('#mClip');
-function stopClip(){try{vid.pause();vid.removeAttribute('src');vid.load();}catch(e){}clip.classList.remove('on','playing');}
-function playClip(){
-  var p=vid.play();if(p&&p.catch)p.catch(function(){clip.classList.remove('playing');});
-}
-function setClip(id){
-  stopClip();clip.classList.remove('none');
-  vid.poster='img/g-'+id+'.webp';vid.src='video/'+id+'.mp4';clip.classList.add('on');
-  playClip();
-}
-vid.addEventListener('playing',function(){clip.classList.add('playing');});
-vid.addEventListener('ended',function(){clip.classList.remove('playing');});
-vid.addEventListener('error',function(){clip.classList.remove('on','playing');clip.classList.add('none');});
-$('#mReplay').addEventListener('click',function(){vid.currentTime=0;playClip();});
-vid.addEventListener('click',function(){if(vid.paused){playClip();}else{vid.pause();clip.classList.remove('playing');}});
-
 var lastFocus;
 function openGame(id){
   var g=byId(id);lastFocus=document.activeElement;
   $('#mImg').src='img/g-'+g.id+'.webp';$('#mImg').alt=tx(g.t);$('#mCat').textContent=tx(CATS[g.c]);$('#mTitle').textContent=tx(g.t);$('#mDesc').textContent=tx(g.d);
   $('#mSkills').innerHTML=tx(g.s).map(function(s){return '<li>'+s+'</li>';}).join('');
   $('#mPlay').href=g.url||DEMO_URL;
-  setClip(id);
   $('#modal').classList.add('open');$('#mClose').focus();
   if(state.seen.indexOf(id)<0){state.seen.push(id);save();renderRail();}
   if(state.seen.length>=3)complete('cat');
 }
-function closeModal(){if(!$('#modal').classList.contains('open'))return;stopClip();$('#modal').classList.remove('open');if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
+function closeModal(){if(!$('#modal').classList.contains('open'))return;$('#modal').classList.remove('open');if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
 $('#mClose').addEventListener('click',closeModal);
 $('#modal').addEventListener('click',function(e){if(e.target.id==='modal')closeModal();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
@@ -753,6 +805,15 @@ $('#lead-form').addEventListener('submit',function(e){
 
 /* ---------- VIDÉO DE FOND (optionnelle) ---------- */
 if(HERO_VIDEO){var v=document.createElement('video');v.src=HERO_VIDEO;v.muted=true;v.loop=true;v.autoplay=true;v.playsInline=true;v.setAttribute('playsinline','');v.poster='img/bg-1.webp';var bg=$('#bgv');bg.innerHTML='';bg.appendChild(v);}
+
+/* ---------- VIDEO MOTION DESIGN ---------- */
+$('#vplay').addEventListener('click',function(){
+  if(!MOTION_VIDEO){toast(L('vdSoon'));return;}
+  var f=$('#vframe'),yt=MOTION_VIDEO.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/),n;
+  if(yt){n=document.createElement('iframe');n.src='https://www.youtube-nocookie.com/embed/'+yt[1]+'?autoplay=1&rel=0';n.allow='autoplay; fullscreen';n.allowFullscreen=true;n.title='Motion design';}
+  else{n=document.createElement('video');n.src=MOTION_VIDEO;n.controls=true;n.autoplay=true;n.setAttribute('playsinline','');}
+  f.innerHTML='';f.appendChild(n);
+});
 
 load();applyLang();
 })();
