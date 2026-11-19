@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avatar Sales Academy — Serious Games 3D</title>
+<meta name="description" content="20 Serious Games 3D pour la formation commerciale : jouez un extrait, explorez le catalogue et trouvez le jeu adapté à vos apprenants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700;1,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060B16; --panel:#0D1628; --panel2:#111D34; --line:rgba(120,170,255,.18);
+    --cyan:#00AAFF; --orange:#FF6B00; --green:#2BD67B; --red:#FF4D5E; --text:#E8EEF8; --muted:#93A0B8;
+    --display:'Barlow Condensed',sans-serif; --body:'DM Sans',sans-serif; --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3{font-family:var(--display);font-weight:800;font-style:italic;text-transform:uppercase;line-height:.98;letter-spacing:.3px;}
+  .tag{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);display:inline-flex;align-items:center;gap:10px;}
+  .tag::before{content:"";width:24px;height:3px;background:var(--orange);transform:skewX(-20deg);}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--display);font-weight:700;font-style:italic;font-size:19px;letter-spacing:1px;text-transform:uppercase;padding:13px 28px;transition:transform .2s,background .2s,box-shadow .2s;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);}
+  .btn-primary{background:var(--orange);color:#fff;}
+  .btn-primary:hover{background:#ff8126;transform:translateY(-2px);}
+  .btn-ghost{background:rgba(255,255,255,.1);color:#fff;backdrop-filter:blur(6px);}
+  .btn-ghost:hover{background:rgba(255,255,255,.2);transform:translateY(-2px);}
+  .btn-sm{font-size:16px;padding:9px 20px;}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(6,11,22,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;gap:20px;height:68px;}
+  .logo{font-family:var(--display);font-weight:800;font-style:italic;font-size:21px;letter-spacing:1.5px;display:flex;align-items:center;gap:10px;white-space:nowrap;}
+  .logo i{width:22px;height:22px;display:block;background:linear-gradient(135deg,var(--cyan),var(--orange));clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);}
+  .logo b{color:var(--orange);}
+  .xp{flex:1;max-width:330px;margin-left:auto;display:flex;align-items:center;gap:12px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;text-align:left;transition:border-color .2s;}
+  .xp:hover{border-color:var(--cyan);}
+  .xp .lab{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;}
+  .xp .lab b{color:var(--orange);}
+  .xp .track{flex:1;height:7px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;min-width:50px;}
+  .xp .track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--orange));transition:width .6s;}
+  .langs{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .langs button{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:1px;padding:8px 10px;color:var(--muted);}
+  .langs button.on{background:var(--cyan);color:#041018;}
+
+  .hero{position:relative;min-height:100vh;min-height:100svh;padding:120px 0 70px;display:flex;align-items:center;isolation:isolate;overflow:hidden;}
+  .bgv{position:absolute;inset:0;z-index:-2;}
+  .bgv div,.bgv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background-size:cover;background-position:center;opacity:0;animation:kb 28s linear infinite;}
+  .bgv div:nth-child(2){animation-delay:7s;} .bgv div:nth-child(3){animation-delay:14s;} .bgv div:nth-child(4){animation-delay:21s;}
+  .bgv video{opacity:1;animation:none;}
+  @keyframes kb{0%{opacity:0;transform:scale(1.02);}4%{opacity:1;}25%{opacity:1;}30%{opacity:0;transform:scale(1.14) translateX(-1.5%);}100%{opacity:0;}}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(6,11,22,.95) 0%,rgba(6,11,22,.72) 45%,rgba(6,11,22,.45) 100%),linear-gradient(to top,var(--bg) 0%,transparent 30%);}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;width:100%;}
+  .hero h1{font-size:clamp(46px,7vw,96px);margin:16px 0 20px;}
+  .hero h1 em{color:var(--orange);font-style:italic;}
+  .hero p.lead{font-size:18px;color:#C6D0E2;max-width:520px;margin-bottom:28px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .stats{display:flex;gap:34px;margin-top:38px;flex-wrap:wrap;}
+  .stats strong{display:block;font-family:var(--display);font-style:italic;font-weight:800;font-size:44px;line-height:1;color:#fff;}
+  .stats span{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;}
+
+  .arcade{position:relative;background:rgba(10,18,34,.86);border:1px solid rgba(0,170,255,.45);border-radius:var(--r);padding:22px;backdrop-filter:blur(10px);box-shadow:0 0 60px rgba(0,170,255,.16),0 30px 70px rgba(0,0,0,.55);}
+  .arcade-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin-bottom:14px;}
+  .arcade-top .live{color:var(--orange);display:flex;align-items:center;gap:8px;}
+  .arcade-top .live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange);animation:blink 1.2s infinite;}
+  @keyframes blink{50%{opacity:.25;}}
+  .timer{height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:16px;}
+  .timer i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--orange),var(--cyan));transform-origin:left;}
+  .scene{display:grid;grid-template-columns:108px 1fr;gap:16px;align-items:center;min-height:150px;}
+  .scene .who{width:108px;height:138px;border-radius:10px;overflow:hidden;border:1px solid var(--line);}
+  .scene .who img{width:100%;height:100%;object-fit:cover;object-position:top;transform:scale(1.9);transform-origin:50% 22%;}
+  .bubble{background:var(--panel2);border:1px solid var(--line);border-radius:4px 14px 14px 14px;padding:14px 16px;font-size:17px;font-weight:500;}
+  .bubble small{display:block;font-family:var(--display);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);font-size:13px;margin-bottom:4px;}
+  .choices{display:grid;gap:10px;margin-top:16px;}
+  .choice{text-align:left;padding:13px 16px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:15.5px;transition:border-color .15s,background .15s,transform .15s;}
+  .choice:hover{border-color:var(--cyan);background:rgba(0,170,255,.1);transform:translateX(4px);}
+  .choice.ok{border-color:var(--green);background:rgba(43,214,123,.16);}
+  .choice.ko{border-color:var(--red);background:rgba(255,77,94,.14);}
+  .arcade-start,.arcade-end{text-align:center;padding:14px 6px 6px;}
+  .arcade-start h2,.arcade-end h2{font-size:40px;margin:8px 0 10px;}
+  .arcade-start p,.arcade-end p{color:var(--muted);margin-bottom:20px;font-size:15.5px;}
+  .arcade-end .score{font-family:var(--display);font-style:italic;font-weight:800;font-size:76px;line-height:1;color:var(--orange);}
+  .arcade-end .rank{font-family:var(--display);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin:4px 0 14px;}
+  .arcade .cta-row{justify-content:center;}
+
+  section.block{padding:90px 0;position:relative;}
+  .head{margin-bottom:34px;max-width:720px;}
+  .head h2{font-size:clamp(38px,5vw,64px);margin:12px 0 12px;}
+  .head p{color:var(--muted);font-size:17px;}
+
+  .map{background:linear-gradient(180deg,transparent,rgba(0,170,255,.05),transparent);}
+  .path{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;counter-reset:q;}
+  .path::before{content:"";position:absolute;left:10%;right:10%;top:29px;height:3px;background:repeating-linear-gradient(90deg,var(--line) 0 10px,transparent 10px 18px);}
+  .node{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:0 8px;}
+  .node .dot{counter-increment:q;width:60px;height:60px;display:grid;place-items:center;background:#16233d;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);font-family:var(--display);font-weight:800;font-style:italic;font-size:26px;color:var(--muted);transition:all .3s;position:relative;z-index:1;}
+  .node .dot::before{content:counter(q);}
+  .node:hover .dot{background:#1e3157;color:#fff;}
+  .node.done .dot{background:var(--orange);color:#fff;}
+  .node.done .dot::before{content:"✓";font-style:normal;}
+  .node .txt{display:flex;flex-direction:column;gap:4px;align-items:inherit;}
+  .node b{font-family:var(--display);font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.5px;line-height:1.1;}
+  .node .txt span{font-size:13px;color:var(--muted);line-height:1.35;}
+  .node em{font-style:normal;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:1.5px;color:var(--cyan);text-transform:uppercase;}
+  .node.done em{color:var(--green);}
+
+  .arrows{display:flex;gap:10px;margin-top:18px;}
+  .arrows button{width:52px;height:46px;display:grid;place-items:center;background:#16233d;font-size:22px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:background .2s;}
+  .arrows button:hover{background:var(--orange);}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
+  .chips button{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--line);border-radius:99px;color:var(--muted);transition:all .2s;}
+  .chips button:hover{color:#fff;border-color:#fff;}
+  .chips button.on{background:#fff;color:#060B16;border-color:#fff;}
+  .rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;padding:6px 24px 20px;margin:0 -24px;scrollbar-width:none;}
+  .rail::-webkit-scrollbar{display:none;}
+  .game{display:flex;flex-direction:column;justify-content:flex-start;flex:0 0 min(360px,78vw);scroll-snap-align:start;text-align:left;border-radius:var(--r);overflow:hidden;background:var(--panel);border:1px solid var(--line);transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;}
+  .game:hover{transform:translateY(-6px);border-color:var(--orange);box-shadow:0 18px 44px rgba(255,107,0,.2);}
+  .game .th{width:100%;aspect-ratio:16/9;background:#0b1323;position:relative;overflow:hidden;}
+  .game .th img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .game:hover .th img{transform:scale(1.06);}
+  .game .th::after{content:"▶";position:absolute;right:12px;bottom:12px;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--orange);font-size:15px;padding-left:3px;opacity:0;transform:scale(.7);transition:all .25s;}
+  .game:hover .th::after{opacity:1;transform:none;}
+  .game .seen{position:absolute;left:10px;top:10px;font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;background:var(--green);color:#041018;padding:2px 8px;border-radius:4px;display:none;}
+  .game.seen-on .seen{display:block;}
+  .game .meta{padding:14px 16px 18px;}
+  .game .meta small{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);}
+  .game .meta h3{font-size:23px;margin-top:4px;font-style:normal;font-weight:700;line-height:1.08;}
+
+  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(3,6,12,.82);backdrop-filter:blur(6px);}
+  .modal.open{display:flex;}
+  .sheet{width:min(820px,100%);max-height:92vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);position:relative;}
+  .sheet img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+  .sheet .in{padding:24px 28px 30px;}
+  .sheet h3{font-size:36px;margin:6px 0 12px;}
+  .sheet p{color:#C6D0E2;margin-bottom:18px;}
+  .sheet ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+  .sheet li{font-size:13px;padding:5px 12px;border-radius:99px;background:rgba(0,170,255,.12);border:1px solid rgba(0,170,255,.35);}
+  .close{position:absolute;right:12px;top:12px;width:40px;height:40px;border-radius:50%;background:rgba(6,11,22,.8);font-size:20px;z-index:2;}
+
+  .diag{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start;}
+  .console{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:28px;min-height:330px;}
+  .console .step{font-family:var(--display);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-size:14px;}
+  .console h3{font-size:30px;margin:6px 0 18px;font-style:normal;}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .opts button{padding:14px 16px;border:1px solid var(--line);border-radius:10px;text-align:left;background:rgba(255,255,255,.03);transition:all .15s;font-size:15px;}
+  .opts button:hover{border-color:var(--cyan);background:rgba(0,170,255,.1);}
+  .reco{display:grid;gap:12px;}
+  .reco button{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center;text-align:left;padding:8px;border:1px solid var(--line);border-radius:10px;transition:border-color .2s;}
+  .reco button:hover{border-color:var(--orange);}
+  .reco img{border-radius:6px;aspect-ratio:16/9;object-fit:cover;}
+  .reco b{font-family:var(--display);font-size:20px;text-transform:uppercase;line-height:1.1;display:block;}
+  .reco small{color:var(--cyan);font-family:var(--display);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+
+  .levels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:l;}
+  .level{position:relative;padding:28px 26px 30px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden;}
+  .level::before{counter-increment:l;content:"0" counter(l);position:absolute;right:16px;top:0;font-family:var(--display);font-style:italic;font-weight:800;font-size:96px;line-height:1;color:rgba(255,255,255,.05);}
+  .level h3{font-size:32px;margin-bottom:8px;color:var(--orange);}
+  .level p{color:var(--muted);font-size:15.5px;}
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .big{padding:30px 26px;border-radius:var(--r);border:1px solid var(--line);background:radial-gradient(400px 200px at 0 0,rgba(0,170,255,.12),transparent 70%),var(--panel);}
+  .big strong{display:block;font-family:var(--display);font-style:italic;font-weight:800;font-size:clamp(56px,7vw,88px);line-height:.95;color:#fff;}
+  .big span{display:block;color:var(--muted);margin-top:10px;font-size:15.5px;}
+  .src{font-size:10px;color:#5d6a82;margin-top:14px;}
+  .src a{text-decoration:underline;}
+
+  .bonus{border:1px dashed var(--line);border-radius:var(--r);padding:44px 28px;text-align:center;background:var(--panel);transition:all .4s;}
+  .bonus .lock{font-size:40px;margin-bottom:8px;}
+  .bonus h2{font-size:clamp(34px,4.6vw,56px);margin-bottom:10px;}
+  .bonus p{color:var(--muted);max-width:540px;margin:0 auto 22px;}
+  .bonus .cta-row{justify-content:center;display:none;}
+  .bonus.open{border:1px solid var(--orange);background:radial-gradient(600px 260px at 50% 0,rgba(255,107,0,.2),transparent 70%),var(--panel);box-shadow:0 0 60px rgba(255,107,0,.18);}
+  .bonus.open .cta-row{display:flex;}
+
+  .partners{padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);}
+  .partners .wrap{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+  .partners .lab{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);}
+  .plogos{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .plogos span{background:#fff;border-radius:8px;padding:8px 16px;display:grid;place-items:center;height:50px;}
+  .plogos img{height:30px;width:auto;max-width:150px;object-fit:contain;}
+  .testis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px;}
+  .testi{padding:22px 20px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);display:flex;flex-direction:column;gap:14px;}
+  .testi .stars{color:var(--orange);letter-spacing:3px;font-size:14px;}
+  .testi p{font-size:14.5px;color:#C6D0E2;flex:1;}
+  .testi b{font-family:var(--display);font-size:18px;letter-spacing:1px;text-transform:uppercase;}
+  .post{flex:0 0 min(300px,74vw);scroll-snap-align:start;border-radius:var(--r);overflow:hidden;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .25s,border-color .25s;}
+  .post:hover{transform:translateY(-5px);border-color:var(--cyan);}
+  .post img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0b1323;}
+  .post div{padding:14px 16px 18px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .post h3{font-size:19px;font-style:normal;font-weight:700;line-height:1.12;text-transform:none;flex:1;}
+  .post em{font-style:normal;font-family:var(--display);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:14px;color:var(--orange);}
+  .contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start;}
+  .lead-form{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .lead-form label{display:flex;flex-direction:column;gap:6px;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+  .lead-form .full{grid-column:1/-1;}
+  .lead-form input,.lead-form textarea{font:inherit;font-family:var(--body);font-size:15px;text-transform:none;letter-spacing:0;color:#fff;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:8px;padding:11px 13px;width:100%;}
+  .lead-form input:focus,.lead-form textarea:focus{outline:none;border-color:var(--cyan);}
+  .lead-form .status{font-size:14px;color:var(--muted);min-height:20px;}
+  .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;margin-bottom:22px;}
+  .fgrid h4{font-family:var(--display);font-size:15px;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:10px;}
+  .fgrid ul{list-style:none;display:grid;gap:6px;}
+  .fgrid a:hover{color:#fff;}
+  .fgrid p{max-width:320px;}
+  .badges{display:flex;gap:14px;margin-top:14px;}
+  .badges img{height:30px;width:auto;}
+  .fbot{border-top:1px solid var(--line);padding-top:16px;}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;color:#5d6a82;font-size:13px;}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);z-index:120;background:var(--orange);color:#fff;font-family:var(--display);font-weight:700;font-style:italic;font-size:19px;letter-spacing:1px;text-transform:uppercase;padding:12px 26px;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);transition:transform .45s cubic-bezier(.2,1.4,.4,1);white-space:nowrap;}
+  .toast.on{transform:translate(-50%,0);}
+
+  @media(max-width:980px){
+    .hero-grid,.diag{grid-template-columns:1fr;}
+    .levels,.proof{grid-template-columns:1fr;}
+    .testis{grid-template-columns:1fr 1fr;}
+    .contact,.fgrid{grid-template-columns:1fr;}
+    .path{grid-template-columns:1fr;gap:18px;}
+    .path::before{left:29px;right:auto;top:10px;bottom:10px;width:3px;height:auto;background:repeating-linear-gradient(180deg,var(--line) 0 10px,transparent 10px 18px);}
+    .node{flex-direction:row;text-align:left;align-items:center;gap:16px;padding:0;}
+    .node .dot{flex:0 0 60px;}
+    .node .txt{align-items:flex-start;gap:2px;}
+  }
+  @media(max-width:640px){
+    .nav{gap:10px;height:60px;}
+    .logo span{display:none;}
+    .nav .btn{display:none;}
+    .xp{padding:6px 10px;}
+    .hero{padding:92px 0 50px;}
+    .stats{gap:22px;}
+    .stats strong{font-size:36px;}
+    .scene{grid-template-columns:76px 1fr;}
+    .scene .who{width:76px;height:100px;}
+    .bubble{font-size:15.5px;}
+    .opts{grid-template-columns:1fr;}
+    section.block{padding:60px 0;}
+    .btn{width:100%;}
+    .reco button{grid-template-columns:96px 1fr;}
+    .testis,.lead-form{grid-template-columns:1fr;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .bgv div{animation:none;} .bgv div:first-child{opacity:1;}
+    html{scroll-behavior:auto;} .arcade-top .live::before{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Avatar Sales Academy"><i></i><span>AVATAR <b>SALES</b> ACADEMY</span></a>
+    <button class="xp" id="xpBtn" aria-label="Quêtes">
+      <span class="lab"><span data-i="quests">Quêtes</span> <b id="xpCount">0/5</b></span>
+      <span class="track"><i id="xpBar"></i></span>
+    </button>
+    <div class="langs" role="group" aria-label="Langue">
+      <button data-lang="fr" class="on">FR</button><button data-lang="en">EN</button><button data-lang="es">ES</button>
+    </div>
+    <a class="btn btn-primary btn-sm" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank" rel="noopener" data-i="navCta">Essai gratuit</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="bgv" id="bgv" aria-hidden="true">
+    <div style="background-image:url(img/bg-1.webp)"></div>
+    <div style="background-image:url(img/bg-2.webp)"></div>
+    <div style="background-image:url(img/bg-3.webp)"></div>
+    <div style="background-image:url(img/bg-4.webp)"></div>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag" data-i="heroTag">Serious Games 3D · Formation commerciale</span>
+      <h1 data-i="heroH1">La vente s'apprend <em>en jouant.</em></h1>
+      <p class="lead" data-i="heroLead">Vos apprenants affrontent des clients virtuels dans des décors 3D : ils décident, se trompent, recommencent, et vous suivez leurs scores.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#catalogue" data-i="heroCta1">Voir les 20 jeux</a>
+        <a class="btn btn-ghost" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank" rel="noopener" data-i="heroCta2">Audit offert</a>
+      </div>
+      <div class="stats">
+        <div><strong>20</strong><span data-i="st1">jeux 3D</span></div>
+        <div><strong>6</strong><span data-i="st2">univers métier</span></div>
+        <div><strong>70 %</strong><span data-i="st3">seuil de validation</span></div>
+      </div>
+    </div>
+    <div class="arcade" id="arcade" aria-live="polite"></div>
+  </div>
+</section>
+
+<div class="partners">
+  <div class="wrap">
+    <span class="lab" data-i="ptLab">Nos partenaires</span>
+    <div class="plogos">
+      <span><img src="img/eluneo.png" alt="Eluneo" loading="lazy"></span>
+      <span><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/serious-factory.png" alt="Serious Factory" loading="lazy"></span>
+      <span><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/made-in-95.webp" alt="Made in 95" loading="lazy"></span>
+      <span><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/rsconsultants-1-1024x234.webp" alt="RS Consultants" loading="lazy"></span>
+    </div>
+  </div>
+</div>
+
+<section class="block map" id="quetes">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag" data-i="mapTag">Votre mission</span>
+      <h2 data-i="mapH2">5 quêtes pour débloquer le bonus</h2>
+      <p data-i="mapP">Explorez le site comme un jeu : chaque quête accomplie remplit votre barre de progression.</p>
+    </div>
+    <div class="path" id="path"></div>
+  </div>
+</section>
+
+<section class="block" id="catalogue">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag" data-i="catTag">Le catalogue</span>
+      <h2 data-i="catH2">20 jeux, 6 univers</h2>
+      <p data-i="catP">Cliquez sur une vignette pour découvrir le jeu.</p>
+      <div class="arrows"><button id="prev" aria-label="Précédent">←</button><button id="next" aria-label="Suivant">→</button></div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="rail" id="rail"></div>
+  </div>
+</section>
+
+<section class="block" id="diagnostic">
+  <div class="wrap diag">
+    <div class="head">
+      <span class="tag" data-i="dgTag">Générateur de scénario</span>
+      <h2 data-i="dgH2">Quel jeu pour vos apprenants ?</h2>
+      <p data-i="dgP">Trois questions, et nous vous proposons les Serious Games les plus adaptés à votre besoin.</p>
+    </div>
+    <div class="console" id="console" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="block" id="methode">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag" data-i="mtTag">La méthode</span>
+      <h2 data-i="mtH2">Jouer. Scorer. Débriefer.</h2>
+    </div>
+    <div class="levels">
+      <div class="level"><h3 data-i="l1h">Jouer</h3><p data-i="l1p"></p></div>
+      <div class="level"><h3 data-i="l2h">Scorer</h3><p data-i="l2p"></p></div>
+      <div class="level"><h3 data-i="l3h">Débriefer</h3><p data-i="l3p"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="preuves">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag" data-i="prTag">Résultats</span>
+      <h2 data-i="prH2">Apprendre en jouant, ça marche</h2>
+    </div>
+    <div class="proof">
+      <div class="big"><strong>75 %</strong><span data-i="p1"></span></div>
+      <div class="big"><strong>+40 %</strong><span data-i="p2"></span></div>
+      <div class="big"><strong>+50 %</strong><span data-i="p3"></span></div>
+    </div>
+    <p class="src">Sources : <a href="https://formation.viaaduc.com/actualites/13/le-pouvoir-des-serious-games-dans-la-formation-professionnelle" target="_blank" rel="noopener">Viaaduc</a> · <a href="https://teamfirst.be/blog/serious-game-strategique-entreprise/" target="_blank" rel="noopener">TeamFirst</a> · <a href="https://www.albusfactory.com/blog-post/serious-game-definition-guide-complet" target="_blank" rel="noopener">Albus Factory</a></p>
+    <div class="testis">
+      <figure class="testi"><span class="stars" aria-hidden="true">★★★★★</span><p lang="fr">« Une solution rapide à déployer, ludique et ultra engageante. Les Serious Games ont boosté la motivation et ancré les apprentissages. Mention spéciale pour les modules sur mesure : objections &amp; accueil client. »</p><b>Emeline D.</b></figure>
+      <figure class="testi"><span class="stars" aria-hidden="true">★★★★★</span><p lang="fr">« Une expérience de formation exceptionnelle grâce à Régis et son serious game immersif avec LMS intégré. Les modules de vente sont variés, captivants, et surtout efficaces pour ancrer les apprentissages dans la durée. »</p><b>Laurine C.</b></figure>
+      <figure class="testi"><span class="stars" aria-hidden="true">★★★★★</span><p lang="fr">« J'ai été bluffé par la rapidité de mise en place et surtout grâce à l'aspect ludique. Résultat : meilleure mémorisation, plus d'implication, et des compétences ancrées durablement. »</p><b>Enzo</b></figure>
+      <figure class="testi"><span class="stars" aria-hidden="true">★★★★★</span><p lang="fr">« Une solution rapide à mettre en place, à la fois ludique et bien pensée. Les contenus sont variés, immersifs, et donnent envie de s'impliquer. L'approche par le jeu apporte une vraie dynamique à la formation. »</p><b>Katia K.</b></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="blog">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag">Blog</span>
+      <h2 data-i="blH2">Nos derniers articles</h2>
+      <div class="arrows"><button id="bPrev" aria-label="Précédent">←</button><button id="bNext" aria-label="Suivant">→</button></div>
+    </div>
+    <div class="rail" id="blogRail">
+      <a class="post" href="https://www.avatar-sales-academy.com/combien-coute-reellement-la-creation-dun-serious-game-le-guide-complet-2024/" target="_blank" rel="noopener"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/12/equipe-Avatar.png" alt="" loading="lazy" width="300" height="169"><div><h3 lang="fr">Pourquoi les Serious Games sont votre meilleur allié pour réussir votre BTS NDRC &amp; MCO</h3><em data-i="blRead">Lire l'article →</em></div></a>
+      <a class="post" href="https://www.avatar-sales-academy.com/serious-games-revolutionner-la-formation-a-distance-pour-les-commerciaux/" target="_blank" rel="noopener"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/04/bg-commerciaux-1.webp" alt="" loading="lazy" width="300" height="169"><div><h3 lang="fr">Serious Games : révolutionner la formation à distance pour les commerciaux</h3><em data-i="blRead">Lire l'article →</em></div></a>
+      <a class="post" href="https://www.avatar-sales-academy.com/les-serious-games-un-levier-puissant-pour-booster-votre-performance-commerciale/" target="_blank" rel="noopener"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Gemini_Generated_Image_61pewc61pewc61pe.png" alt="" loading="lazy" width="300" height="169"><div><h3 lang="fr">Les 5 conseils pour enfin décrocher ton alternance !</h3><em data-i="blRead">Lire l'article →</em></div></a>
+      <a class="post" href="https://www.avatar-sales-academy.com/lms-transformez-votre-formation-en-une-experience-inoubliable/" target="_blank" rel="noopener"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Facture-alternant.png" alt="" loading="lazy" width="300" height="169"><div><h3 lang="fr">Et si vous misiez sur la solution la plus pérenne ? L'Alternance !</h3><em data-i="blRead">Lire l'article →</em></div></a>
+      <a class="post" href="https://www.avatar-sales-academy.com/quest-ce-quun-lms-et-pourquoi-est-il-essentiel/" target="_blank" rel="noopener"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Gemini_Generated_Image_v3xdbcv3xdbcv3xd.png" alt="" loading="lazy" width="300" height="169"><div><h3 lang="fr">Comment mémoriser plus vite et plus longtemps, grâce au pouvoir de la répétition ?</h3><em data-i="blRead">Lire l'article →</em></div></a>
+      <a class="post" href="https://www.avatar-sales-academy.com/formateurs-responsables-pedagogiques-reinventez-lapprentissage-avec-le-pouvoir-du-jeu%f0%9f%8e%ae/" target="_blank" rel="noopener"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2025/04/Gemini_Generated_Image_prhfvtprhfvtprhf.jpg" alt="" loading="lazy" width="300" height="169"><div><h3 lang="fr">Formateurs, responsables pédagogiques : réinventez l'apprentissage avec le pouvoir du jeu</h3><em data-i="blRead">Lire l'article →</em></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="bonus">
+  <div class="wrap">
+    <div class="bonus" id="bonusBox">
+      <div class="lock" id="lock">🔒</div>
+      <h2 id="bonusH"></h2>
+      <p id="bonusP"></p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://avatarsales.github.io/asa-quiz/avantpremiere.html" target="_blank" rel="noopener" data-i="bn1">Classe pilote 30 jours</a>
+        <a class="btn btn-ghost" href="https://avatar-sales-academy.fr/" target="_blank" rel="noopener" data-i="bn2">Accès VIP</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="block" id="contact">
+  <div class="wrap contact">
+    <div class="head">
+      <span class="tag" data-i="ctTag">Contact</span>
+      <h2 data-i="ctH2">Centre de formation ou formateur ?</h2>
+      <p data-i="ctP">Laissez-nous vos coordonnées, nous vous recontactons sous 48 h.</p>
+      <div class="cta-row" style="margin-top:22px"><a class="btn btn-ghost" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank" rel="noopener" data-i="ctRdv">Prendre rendez-vous</a></div>
+    </div>
+    <form class="lead-form" id="lead-form">
+      <label><span data-i="fNom">Nom *</span><input type="text" name="nom" required autocomplete="name"></label>
+      <label><span data-i="fMail">Email *</span><input type="email" name="email" required autocomplete="email"></label>
+      <label><span data-i="fTel">Téléphone</span><input type="tel" name="telephone" autocomplete="tel"></label>
+      <label><span data-i="fEtab">Établissement</span><input type="text" name="etablissement" autocomplete="organization"></label>
+      <label class="full"><span data-i="fMsg">Message</span><textarea name="message" rows="3"></textarea></label>
+      <button type="submit" class="btn btn-primary full" id="leadBtn" data-i="fSend">Envoyer ma demande</button>
+      <p class="status full" id="leadStatus" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="logo" style="margin-bottom:12px;color:#fff"><i></i><span>AVATAR <b>SALES</b> ACADEMY</span></div>
+        <p data-i="ftP">La plateforme Serious Games qui transforme la formation commerciale en expérience gamifiée.</p>
+        <div class="badges"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/10/rgpd.webp" alt="RGPD" loading="lazy"><img src="https://www.avatar-sales-academy.com/wp-content/uploads/2024/10/Hebergementt.webp" alt="Hébergement en France" loading="lazy"></div>
+      </div>
+      <div>
+        <h4 data-i="ftL">Liens utiles</h4>
+        <ul>
+          <li><a href="https://www.avatar-sales-academy.com/mentions-legales/" target="_blank" rel="noopener" data-i="ftMl">Mentions légales</a></li>
+          <li><a href="https://www.avatar-sales-academy.com/politique-de-confidentialite/" target="_blank" rel="noopener" data-i="ftPc">Politique de confidentialité</a></li>
+          <li><a href="https://www.avatar-sales-academy.com/cgv/" target="_blank" rel="noopener">CGV</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@avatar-sales-academy.com">contact@avatar-sales-academy.com</a></li>
+          <li><a href="http://www.linkedin.com/in/regis-malonga" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.youtube.com/@AVATARSALESACADEMY" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">© 2026 Avatar Sales Academy · <span data-i="ftQ">Organisme certifié Qualiopi</span></div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="sheet">
+    <button class="close" id="mClose" aria-label="Fermer">✕</button>
+    <img id="mImg" alt="" width="640" height="360">
+    <div class="in">
+      <span class="tag" id="mCat"></span>
+      <h3 id="mTitle"></h3>
+      <p id="mDesc"></p>
+      <ul id="mSkills"></ul>
+      <div class="cta-row">
+        <a class="btn btn-primary" id="mPlay" href="#" target="_blank" rel="noopener" data-i="mPlay">Demander la démo</a>
+        <a class="btn btn-ghost" href="https://calendly.com/regis-malonga/prise-de-contact" target="_blank" rel="noopener" data-i="mTalk">En parler</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+/* ---------- RÉGLAGES ---------- */
+var HERO_VIDEO = '';   // ex. 'video/hero.mp4' pour remplacer le diaporama par une vraie vidéo
+var DEMO_URL  = 'https://avatarsales.github.io/asa-quiz/avantpremiere.html';
+
+/* ---------- TEXTES ---------- */
+var T = {
+fr:{ptLab:'Nos partenaires',blH2:'Nos derniers articles',blRead:"Lire l'article →",ctTag:'Contact',ctH2:'Centre de formation ou formateur ?',ctP:'Laissez-nous vos coordonnées, nous vous recontactons sous 48 h.',ctRdv:'Prendre rendez-vous',fNom:'Nom *',fMail:'Email *',fTel:'Téléphone',fEtab:'Établissement',fMsg:'Message',fSend:'Envoyer ma demande',fWait:'Envoi en cours…',fOk:'Merci ! Votre demande est partie, nous vous recontactons sous 48 h.',fKo:"Une erreur est survenue. Réessayez ou écrivez-nous par email.",ftP:'La plateforme Serious Games qui transforme la formation commerciale en expérience gamifiée.',ftL:'Liens utiles',ftMl:'Mentions légales',ftPc:'Politique de confidentialité',quests:'Quêtes',navCta:'Essai gratuit',heroTag:'Serious Games 3D · Formation commerciale',heroH1:"La vente s'apprend <em>en jouant.</em>",heroLead:"Vos apprenants affrontent des clients virtuels dans des décors 3D : ils décident, se trompent, recommencent, et vous suivez leurs scores.",heroCta1:'Voir les 20 jeux',heroCta2:'Audit offert',st1:'jeux 3D',st2:'univers métier',st3:'seuil de validation',
+ mapTag:'Votre mission',mapH2:'5 quêtes pour débloquer le bonus',mapP:"Explorez le site comme un jeu : chaque quête accomplie remplit votre barre de progression.",
+ catTag:'Le catalogue',catH2:'20 jeux, 6 univers',catP:'Cliquez sur une vignette pour découvrir le jeu.',
+ dgTag:'Générateur de scénario',dgH2:'Quel jeu pour vos apprenants ?',dgP:'Trois questions, et nous vous proposons les Serious Games les plus adaptés à votre besoin.',
+ mtTag:'La méthode',mtH2:'Jouer. Scorer. Débriefer.',l1h:'Jouer',l1p:"L'apprenant dialogue avec un client virtuel dans un décor 3D à 360°, en présentiel ou à distance.",l2h:'Scorer',l2p:"Points, chrono, indices et graphique de compétences : le module est validé à partir de 70 % des points.",l3h:'Débriefer',l3p:"Bilan PDF téléchargeable et remontée des scores dans votre LMS (SCORM 2004) pour préparer le coaching.",
+ prTag:'Résultats',prH2:'Apprendre en jouant, ça marche',p1:'de rétention des connaissances avec des formations gamifiées',p2:'de rétention des compétences à 6 mois',p3:"d'engagement par rapport aux formations traditionnelles",
+ bnLockH:'Bonus verrouillé',bnLockP:'Terminez les 5 quêtes pour débloquer votre accès VIP.',bnOpenH:'Bonus débloqué !',bnOpenP:'Bravo, vous avez terminé les 5 quêtes. Votre classe pilote de 30 jours et votre accès VIP vous attendent.',bn1:'Classe pilote 30 jours',bn2:'Accès VIP',ftQ:'Organisme certifié Qualiopi',
+ mPlay:'Demander la démo',mTalk:'En parler',seen:'Vu',all:'Tous',
+ gTag:'Mini-jeu',gStartH:'Défi 15 secondes',gStartP:'Un client, trois objections, quinze secondes. Saurez-vous trouver la bonne réplique ?',gStartB:'Jouer',gLive:'En direct',gClient:'Le client',gEndP:'Dans nos jeux, chaque réplique compte.',gAgain:'Rejouer',gMore:'Voir les jeux',
+ ranks:['À entraîner','Bon réflexe','Vendeur affûté','Closer'],
+ qDone:'Quête accomplie',qTodo:'À faire',qOk:'Terminé',
+ dStep:'Question',dAgain:'Recommencer',dResH:'Votre sélection',dResCta:'Recevoir la démo'},
+en:{ptLab:'Our partners',blH2:'Latest articles',blRead:'Read the article (FR) →',ctTag:'Contact',ctH2:'Training centre or trainer?',ctP:'Leave us your details and we will get back to you within 48 hours.',ctRdv:'Book a call',fNom:'Name *',fMail:'Email *',fTel:'Phone',fEtab:'Organisation',fMsg:'Message',fSend:'Send my request',fWait:'Sending…',fOk:'Thank you! Your request has been sent, we will get back to you within 48 hours.',fKo:'Something went wrong. Please try again or email us.',ftP:'The Serious Games platform that turns sales training into a gamified experience.',ftL:'Useful links',ftMl:'Legal notice',ftPc:'Privacy policy',quests:'Quests',navCta:'Free trial',heroTag:'3D Serious Games · Sales training',heroH1:'Learn to sell <em>by playing.</em>',heroLead:'Your learners face virtual customers in 3D settings: they decide, fail, try again, and you track their scores.',heroCta1:'See the 20 games',heroCta2:'Free audit',st1:'3D games',st2:'business worlds',st3:'pass mark',
+ mapTag:'Your mission',mapH2:'5 quests to unlock the bonus',mapP:'Explore the site like a game: each completed quest fills your progress bar.',
+ catTag:'The catalogue',catH2:'20 games, 6 worlds',catP:'Click a thumbnail to discover the game.',
+ dgTag:'Scenario generator',dgH2:'Which game for your learners?',dgP:'Three questions, and we suggest the Serious Games that best fit your need.',
+ mtTag:'The method',mtH2:'Play. Score. Debrief.',l1h:'Play',l1p:'The learner talks with a virtual customer in a 360° 3D setting, in class or remotely.',l2h:'Score',l2p:'Points, timer, hints and a skills chart: the module is passed from 70% of the points.',l3h:'Debrief',l3p:'Downloadable PDF report and scores sent to your LMS (SCORM 2004) to prepare coaching.',
+ prTag:'Results',prH2:'Learning by playing works',p1:'knowledge retention with gamified training',p2:'skills retention at 6 months',p3:'engagement compared with traditional training',
+ bnLockH:'Bonus locked',bnLockP:'Complete the 5 quests to unlock your VIP access.',bnOpenH:'Bonus unlocked!',bnOpenP:'Well done, you completed the 5 quests. Your 30-day pilot class and VIP access are waiting.',bn1:'30-day pilot class',bn2:'VIP access',ftQ:'Qualiopi-certified organisation',
+ mPlay:'Request the demo',mTalk:'Talk to us',seen:'Seen',all:'All',
+ gTag:'Mini-game',gStartH:'15-second challenge',gStartP:'One customer, three objections, fifteen seconds. Can you find the right reply?',gStartB:'Play',gLive:'Live',gClient:'The customer',gEndP:'In our games, every reply counts.',gAgain:'Play again',gMore:'See the games',
+ ranks:['Needs practice','Good instinct','Sharp seller','Closer'],
+ qDone:'Quest complete',qTodo:'To do',qOk:'Done',
+ dStep:'Question',dAgain:'Start over',dResH:'Your selection',dResCta:'Get the demo'},
+es:{ptLab:'Nuestros socios',blH2:'Últimos artículos',blRead:'Leer el artículo (FR) →',ctTag:'Contacto',ctH2:'¿Centro de formación o formador?',ctP:'Déjenos sus datos y le contactaremos en 48 horas.',ctRdv:'Reservar una cita',fNom:'Nombre *',fMail:'Email *',fTel:'Teléfono',fEtab:'Centro',fMsg:'Mensaje',fSend:'Enviar mi solicitud',fWait:'Enviando…',fOk:'¡Gracias! Su solicitud ha sido enviada, le contactaremos en 48 horas.',fKo:'Se ha producido un error. Inténtelo de nuevo o escríbanos por email.',ftP:'La plataforma de Serious Games que convierte la formación comercial en una experiencia gamificada.',ftL:'Enlaces útiles',ftMl:'Aviso legal',ftPc:'Política de privacidad',quests:'Misiones',navCta:'Prueba gratis',heroTag:'Serious Games 3D · Formación comercial',heroH1:'La venta se aprende <em>jugando.</em>',heroLead:'Sus alumnos se enfrentan a clientes virtuales en escenarios 3D: deciden, se equivocan, vuelven a empezar, y usted sigue sus puntuaciones.',heroCta1:'Ver los 20 juegos',heroCta2:'Auditoría gratis',st1:'juegos 3D',st2:'universos',st3:'umbral de validación',
+ mapTag:'Su misión',mapH2:'5 misiones para desbloquear el bonus',mapP:'Explore el sitio como un juego: cada misión cumplida llena su barra de progreso.',
+ catTag:'El catálogo',catH2:'20 juegos, 6 universos',catP:'Haga clic en una miniatura para descubrir el juego.',
+ dgTag:'Generador de escenario',dgH2:'¿Qué juego para sus alumnos?',dgP:'Tres preguntas, y le proponemos los Serious Games más adecuados a su necesidad.',
+ mtTag:'El método',mtH2:'Jugar. Puntuar. Analizar.',l1h:'Jugar',l1p:'El alumno dialoga con un cliente virtual en un escenario 3D de 360°, en clase o a distancia.',l2h:'Puntuar',l2p:'Puntos, cronómetro, pistas y gráfico de competencias: el módulo se valida a partir del 70 % de los puntos.',l3h:'Analizar',l3p:'Informe PDF descargable y envío de las puntuaciones a su LMS (SCORM 2004) para preparar el coaching.',
+ prTag:'Resultados',prH2:'Aprender jugando funciona',p1:'de retención de conocimientos con formaciones gamificadas',p2:'de retención de competencias a los 6 meses',p3:'de implicación frente a las formaciones tradicionales',
+ bnLockH:'Bonus bloqueado',bnLockP:'Complete las 5 misiones para desbloquear su acceso VIP.',bnOpenH:'¡Bonus desbloqueado!',bnOpenP:'Enhorabuena, ha completado las 5 misiones. Su clase piloto de 30 días y su acceso VIP le esperan.',bn1:'Clase piloto 30 días',bn2:'Acceso VIP',ftQ:'Organismo certificado Qualiopi',
+ mPlay:'Pedir la demo',mTalk:'Hablemos',seen:'Visto',all:'Todos',
+ gTag:'Minijuego',gStartH:'Reto de 15 segundos',gStartP:'Un cliente, tres objeciones, quince segundos. ¿Encontrará la réplica correcta?',gStartB:'Jugar',gLive:'En directo',gClient:'El cliente',gEndP:'En nuestros juegos, cada réplica cuenta.',gAgain:'Volver a jugar',gMore:'Ver los juegos',
+ ranks:['A entrenar','Buen reflejo','Vendedor afilado','Closer'],
+ qDone:'Misión cumplida',qTodo:'Pendiente',qOk:'Hecho',
+ dStep:'Pregunta',dAgain:'Reiniciar',dResH:'Su selección',dResCta:'Recibir la demo'}
+};
+
+var CATS = {retail:{fr:'Retail & Sport',en:'Retail & Sport',es:'Retail y Deporte'},bank:{fr:'Banque & Assurance',en:'Banking & Insurance',es:'Banca y Seguros'},auto:{fr:'Automobile',en:'Automotive',es:'Automóvil'},immo:{fr:'Immobilier',en:'Real estate',es:'Inmobiliario'},it:{fr:'IT & Digital',en:'IT & Digital',es:'IT y Digital'},base:{fr:'Fondamentaux & Quiz',en:'Fundamentals & Quiz',es:'Fundamentos y Quiz'}};
+
+/* g = objectifs couverts (sell, conflict, aware, exam). Ajoutez url:'…' à un jeu pour lier sa démo. */
+var GAMES = [
+ {id:'running',c:'retail',g:['sell'],t:{fr:'Le vendeur conseil — Rayon Running',en:'The sales adviser — Running aisle',es:'El vendedor asesor — Sección Running'},d:{fr:"Découvrez le besoin d'un client au rayon Running et conseillez-lui la bonne paire, sous l'œil du coach et du manager.",en:"Uncover a customer's need in the Running aisle and recommend the right pair, with the coach and manager watching.",es:'Descubra la necesidad de un cliente en la sección Running y aconséjele el par adecuado, bajo la mirada del coach y del mánager.'},s:{fr:['Découverte du besoin','Conseil produit','Vente additionnelle'],en:['Needs discovery','Product advice','Add-on selling'],es:['Descubrimiento de necesidades','Consejo de producto','Venta adicional']}},
+ {id:'trail',c:'retail',g:['sell'],t:{fr:'Le conseiller Trail & Outdoor',en:'The Trail & Outdoor adviser',es:'El asesor Trail y Outdoor'},d:{fr:"Accompagnez une cliente au rayon Trail & Outdoor : questionnement, argumentation et choix du bon équipement.",en:'Guide a customer in the Trail & Outdoor aisle: questioning, pitching and choosing the right gear.',es:'Acompañe a una clienta en la sección Trail y Outdoor: preguntas, argumentación y elección del equipo adecuado.'},s:{fr:['Questionnement','Argumentation','Conseil produit'],en:['Questioning','Pitching','Product advice'],es:['Preguntas','Argumentación','Consejo de producto']}},
+ {id:'caisse',c:'retail',g:['conflict'],t:{fr:'Litige commercial — La crise en caisse',en:'Customer dispute — Crisis at the checkout',es:'Litigio comercial — Crisis en caja'},d:{fr:"Un client s'emporte en caisse. Appliquez les techniques de désamorçage pour calmer la situation.",en:'A customer loses their temper at the checkout. Use de-escalation techniques to calm things down.',es:'Un cliente pierde los nervios en caja. Aplique las técnicas de desescalada para calmar la situación.'},s:{fr:['Désamorçage','Écoute active','Gestion du stress'],en:['De-escalation','Active listening','Stress management'],es:['Desescalada','Escucha activa','Gestión del estrés']}},
+ {id:'beaute',c:'retail',g:['conflict'],t:{fr:'Litige commercial — Le rayon beauté',en:'Customer dispute — The beauty aisle',es:'Litigio comercial — Sección de belleza'},d:{fr:"Une réclamation au rayon beauté : traitez le litige sans perdre la cliente.",en:'A complaint in the beauty aisle: handle the dispute without losing the customer.',es:'Una reclamación en la sección de belleza: gestione el litigio sin perder a la clienta.'},s:{fr:['Traitement des réclamations','Empathie','Fidélisation'],en:['Complaint handling','Empathy','Loyalty'],es:['Gestión de reclamaciones','Empatía','Fidelización']}},
+ {id:'rayon',c:'retail',g:['sell'],t:{fr:'Rayon Gagnant — Merchandising',en:'Winning Aisle — Merchandising',es:'Sección Ganadora — Merchandising'},d:{fr:"Contrôlez un linéaire, repérez les zones froides, arbitrez l'assortiment et mesurez le ROI de vos décisions.",en:'Audit a shelf, spot cold zones, decide on the range and measure the ROI of your choices.',es:'Controle un lineal, detecte las zonas frías, decida el surtido y mida el ROI de sus decisiones.'},s:{fr:['Planogramme','Zones chaudes / froides','Indices de sensibilité','ROI'],en:['Planogram','Hot / cold zones','Sensitivity indices','ROI'],es:['Planograma','Zonas calientes / frías','Índices de sensibilidad','ROI']}},
+ {id:'assurance',c:'bank',g:['sell'],t:{fr:'Vente additionnelle — Assurance auto',en:'Add-on selling — Car insurance',es:'Venta adicional — Seguro de coche'},d:{fr:"Proposez la bonne garantie au bon moment, avec des points à gagner et un chrono.",en:'Offer the right cover at the right moment, with points to win and a timer.',es:'Proponga la garantía adecuada en el momento justo, con puntos y cronómetro.'},s:{fr:['Vente additionnelle','Argumentation','Cadre légal'],en:['Add-on selling','Pitching','Legal framework'],es:['Venta adicional','Argumentación','Marco legal']}},
+ {id:'pret',c:'bank',g:['sell','aware'],t:{fr:'Banque — Prêt et conformité',en:'Banking — Loans and compliance',es:'Banca — Préstamo y cumplimiento'},d:{fr:"Recevez un couple de clients pour un projet de prêt, en respectant les règles de conformité.",en:'Meet a couple about a loan project while following compliance rules.',es:'Reciba a una pareja para un proyecto de préstamo, respetando las normas de cumplimiento.'},s:{fr:['Découverte client','Devoir de conseil','Conformité'],en:['Customer discovery','Duty to advise','Compliance'],es:['Descubrimiento del cliente','Deber de asesoramiento','Cumplimiento']}},
+ {id:'impayes',c:'bank',g:['conflict'],t:{fr:'Banque — Impayés et recouvrement amiable',en:'Banking — Arrears and amicable recovery',es:'Banca — Impagos y recobro amistoso'},d:{fr:"Menez un entretien délicat pour trouver une solution amiable à un impayé.",en:'Lead a sensitive conversation to find an amicable solution to a missed payment.',es:'Dirija una entrevista delicada para hallar una solución amistosa a un impago.'},s:{fr:['Entretien difficile','Négociation','Recouvrement amiable'],en:['Difficult conversation','Negotiation','Amicable recovery'],es:['Entrevista difícil','Negociación','Recobro amistoso']}},
+ {id:'suv',c:'auto',g:['sell'],t:{fr:'Concession — Vendre un SUV électrique',en:'Dealership — Selling an electric SUV',es:'Concesionario — Vender un SUV eléctrico'},d:{fr:"Du questionnement à la négociation : vendez un SUV électrique à une acheteuse exigeante.",en:'From questioning to negotiation: sell an electric SUV to a demanding buyer.',es:'De las preguntas a la negociación: venda un SUV eléctrico a una compradora exigente.'},s:{fr:['Questionnement','Argumentaire','Négociation','Savoir-être'],en:['Questioning','Sales pitch','Negotiation','Soft skills'],es:['Preguntas','Argumentario','Negociación','Saber estar']}},
+ {id:'financement',c:'auto',g:['sell'],t:{fr:'Financement, services et après-vente',en:'Financing, services and after-sales',es:'Financiación, servicios y posventa'},d:{fr:"Crédit, LOA ou LLD, garanties et entretien : construisez l'offre complète et fidélisez.",en:'Loan, lease or long-term rental, warranties and servicing: build the full offer and retain the customer.',es:'Crédito, leasing o renting, garantías y mantenimiento: construya la oferta completa y fidelice.'},s:{fr:['Financement','Services associés','Fidélisation'],en:['Financing','Related services','Loyalty'],es:['Financiación','Servicios asociados','Fidelización']}},
+ {id:'immo1',c:'immo',g:['sell'],t:{fr:"Immobilier — Obtenir le rendez-vous d'estimation",en:'Real estate — Getting the valuation appointment',es:'Inmobiliario — Conseguir la cita de valoración'},d:{fr:"Décrochez un rendez-vous d'estimation auprès d'un propriétaire vendeur.",en:'Win a valuation appointment with a homeowner who wants to sell.',es:'Consiga una cita de valoración con un propietario vendedor.'},s:{fr:['Prospection','Prise de rendez-vous','Traitement des objections'],en:['Prospecting','Appointment setting','Objection handling'],es:['Prospección','Concertación de citas','Tratamiento de objeciones']}},
+ {id:'immo2',c:'immo',g:['sell'],t:{fr:'Immobilier — Obtenir le mandat exclusif',en:'Real estate — Winning the exclusive mandate',es:'Inmobiliario — Conseguir el mandato exclusivo'},d:{fr:"Face aux propriétaires, défendez votre estimation et obtenez le mandat exclusif.",en:'Facing the owners, defend your valuation and win the exclusive mandate.',es:'Frente a los propietarios, defienda su valoración y consiga el mandato exclusivo.'},s:{fr:['Argumentation','Négociation','Cadre légal'],en:['Pitching','Negotiation','Legal framework'],es:['Argumentación','Negociación','Marco legal']}},
+ {id:'spin',c:'it',g:['sell'],t:{fr:'Vente complexe IT — Méthode SPIN',en:'Complex IT sale — SPIN method',es:'Venta compleja IT — Método SPIN'},d:{fr:"Appliquez la méthode SPIN face à un DSI exigeant pour faire émerger ses vrais enjeux.",en:'Apply the SPIN method with a demanding CIO to bring out the real stakes.',es:'Aplique el método SPIN ante un CIO exigente para hacer emerger sus verdaderos retos.'},s:{fr:['SPIN Selling','Vente complexe','Questionnement'],en:['SPIN Selling','Complex sales','Questioning'],es:['SPIN Selling','Venta compleja','Preguntas']}},
+ {id:'b2b',c:'it',g:['sell'],t:{fr:'Marketing digital B2B — Générer des leads',en:'B2B digital marketing — Generating leads',es:'Marketing digital B2B — Generar leads'},d:{fr:"Convainquez une directrice marketing en parlant bénéfices et ROI plutôt que fonctionnalités.",en:'Convince a marketing director by talking benefits and ROI rather than features.',es:'Convenza a una directora de marketing hablando de beneficios y ROI, no de funcionalidades.'},s:{fr:['Vente B2B','Bénéfices client','ROI'],en:['B2B sales','Customer benefits','ROI'],es:['Venta B2B','Beneficios para el cliente','ROI']}},
+ {id:'telephonie',c:'it',g:['sell'],t:{fr:'Argumentation BtoC — Boutique téléphonie',en:'B2C pitching — Phone shop',es:'Argumentación B2C — Tienda de telefonía'},d:{fr:"Accueillez un client en boutique et adaptez votre argumentaire aux fiches produits.",en:'Welcome a customer in store and tailor your pitch to the product sheets.',es:'Reciba a un cliente en tienda y adapte su argumentario a las fichas de producto.'},s:{fr:['Accueil client','Argumentation','Connaissance produit'],en:['Customer welcome','Pitching','Product knowledge'],es:['Acogida del cliente','Argumentación','Conocimiento del producto']}},
+ {id:'cyber',c:'it',g:['aware'],t:{fr:'Cyber — Les bons réflexes',en:'Cyber — The right reflexes',es:'Ciber — Los buenos reflejos'},d:{fr:"Quatre chapitres pour adopter les bons réflexes : phishing, supports amovibles, mobilité, télétravail et rançongiciel.",en:'Four chapters to build the right reflexes: phishing, removable media, mobility, remote work and ransomware.',es:'Cuatro capítulos para adoptar los buenos reflejos: phishing, soportes extraíbles, movilidad, teletrabajo y ransomware.'},s:{fr:['Phishing','Mobilité','Télétravail','Rançongiciel'],en:['Phishing','Mobility','Remote work','Ransomware'],es:['Phishing','Movilidad','Teletrabajo','Ransomware']}},
+ {id:'pitch',c:'base',g:['sell','exam'],t:{fr:"Pitch commercial — De l'étude de cas au jeu de rôle",en:'Sales pitch — From case study to role play',es:'Pitch comercial — Del caso práctico al juego de rol'},d:{fr:"Analysez une étude de cas, préparez votre pitch puis défendez-le en situation.",en:'Analyse a case study, prepare your pitch, then defend it in a live situation.',es:'Analice un caso práctico, prepare su pitch y defiéndalo en situación.'},s:{fr:['Analyse de cas','Pitch','Jeu de rôle'],en:['Case analysis','Pitch','Role play'],es:['Análisis de caso','Pitch','Juego de rol']}},
+ {id:'om_bts',c:'base',g:['exam'],t:{fr:'Objectif Million — BTS NDRC · MCO · CCST',en:'Objectif Million — BTS NDRC · MCO · CCST',es:'Objectif Million — BTS NDRC · MCO · CCST'},d:{fr:"Le quiz 3D façon jeu télévisé pour réviser les épreuves E1 à E6, avec jokers et deux niveaux de difficulté.",en:'The TV-show-style 3D quiz to revise exams E1 to E6, with lifelines and two difficulty levels.',es:'El quiz 3D estilo concurso de TV para repasar las pruebas E1 a E6, con comodines y dos niveles de dificultad.'},s:{fr:['Révision examen','E1 à E6','2 niveaux'],en:['Exam revision','E1 to E6','2 levels'],es:['Repaso de examen','E1 a E6','2 niveles']}},
+ {id:'om_but',c:'base',g:['exam'],t:{fr:'Objectif Million — BUT TC',en:'Objectif Million — BUT TC',es:'Objectif Million — BUT TC'},d:{fr:"Le quiz 3D pour réviser le programme du BUT Techniques de commercialisation.",en:'The 3D quiz to revise the BUT Techniques de commercialisation syllabus.',es:'El quiz 3D para repasar el programa del BUT Techniques de commercialisation.'},s:{fr:['Révision examen','BUT TC'],en:['Exam revision','BUT TC'],es:['Repaso de examen','BUT TC']}},
+ {id:'om_ntc',c:'base',g:['exam'],t:{fr:'Objectif Million — TP NTC',en:'Objectif Million — TP NTC',es:'Objectif Million — TP NTC'},d:{fr:"Le quiz 3D du titre professionnel Négociateur Technico-Commercial.",en:'The 3D quiz for the Négociateur Technico-Commercial professional qualification.',es:'El quiz 3D del título profesional Négociateur Technico-Commercial.'},s:{fr:['Révision examen','Titre pro NTC'],en:['Exam revision','NTC qualification'],es:['Repaso de examen','Título NTC']}}
+];
+
+var ROUNDS = [
+ {img:'img/marc.webp',q:{fr:"J'ai deux minutes. Pourquoi vous ?",en:"I've got two minutes. Why you?",es:'Tengo dos minutos. ¿Por qué usted?'},
+  ok:{fr:"Quel est votre enjeu n° 1 aujourd'hui ?",en:"What's your number one challenge today?",es:'¿Cuál es su reto n.º 1 hoy?'},
+  ko:{fr:'Je vous présente toute notre gamme.',en:'Let me show you our whole range.',es:'Le presento toda nuestra gama.'}},
+ {img:'img/amina.webp',q:{fr:"C'est trop cher.",en:"It's too expensive.",es:'Es demasiado caro.'},
+  ok:{fr:'Trop cher par rapport à quoi ?',en:'Too expensive compared with what?',es:'¿Demasiado caro comparado con qué?'},
+  ko:{fr:'Je vous fais 10 % tout de suite.',en:"I'll give you 10% off right now.",es:'Le hago un 10 % ahora mismo.'}},
+ {img:'img/karim.webp',q:{fr:'Je vais réfléchir.',en:"I'll think about it.",es:'Me lo voy a pensar.'},
+  ok:{fr:"Qu'est-ce qui vous fait encore hésiter ?",en:"What's still holding you back?",es:'¿Qué le hace dudar todavía?'},
+  ko:{fr:'Très bien, je vous rappelle un de ces jours.',en:"Fine, I'll call you back some day.",es:'Muy bien, le llamo un día de estos.'}}
+];
+
+var QUESTS = [
+ {k:'game',a:'#top',t:{fr:'Relever le défi',en:'Take the challenge',es:'Aceptar el reto'},d:{fr:'Terminez le mini-jeu de 15 secondes',en:'Finish the 15-second mini-game',es:'Termine el minijuego de 15 segundos'}},
+ {k:'cat',a:'#catalogue',t:{fr:'Explorer le catalogue',en:'Explore the catalogue',es:'Explorar el catálogo'},d:{fr:'Ouvrez 3 fiches de jeux',en:'Open 3 game sheets',es:'Abra 3 fichas de juegos'}},
+ {k:'diag',a:'#diagnostic',t:{fr:'Trouver votre jeu',en:'Find your game',es:'Encontrar su juego'},d:{fr:'Répondez aux 3 questions',en:'Answer the 3 questions',es:'Responda a las 3 preguntas'}},
+ {k:'meth',a:'#methode',t:{fr:'Découvrir la méthode',en:'Discover the method',es:'Descubrir el método'},d:{fr:'Jouer, scorer, débriefer',en:'Play, score, debrief',es:'Jugar, puntuar, analizar'}},
+ {k:'proof',a:'#preuves',t:{fr:'Voir les résultats',en:'See the results',es:'Ver los resultados'},d:{fr:'Les chiffres de la gamification',en:'The gamification figures',es:'Las cifras de la gamificación'}}
+];
+
+var DIAG = [
+ {q:{fr:'Quel est votre objectif ?',en:'What is your goal?',es:'¿Cuál es su objetivo?'},o:[
+   ['sell',{fr:'Former à la vente',en:'Train in selling',es:'Formar en ventas'}],
+   ['conflict',{fr:'Gérer les situations difficiles',en:'Handle difficult situations',es:'Gestionar situaciones difíciles'}],
+   ['aware',{fr:'Sensibiliser (cyber, conformité)',en:'Raise awareness (cyber, compliance)',es:'Sensibilizar (ciber, cumplimiento)'}],
+   ['exam',{fr:'Réviser un examen',en:'Revise for an exam',es:'Repasar un examen'}]]},
+ {q:{fr:'Dans quel univers ?',en:'In which world?',es:'¿En qué universo?'},o:[
+   ['retail',CATS.retail],['bank',CATS.bank],['auto',CATS.auto],['immo',CATS.immo],['it',CATS.it],['any',{fr:'Peu importe',en:'Any',es:'Da igual'}]]},
+ {q:{fr:'Pour quel public ?',en:'For which audience?',es:'¿Para qué público?'},o:[
+   ['alt',{fr:'Alternants (BTS, BUT, titres pro)',en:'Work-study students',es:'Alumnos en alternancia'}],
+   ['pro',{fr:'Équipes en poste',en:'Teams in post',es:'Equipos en activo'}],
+   ['new',{fr:'Nouveaux arrivants',en:'New hires',es:'Nuevas incorporaciones'}]]}
+];
+
+/* ---------- ÉTAT ---------- */
+var lang='fr', state={q:{},seen:[]};
+function load(){try{var s=JSON.parse(localStorage.getItem('asa_quest')||'null');if(s&&s.q&&s.seen){state=s;}var l=localStorage.getItem('asa_lang');if(l&&T[l])lang=l;}catch(e){}}
+function save(){try{localStorage.setItem('asa_quest',JSON.stringify(state));localStorage.setItem('asa_lang',lang);}catch(e){}}
+function $(s){return document.querySelector(s);}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+function tx(o){return o[lang]||o.fr;}
+function L(k){return T[lang][k];}
+function byId(id){for(var i=0;i<GAMES.length;i++)if(GAMES[i].id===id)return GAMES[i];}
+
+/* ---------- LANGUE ---------- */
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i]').forEach(function(e){var v=L(e.dataset.i);if(v!=null)e.innerHTML=v;});
+  document.querySelectorAll('.langs button').forEach(function(b){b.classList.toggle('on',b.dataset.lang===lang);});
+  renderPath();renderChips();renderRail();renderArcade();renderDiag();renderBonus();
+}
+document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){lang=b.dataset.lang;save();applyLang();});});
+
+/* ---------- QUÊTES ---------- */
+var toastT;
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},2600);}
+function doneCount(){return QUESTS.filter(function(q){return state.q[q.k];}).length;}
+function complete(k){
+  if(state.q[k])return; state.q[k]=1; save(); renderPath(); renderBonus();
+  toast('✓ '+L('qDone')+' · '+doneCount()+'/5');
+}
+function renderPath(){
+  var p=$('#path');p.innerHTML='';
+  QUESTS.forEach(function(q){
+    var a=el('a','node'+(state.q[q.k]?' done':''));a.href=q.a;
+    a.innerHTML='<span class="dot"></span><span class="txt"><b>'+tx(q.t)+'</b><span>'+tx(q.d)+'</span><em>'+(state.q[q.k]?L('qOk'):L('qTodo'))+'</em></span>';
+    p.appendChild(a);
+  });
+  var n=doneCount();$('#xpCount').textContent=n+'/5';$('#xpBar').style.width=(n*20)+'%';
+}
+function renderBonus(){
+  var open=doneCount()===5,b=$('#bonusBox');b.classList.toggle('open',open);
+  $('#lock').textContent=open?'🏆':'🔒';
+  $('#bonusH').innerHTML=L(open?'bnOpenH':'bnLockH');$('#bonusP').innerHTML=L(open?'bnOpenP':'bnLockP');
+}
+$('#xpBtn').addEventListener('click',function(){$('#quetes').scrollIntoView();});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){complete(e.target.id==='methode'?'meth':'proof');io.unobserve(e.target);}});},{rootMargin:'-45% 0px -45% 0px'});
+  io.observe($('#methode'));io.observe($('#preuves'));
+}
+
+/* ---------- MINI-JEU ---------- */
+var G={phase:'start',i:0,score:0,t0:0,raf:0};
+function renderArcade(){
+  cancelAnimationFrame(G.raf);
+  if(G.phase==='end'){endGame(true);return;}
+  G.phase='start';
+  $('#arcade').innerHTML='<div class="arcade-start"><span class="tag">'+L('gTag')+'</span><h2>'+L('gStartH')+'</h2><p>'+L('gStartP')+'</p><button class="btn btn-primary" id="gGo">▶ '+L('gStartB')+'</button></div>';
+  $('#gGo').addEventListener('click',startGame);
+}
+function startGame(){cancelAnimationFrame(G.raf);G.phase='play';G.i=0;G.score=0;G.t0=performance.now();drawRound();tick();}
+function tick(){
+  if(G.phase!=='play')return;
+  var left=1-(performance.now()-G.t0)/15000,bar=document.querySelector('#arcade .timer i');
+  if(bar)bar.style.transform='scaleX('+Math.max(0,left)+')';
+  if(left<=0){endGame();return;}
+  G.raf=requestAnimationFrame(tick);
+}
+function drawRound(){
+  var r=ROUNDS[G.i],a=$('#arcade'),flip=Math.random()<.5;
+  a.innerHTML='<div class="arcade-top"><span class="live">'+L('gLive')+'</span><span>'+(G.i+1)+'/3 · '+G.score+' pts</span></div><div class="timer"><i></i></div>'+
+   '<div class="scene"><div class="who"><img src="'+r.img+'" alt="" width="108" height="138"></div><div class="bubble"><small>'+L('gClient')+'</small>'+tx(r.q)+'</div></div><div class="choices"></div>';
+  var box=a.querySelector('.choices'),opts=[[tx(r.ok),1],[tx(r.ko),0]];if(flip)opts.reverse();
+  opts.forEach(function(o){var b=el('button','choice',o[0]);b.addEventListener('click',function(){
+    if(box.dataset.lock||G.phase!=='play')return;box.dataset.lock=1;b.classList.add(o[1]?'ok':'ko');if(o[1])G.score++;
+    setTimeout(function(){if(G.phase!=='play')return;G.i++;if(G.i>=ROUNDS.length)endGame();else drawRound();},520);
+  });box.appendChild(b);});
+}
+function endGame(silent){
+  cancelAnimationFrame(G.raf);G.phase='end';
+  $('#arcade').innerHTML='<div class="arcade-end"><div class="score">'+G.score+'/3</div><div class="rank">'+L('ranks')[G.score]+'</div><p>'+L('gEndP')+'</p><div class="cta-row"><button class="btn btn-ghost btn-sm" id="gAgain">'+L('gAgain')+'</button><a class="btn btn-primary btn-sm" href="#catalogue">'+L('gMore')+'</a></div></div>';
+  $('#gAgain').addEventListener('click',startGame);
+  if(!silent)complete('game');
+}
+
+/* ---------- CATALOGUE ---------- */
+var filter='all';
+function renderChips(){
+  var c=$('#chips');c.innerHTML='';
+  [['all',null]].concat(Object.keys(CATS).map(function(k){return [k,CATS[k]];})).forEach(function(x){
+    var b=el('button',filter===x[0]?'on':'',x[1]?tx(x[1]):L('all'));b.addEventListener('click',function(){filter=x[0];renderChips();renderRail();$('#rail').scrollLeft=0;});c.appendChild(b);
+  });
+}
+function renderRail(){
+  var r=$('#rail');r.innerHTML='';
+  GAMES.filter(function(g){return filter==='all'||g.c===filter;}).forEach(function(g){
+    var b=el('button','game'+(state.seen.indexOf(g.id)>=0?' seen-on':''));
+    b.innerHTML='<div class="th"><img src="img/g-'+g.id+'.webp" alt="" width="640" height="360" loading="lazy"><span class="seen">'+L('seen')+'</span></div><div class="meta"><small>'+tx(CATS[g.c])+'</small><h3>'+tx(g.t)+'</h3></div>';
+    b.addEventListener('click',function(){openGame(g.id);});r.appendChild(b);
+  });
+}
+function scrollRail(d){var r=$('#rail');r.scrollBy({left:d*Math.max(300,r.clientWidth*.8),behavior:'smooth'});}
+$('#prev').addEventListener('click',function(){scrollRail(-1);});$('#next').addEventListener('click',function(){scrollRail(1);});
+
+var lastFocus;
+function openGame(id){
+  var g=byId(id);lastFocus=document.activeElement;
+  $('#mImg').src='img/g-'+g.id+'.webp';$('#mImg').alt=tx(g.t);$('#mCat').textContent=tx(CATS[g.c]);$('#mTitle').textContent=tx(g.t);$('#mDesc').textContent=tx(g.d);
+  $('#mSkills').innerHTML=tx(g.s).map(function(s){return '<li>'+s+'</li>';}).join('');
+  $('#mPlay').href=g.url||DEMO_URL;
+  $('#modal').classList.add('open');$('#mClose').focus();
+  if(state.seen.indexOf(id)<0){state.seen.push(id);save();renderRail();}
+  if(state.seen.length>=3)complete('cat');
+}
+function closeModal(){if(!$('#modal').classList.contains('open'))return;$('#modal').classList.remove('open');if(lastFocus&&document.contains(lastFocus))lastFocus.focus();}
+$('#mClose').addEventListener('click',closeModal);
+$('#modal').addEventListener('click',function(e){if(e.target.id==='modal')closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+/* ---------- DIAGNOSTIC ---------- */
+var D={i:0,a:[]};
+function renderDiag(){
+  var c=$('#console');c.innerHTML='';
+  if(D.i<DIAG.length){
+    var q=DIAG[D.i];
+    c.appendChild(el('div','step',L('dStep')+' '+(D.i+1)+'/3'));c.appendChild(el('h3','',tx(q.q)));
+    var o=el('div','opts');q.o.forEach(function(x){var b=el('button','',tx(x[1]));b.addEventListener('click',function(){D.a[D.i]=x[0];D.i++;renderDiag();if(D.i===DIAG.length)complete('diag');});o.appendChild(b);});
+    c.appendChild(o);
+  }else{
+    var goal=D.a[0],cat=D.a[1];
+    var sc=GAMES.map(function(g,n){var s=0;if(g.g.indexOf(goal)>=0)s+=3;if(cat!=='any'&&g.c===cat)s+=2;return [s,-n,g];}).sort(function(x,y){return y[0]-x[0]||y[1]-x[1];}).slice(0,3);
+    c.appendChild(el('div','step',L('dResH')));c.appendChild(el('h3','',tx(DIAG[0].o.filter(function(x){return x[0]===goal;})[0][1])));
+    var r=el('div','reco');sc.forEach(function(x){var g=x[2],b=el('button','');b.innerHTML='<img src="img/g-'+g.id+'.webp" alt="" width="120" height="68" loading="lazy"><span><small>'+tx(CATS[g.c])+'</small><b>'+tx(g.t)+'</b></span>';b.addEventListener('click',function(){openGame(g.id);});r.appendChild(b);});
+    c.appendChild(r);
+    var row=el('div','cta-row');row.style.marginTop='20px';
+    var a=el('a','btn btn-primary btn-sm',L('dResCta'));a.href=DEMO_URL;a.target='_blank';a.rel='noopener';
+    var again=el('button','btn btn-ghost btn-sm',L('dAgain'));again.addEventListener('click',function(){D={i:0,a:[]};renderDiag();});
+    row.appendChild(a);row.appendChild(again);c.appendChild(row);
+  }
+}
+
+/* ---------- BLOG + FORMULAIRE ---------- */
+function railBy(id,d){var r=$(id);r.scrollBy({left:d*Math.max(280,r.clientWidth*.8),behavior:'smooth'});}
+$('#bPrev').addEventListener('click',function(){railBy('#blogRail',-1);});$('#bNext').addEventListener('click',function(){railBy('#blogRail',1);});
+var LEAD_WEBHOOK_URL='https://script.google.com/macros/s/AKfycbwkgUGVHo1LXlA_eLZ2GWe5CL-VFNPxJW22bzTaVK_g98zHcQ_i5lw2YSkb1oG11cshJQ/exec';
+$('#lead-form').addEventListener('submit',function(e){
+  e.preventDefault();var f=e.target,st=$('#leadStatus'),bt=$('#leadBtn');
+  bt.disabled=true;bt.textContent=L('fWait');st.textContent='';
+  fetch(LEAD_WEBHOOK_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams(new FormData(f))})
+   .then(function(){f.reset();st.textContent=L('fOk');st.style.color='var(--green)';bt.disabled=false;bt.textContent=L('fSend');})
+   .catch(function(){st.textContent=L('fKo');st.style.color='var(--red)';bt.disabled=false;bt.textContent=L('fSend');});
+});
+
+/* ---------- VIDÉO DE FOND (optionnelle) ---------- */
+if(HERO_VIDEO){var v=document.createElement('video');v.src=HERO_VIDEO;v.muted=true;v.loop=true;v.autoplay=true;v.playsInline=true;v.setAttribute('playsinline','');v.poster='img/bg-1.webp';var bg=$('#bgv');bg.innerHTML='';bg.appendChild(v);}
+
+load();applyLang();
+})();
+</script>
+</body>
+</html>
