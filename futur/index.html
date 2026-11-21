@@ -344,7 +344,7 @@
       <span class="tag" data-i="vdTag">En vidéo</span>
     </div>
     <div class="vframe" id="vframe">
-      <img src="img/bg-2.webp" alt="" width="1280" height="720" loading="lazy">
+      <img src="https://i.ytimg.com/vi/WuMZcU6Pokg/hqdefault.jpg" onerror="this.onerror=null;this.src='img/bg-2.webp'" alt="" width="1280" height="720" loading="lazy">
       <button class="vplay" id="vplay" aria-label="Lecture"><span>▶</span></button>
     </div>
   </div>
@@ -576,7 +576,7 @@
 (function(){
 /* ---------- RÉGLAGES ---------- */
 var HERO_VIDEO = '';   // ex. 'video/hero.mp4' pour remplacer le diaporama par une vraie vidéo
-var MOTION_VIDEO = '';   // lien de la video motion design : 'video/motion.mp4' ou lien YouTube
+var MOTION_VIDEO = 'https://youtu.be/WuMZcU6Pokg';   // lien de la video motion design : 'video/motion.mp4' ou lien YouTube
 var DEMO_URL  = 'https://avatarsales.github.io/asa-quiz/avantpremiere.html';
 
 /* ---------- TEXTES ---------- */
@@ -835,7 +835,7 @@ if(HERO_VIDEO){var v=document.createElement('video');v.src=HERO_VIDEO;v.muted=tr
 $('#vplay').addEventListener('click',function(){
   if(!MOTION_VIDEO){toast(L('vdSoon'));return;}
   var f=$('#vframe'),yt=MOTION_VIDEO.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/),n;
-  if(yt){n=document.createElement('iframe');n.src='https://www.youtube-nocookie.com/embed/'+yt[1]+'?autoplay=1&rel=0';n.allow='autoplay; fullscreen';n.allowFullscreen=true;n.title='Motion design';}
+  if(yt){n=document.createElement('iframe');n.src='https://www.youtube-nocookie.com/embed/'+yt[1]+'?autoplay=1&rel=0';n.allow='autoplay; fullscreen';n.referrerPolicy='strict-origin-when-cross-origin';n.allowFullscreen=true;n.title='Motion design';}
   else{n=document.createElement('video');n.src=MOTION_VIDEO;n.controls=true;n.autoplay=true;n.setAttribute('playsinline','');}
   f.innerHTML='';f.appendChild(n);
 });
