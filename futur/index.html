@@ -576,7 +576,10 @@
 (function(){
 /* ---------- RÉGLAGES ---------- */
 var HERO_VIDEO = '';   // ex. 'video/hero.mp4' pour remplacer le diaporama par une vraie vidéo
-var MOTION_VIDEO = 'https://youtu.be/WuMZcU6Pokg';   // lien de la video motion design : 'video/motion.mp4' ou lien YouTube
+var MOTION_VIDEOS = {fr:'https://youtu.be/xwK5wjfLAjE', en:'https://youtu.be/bW7auOLHqKY', es:'https://youtu.be/h7xbMm8xvyI'};   // une video motion design par langue
+function motionVideo(){return MOTION_VIDEOS[lang]||MOTION_VIDEOS.fr;}
+function motionId(){var m=motionVideo().match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);return m?m[1]:'';}
+var VP=null;function resetMotion(){var f=$('#vframe');if(!f)return;if(!VP)VP=$('#vplay');var id=motionId(),th=id?'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg':'img/bg-2.webp';f.innerHTML='<img alt="" width="1280" height="720">';var im=f.firstChild;im.onerror=function(){im.onerror=null;im.src='img/bg-2.webp';};im.src=th;f.appendChild(VP);}
 var DEMO_URL  = 'https://avatarsales.github.io/asa-quiz/avantpremiere.html';
 
 /* ---------- TEXTES ---------- */
@@ -694,7 +697,7 @@ function applyLang(){
   document.documentElement.lang=lang;
   document.querySelectorAll('[data-i]').forEach(function(e){var v=L(e.dataset.i);if(v!=null)e.innerHTML=v;});
   document.querySelectorAll('.langs button').forEach(function(b){b.classList.toggle('on',b.dataset.lang===lang);});
-  renderPath();renderChips();renderRail();renderArcade();renderDiag();renderBonus();
+  renderPath();renderChips();renderRail();renderArcade();renderDiag();renderBonus();resetMotion();
 }
 document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){lang=b.dataset.lang;save();applyLang();});});
 
@@ -833,10 +836,10 @@ if(HERO_VIDEO){var v=document.createElement('video');v.src=HERO_VIDEO;v.muted=tr
 
 /* ---------- VIDEO MOTION DESIGN ---------- */
 $('#vplay').addEventListener('click',function(){
-  if(!MOTION_VIDEO){toast(L('vdSoon'));return;}
-  var f=$('#vframe'),yt=MOTION_VIDEO.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/),n;
+  var MV=motionVideo();if(!MV){toast(L('vdSoon'));return;}
+  var f=$('#vframe'),yt=MV.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/),n;
   if(yt){n=document.createElement('iframe');n.src='https://www.youtube-nocookie.com/embed/'+yt[1]+'?autoplay=1&rel=0';n.allow='autoplay; fullscreen';n.referrerPolicy='strict-origin-when-cross-origin';n.allowFullscreen=true;n.title='Motion design';}
-  else{n=document.createElement('video');n.src=MOTION_VIDEO;n.controls=true;n.autoplay=true;n.setAttribute('playsinline','');}
+  else{n=document.createElement('video');n.src=MV;n.controls=true;n.autoplay=true;n.setAttribute('playsinline','');}
   f.innerHTML='';f.appendChild(n);
 });
 
